@@ -1,0 +1,19 @@
+             PGM        PARM(&FUNCS_PTR &CURL)
+             DCL        VAR(&FUNCS_PTR) TYPE(*PTR)
+             DCL        VAR(&CURL)      TYPE(*INT)                 LEN(8)
+             DCL        VAR(&CURL32)    TYPE(*INT)  STG(*DEFINED)  LEN(4)  DEFVAR(&CURL 5)
+             INCLUDE    SRCMBR(DCL32INCL)
+             DCL        VAR(&FUNCTION)  TYPE(*INT)  STG(*DEFINED) LEN(8)  DEFVAR(&PA 1)
+             DCL        VAR(&CURL_H)    TYPE(*INT)  STG(*DEFINED) LEN(8)  DEFVAR(&BUFFER 1)
+             DCL        VAR(&CURL_H32)  TYPE(*INT)  STG(*DEFINED) LEN(4)  DEFVAR(&BUFFER 1)
+             CHGVAR     VAR(&CURL_H)                                      VALUE(0)
+             CHGVAR     VAR(&CURL)                                        VALUE(0)
+             CHGVAR     VAR(&RESTYP)                                      VALUE(-5)
+             CHGVAR     VAR(&BF_LEN)                                      VALUE(4)
+             CALLPRC    PRC('Qp2CallPase2') PARM((&FUNCTION) (&ARGL_P *BYVAL) (&SIGN_P *BYVAL) +
+                          (&RESTYP *BYVAL) (&BUFF_P *BYVAL) (&BF_LEN *BYVAL)) RTNVAL(&RTCD)
+             IF         COND(&RTCD *NE 0) THEN(DO)
+             SNDPGMMSG MSG('Qp2CallPase2 failed for curl_easy_init(); RTCD = ' *CAT %CHAR(&RTCD))
+             ENDDO
+             CHGVAR     VAR(&CURL32) VALUE(&CURL_H32)
+RETURN:      ENDPGM

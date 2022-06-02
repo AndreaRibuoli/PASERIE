@@ -1,0 +1,5 @@
+                R GUIDE                     TEXT('GUIDANCE.TXT record format')
+                  SRCFILE       10A         TEXT('Source File')
+                  SRCMBR        10A         TEXT('Source Member')
+                  SRCTYPE       10A         TEXT('Source Type')
+                  SRCDESC       50A         TEXT('Description')

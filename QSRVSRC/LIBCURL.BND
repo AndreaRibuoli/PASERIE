@@ -1,0 +1,11 @@
+StrPgmExp PgmLvl(*CURRENT) Signature('PaserieV01R01M01')
+Export Symbol("EASY_INIT")
+Export Symbol("EASY_SETOP")
+Export Symbol("EASY_PERFO")
+Export Symbol("EASY_CLEAN")
+Export Symbol("EASY_GINFO")
+Export Symbol("SLIST_APPE")
+Export Symbol("EASY_LOAD")
+Export Symbol("CALL_BACK")
+Export Symbol("VERS_INFO")
+EndPgmExp

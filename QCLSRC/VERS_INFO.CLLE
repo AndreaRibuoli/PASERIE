@@ -1,0 +1,19 @@
+             PGM        PARM(&FUNCS_PTR &INFO_H)
+             COPYRIGHT  TEXT('Andrea Ribuoli © 2020 - PASERIE Installer')
+             DCL        VAR(&FUNCS_PTR) TYPE(*PTR)
+             DCL        VAR(&INFO_H)    TYPE(*INT)                LEN(8)
+             DCL        VAR(&INFO_H32)  TYPE(*INT)  STG(*DEFINED) LEN(4)  DEFVAR(&INFO_H 5)
+             INCLUDE    SRCMBR(DCL32INCL)
+             DCL        VAR(&FUNCTION)  TYPE(*INT)  STG(*DEFINED) LEN(8)  DEFVAR(&PA 49)
+             DCL        VAR(&INFO_A32)  TYPE(*INT)  STG(*DEFINED) LEN(4)  DEFVAR(&ARGL 1)
+             CHGVAR     VAR(&INFO_A32)                             VALUE(&INFO_H32)
+             CHGVAR     VAR(&FIRST)                                VALUE(-5)
+             CHGVAR     VAR(&SECOND)                               VALUE(0)
+             CHGVAR     VAR(&RESTYP)                               VALUE(0)
+             CHGVAR     VAR(&BF_LEN)                               VALUE(0)
+             CALLPRC    PRC('Qp2CallPase2') PARM((&FUNCTION) (&ARGL_P *BYVAL) (&SIGN_P *BYVAL) +
+                          (&RESTYP *BYVAL) (&BUFF_P *BYVAL) (&BF_LEN *BYVAL)) RTNVAL(&RTCD)
+             IF         COND(&RTCD *NE 0) THEN(DO)
+             SNDPGMMSG MSG('Qp2CallPase2 failed for VersionInfo(); RTCD = ' *CAT %CHAR(&RTCD))
+             ENDDO
+             ENDPGM
