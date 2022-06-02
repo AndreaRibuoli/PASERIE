@@ -1,2 +1,2 @@
 # PASERIE
-Utility for Source Level Distribution in IBM i
+Utility for Source-Level Distribution in IBM i
