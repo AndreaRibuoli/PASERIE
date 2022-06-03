@@ -10,8 +10,8 @@
              INCLUDE    SRCMBR(CURL_INCL)
              DCL        VAR(&FREE_PTR) TYPE(*PTR) ADDRESS(*NULL)
              DCL        VAR(&RET_LEN)  TYPE(*INT) STG(*BASED) LEN(8) BASPTR(&FREE_PTR)
-             DCL        VAR(&BODY_LEN) TYPE(*INT)  LEN(8)
-             DCL        VAR(&BODY_L16) TYPE(*INT)  STG(*DEFINED) LEN(2) DEFVAR(&BODY_LEN 7)
+             DCL        VAR(&TOTAL_LEN)  TYPE(*INT) STG(*DEFINED) LEN(4) DEFVAR(&RET_LEN 5)
+             DCL        VAR(&BODY_LEN) TYPE(*INT)  LEN(4)
              DCL        VAR(&CURL_VRM) TYPE(*CHAR) LEN(6)
              DCL        VAR(&MAHIGHB) TYPE(*CHAR) STG(*DEFINED) LEN(1) DEFVAR(&CURL_VRM)
              DCL        VAR(&MALOWBY) TYPE(*CHAR) STG(*DEFINED) LEN(1) DEFVAR(&CURL_VRM 2)
@@ -214,11 +214,6 @@ REPEAT_I:
              /* by copying &NATIVE char(16) into &BFP we are actually setting &NATIVEP pointer */
              CHGVAR     VAR(&BFP) VALUE(&NATIVE)
              CHGVAR     VAR(&CURR_P) VALUE(&NATIVP)
-         /*    CHGVAR     VAR(&CLOSING_P) VALUE(&NATIVP)                                   */
-         /*    CHGVAR     VAR(&BODY_L16) VALUE(&BODY_L16 - 21)                             */
-         /*    CHGVAR     VAR(%OFFSET(&CLOSING_P)) VALUE(%OFFSET(&CLOSING_P) + &BODY_L16)  */
-         /*    SNDPGMMSG  MSG('Closing' *BCAT &CLOSING)                                    */
-         /*    DMPCLPGM                                                                    */
          /*                                                                      */
          /*    scansiono &HTML (utf-8) cercando il primo 0x0a (new-line)         */
          /*      per farlo mi occorre partire dalla prima posizione (1)          */
@@ -248,12 +243,20 @@ REPEAT_I:
              CHGVAR     VAR(&OUT_BYTES) VALUE(&MAXRECLEN)
  NEXT_I:     CHGVAR     VAR(&SPOS) VALUE(&EPOS + 1)
              CHGVAR     VAR(&EPOS) VALUE(%SCAN(&OA &HTML &SPOS))
-             IF         COND(&EPOS *EQ 0) THEN(DO)
-             /* 'No more LINE FEEDs in' *BCAT &URLI */
-             GOTO       CMDLBL(SKIP_I)
+             IF         COND(&EPOS *EQ 0) THEN(DO)        /* No more LINE FEEDs */
+              IF         COND(&BODY_LEN *GT 0) THEN(DO)             
+               CHGVAR     VAR(&HTML_E) VALUE(' ')
+               CHGVAR     VAR(&HTML_P) VALUE(%ADDRESS(&HTML_E))
+               CHGVAR     VAR(&PRE_BYTES) VALUE(&OUT_BYTES)
+               CALLPRC    PRC('iconv') PARM((&CONVB *BYVAL) (&CURR_P) (&BODY_LEN) (&HTML_P) (&OUT_BYTES)) RTNVAL(&RC)
+               CHGVAR     VAR(&PRE_BYTES) VALUE(&PRE_BYTES - &OUT_BYTES)
+               CALLPRC    PRC('write') PARM((&FD *BYVAL) (&HTML_E *BYREF) (&PRE_BYTES *BYVAL)) RTNVAL(&RTCD)
+              ENDDO
+              GOTO       CMDLBL(SKIP_I)
              ENDDO
              CHGVAR     VAR(&LEN) VALUE(&EPOS - &SPOS)
              CHGVAR     VAR(&IN_BYTES) VALUE(&LEN + 1)
+             CHGVAR     VAR(&BODY_LEN) VALUE(&BODY_LEN - &IN_BYTES)
              CHGVAR     VAR(&HTML_E) VALUE(' ')
              CHGVAR     VAR(&HTML_P) VALUE(%ADDRESS(&HTML_E))
              CHGVAR     VAR(&PRE_BYTES) VALUE(&OUT_BYTES)
