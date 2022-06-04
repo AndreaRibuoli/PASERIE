@@ -127,7 +127,7 @@
              CHGVAR     VAR(&OPT_CD) VALUE(6291464) /* CURLINFO_SIZE_DOWNLOAD_T */
              CALLPRC    PRC('EASY_GINFO') PARM((&FUNCS_PTR) (&CURL) (&OPT_CD) (&LOCA) (&ERROR))
              CHGVAR     VAR(&BODY_LEN) VALUE(&TOTAL_LEN)
-             DMPCLPGM
+             /* DMPCLPGM */
              CALLPRC    PRC('Qp2free') PARM((&FREE_PTR *BYVAL)) RTNVAL(&RTCD)
 
              /* by copying &NATIVE char(16) into &BFP we are actually setting &NATIVEP pointer */
@@ -157,6 +157,7 @@
                GOTO       CMDLBL(FINE)
              ENDDO
              CHGVAR     VAR(&RPOS) VALUE(%SCAN(&LINEFEED &HTML_E 1) -1)
+             IF         COND(&RPOS *EQ 0) THEN(DMPCLPGM)
              CHGVAR     VAR(%SST(&PKG_BLCK &CURPOS 90)) VALUE(%SST(&HTML_E 1 &RPOS))
              CHGVAR     VAR(&CURPOS) VALUE(&CURPOS + 91)
              CHGVAR     VAR(&TOTCNT) VALUE(&TOTCNT + 1)
