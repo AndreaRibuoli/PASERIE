@@ -170,8 +170,8 @@
                DMPCLPGM
                CHGVAR   VAR(&RPOS) VALUE(30)
              ENDDO
-               CHGVAR   VAR(&RPOS) VALUE(&RPOS - 1)
              ELSE DO
+               CHGVAR   VAR(&RPOS) VALUE(&RPOS - 1)
              ENDDO
              CHGVAR     VAR(%SST(&PKG_BLCK &CURPOS 90)) VALUE(%SST(&HTML_E 1 &RPOS))
              CHGVAR     VAR(&CURPOS) VALUE(&CURPOS + 91)
