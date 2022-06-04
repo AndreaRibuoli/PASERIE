@@ -243,18 +243,20 @@ REPEAT_I:
              CHGVAR     VAR(&OUT_BYTES) VALUE(&MAXRECLEN)
  NEXT_I:     CHGVAR     VAR(&SPOS) VALUE(&EPOS + 1)
              CHGVAR     VAR(&EPOS) VALUE(%SCAN(&OA &HTML &SPOS))
-             IF         COND(&EPOS *EQ 0) THEN(DO)        /* No more LINE FEEDs */
-              GOTO       CMDLBL(SKIP_I)
-             ENDDO
+                        /* No more LINE FEEDs */
+             IF         COND(&EPOS *EQ 0) THEN(CMDLBL(SKIP_I))
+                        /* LINE FEED beyond end of content */
+             IF         COND(%SST(&HTML 1 1) *EQ &NL) THEN(GOTO CMDLBL(SKIP_I))
              CHGVAR     VAR(&LEN) VALUE(&EPOS - &SPOS)
              CHGVAR     VAR(&IN_BYTES) VALUE(&LEN + 1)
              IF         COND(&BODY_LEN *LT &IN_BYTES) THEN(DMPCLPGM)
-             /* CHGVAR     VAR(&BODY_LEN) VALUE(&BODY_LEN - &IN_BYTES) */
+             CHGVAR     VAR(&BODY_LEN) VALUE(&BODY_LEN - &IN_BYTES)
              /* bytes that WILL remain */
              CHGVAR     VAR(&HTML_E) VALUE(' ')
              CHGVAR     VAR(&HTML_P) VALUE(%ADDRESS(&HTML_E))
              CHGVAR     VAR(&PRE_BYTES) VALUE(&OUT_BYTES)
              CALLPRC    PRC('iconv') PARM((&CONVB *BYVAL) (&CURR_P) (&IN_BYTES) (&HTML_P) (&OUT_BYTES)) RTNVAL(&RC)
+                        /* should never occur */
              IF         COND(%SST(&HTML_E 1 1) *EQ &NL) THEN(GOTO CMDLBL(SKIP_I))
              CHGVAR     VAR(&PRE_BYTES) VALUE(&PRE_BYTES - &OUT_BYTES)
              CALLPRC    PRC('write') PARM((&FD *BYVAL) (&HTML_E *BYREF) (&PRE_BYTES *BYVAL)) RTNVAL(&RTCD)
