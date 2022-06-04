@@ -120,28 +120,42 @@
              CALLPRC    PRC('EASY_SETOP') PARM((&FUNCS_PTR) (&CURL) (&OPT_CD) (&LOCA) (&ERROR))
              /* */
              CALLPRC    PRC('EASY_PERFO') PARM((&FUNCS_PTR) (&CURL) (&ERROR))
-             CALLPRC    PRC('Qp2free') PARM((&FREE_PTR *BYVAL)) RTNVAL(&RTCD)
              IF         COND(&ERROR *NE 0) THEN(DO)
              SNDPGMMSG  MSG('La chiamata a libcurl ha dato errore.')
              GOTO       CMDLBL(FINE)
              ENDDO
+             CHGVAR     VAR(&OPT_CD) VALUE(6291464) /* CURLINFO_SIZE_DOWNLOAD_T */
+             CALLPRC    PRC('EASY_GINFO') PARM((&FUNCS_PTR) (&CURL) (&OPT_CD) (&LOCA) (&ERROR))
+             CHGVAR     VAR(&BODY_LEN) VALUE(&TOTAL_LEN)
+             CALLPRC    PRC('Qp2free') PARM((&FREE_PTR *BYVAL)) RTNVAL(&RTCD)
+
              /* by copying &NATIVE char(16) into &BFP we are actually setting &NATIVEP pointer */
              CHGVAR     VAR(&BFP) VALUE(&NATIVE)
              CHGVAR     VAR(&CURR_P) VALUE(&NATIVP)
              CHGVAR     VAR(&EPOS) VALUE(0)
  NEXT:       CHGVAR     VAR(&SPOS) VALUE(&EPOS + 1)
              CHGVAR     VAR(&EPOS) VALUE(%SCAN(&OA &HTML &SPOS))
-             IF         COND(&EPOS *EQ 0) THEN(DO)
-             GOTO       CMDLBL(SKIP)
-             ENDDO
+                        /* No more LINE FEEDs */
+             IF         COND(&EPOS *EQ 0) THEN(GOTO CMDLBL(SKIP))
+                        /* LINE FEED beyond end of content */
+             IF         COND(%SST(&HTML 1 1) *EQ &NL) THEN(GOTO CMDLBL(SKIP))
              CHGVAR     VAR(&LEN) VALUE(&EPOS - &SPOS)
-             /* writing the linefeed is essential (i.e. converting &LEN plus 1) in order to */
-             /* populate records of source file members                                     */
              CHGVAR     VAR(&IN_BYTES) VALUE(&LEN + 1)
+                        /* LINE FEED beyond end of content because */
+                        /* terminating LINE FEED is M_I_S_S_I_N_G! */
+             IF         COND(&BODY_LEN *LT &IN_BYTES) THEN(DO)
+             CHGVAR     VAR(&IN_BYTES) VALUE(&BODY_LEN)
+             CHGVAR     VAR(&BODY_LEN) VALUE(0)
+             ENDDO
+                         /* these are the bytes that WILL remain to be converted & written */
+             ELSE DO
+             CHGVAR     VAR(&BODY_LEN) VALUE(&BODY_LEN - &IN_BYTES)
+             ENDDO
              CHGVAR     VAR(&HTML_E) VALUE(' ')
              CHGVAR     VAR(&HTML_P) VALUE(%ADDRESS(&HTML_E))
              CHGVAR     VAR(&OUT_BYTES) VALUE(&MAXRECLEN)
              CALLPRC    PRC('iconv') PARM((&CONVB *BYVAL) (&CURR_P) (&IN_BYTES) (&HTML_P) (&OUT_BYTES)) RTNVAL(&RC)
+                        /* should never occur */
              IF         COND(%SST(&HTML_E 1 1) *EQ &NL) THEN(GOTO CMDLBL(SKIP))
              IF         COND(%SST(&HTML_E 1 1) *EQ '{') THEN(DO)
              SNDPGMMSG  MSG('GUIDANCE.TXT non trovato')
