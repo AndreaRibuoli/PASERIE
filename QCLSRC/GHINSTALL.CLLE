@@ -140,6 +140,7 @@
              CHGVAR     VAR(&EPOS) VALUE(%SCAN(&OA &HTML &SPOS))
              IF         COND(&EPOS *EQ 0) THEN(DO)
                IF         COND(&BODY_LEN *GT 0) THEN(DO)
+                 DMPCLPGM
                  CHGVAR     VAR(&IN_BYTES) VALUE(&BODY_LEN + 1)
                  CHGVAR     VAR(%SST(&HTML &IN_BYTES 1)) VALUE(X'0A')
                  CHGVAR     VAR(&BODY_LEN) VALUE(0)
@@ -164,8 +165,13 @@
                SNDPGMMSG  MSG('GUIDANCE.TXT non trovato')
                GOTO       CMDLBL(FINE)
              ENDDO
-             CHGVAR     VAR(&RPOS) VALUE(%SCAN(&LINEFEED &HTML_E 1)-1)
-             CHGVAR     VAR(%SST(&PKG_BLCK &CURPOS 90)) VALUE(%SST(&HTML_E 1 &RPOS))
+             CHGVAR     VAR(&RPOS) VALUE(%SCAN(&LINEFEED &HTML_E 1))
+             IF         COND(&RPOS *EQ 0) THEN(DO)
+               DMPCLPGM
+               CHGVAR   VAR(&RPOS) VALUE(31)
+             ELSE DO
+             ENDDO
+             CHGVAR     VAR(%SST(&PKG_BLCK &CURPOS 90)) VALUE(%SST(&HTML_E 1 (&RPOS-1)))
              CHGVAR     VAR(&CURPOS) VALUE(&CURPOS + 91)
              CHGVAR     VAR(&TOTCNT) VALUE(&TOTCNT + 1)
              CHGVAR     VAR(&TMP_FILN) VALUE(%SST(&HTML_E 1 10))
