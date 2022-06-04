@@ -135,7 +135,8 @@
              CHGVAR     VAR(&CURR_P) VALUE(&NATIVP)
              CHGVAR     VAR(&EPOS) VALUE(0)
              CHGVAR     VAR(&OUT_BYTES) VALUE(&MAXRECLEN)
- NEXT:       CHGVAR     VAR(&SPOS) VALUE(&EPOS + 1)
+ NEXT:       IF         COND(%SST(&HTML 1 1) *EQ &NL) THEN(GOTO CMDLBL(SKIP))
+             CHGVAR     VAR(&SPOS) VALUE(&EPOS + 1)
              CHGVAR     VAR(&EPOS) VALUE(%SCAN(&OA &HTML &SPOS))
              IF         COND(&EPOS *EQ 0) THEN(DO)
                IF         COND(&BODY_LEN *GT 0) THEN(DO)
@@ -146,7 +147,6 @@
                ENDDO
                GOTO       CMDLBL(SKIP)
              ENDDO
-             IF         COND(%SST(&HTML 1 1) *EQ &NL) THEN(GOTO CMDLBL(SKIP))
              CHGVAR     VAR(&LEN) VALUE(&EPOS - &SPOS)
              CHGVAR     VAR(&IN_BYTES) VALUE(&LEN + 1)
              IF         COND(&BODY_LEN *LT &IN_BYTES) THEN(DO)
