@@ -244,7 +244,7 @@ REPEAT_I:
  NEXT_I:     CHGVAR     VAR(&SPOS) VALUE(&EPOS + 1)
              CHGVAR     VAR(&EPOS) VALUE(%SCAN(&OA &HTML &SPOS))
                         /* No more LINE FEEDs */
-             IF         COND(&EPOS *EQ 0) THEN(CMDLBL(SKIP_I))
+             IF         COND(&EPOS *EQ 0) THEN(GOTO CMDLBL(SKIP_I))
                         /* LINE FEED beyond end of content */
              IF         COND(%SST(&HTML 1 1) *EQ &NL) THEN(GOTO CMDLBL(SKIP_I))
              CHGVAR     VAR(&LEN) VALUE(&EPOS - &SPOS)
