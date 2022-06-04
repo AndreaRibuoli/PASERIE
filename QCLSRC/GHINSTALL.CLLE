@@ -120,6 +120,7 @@
              CALLPRC    PRC('EASY_SETOP') PARM((&FUNCS_PTR) (&CURL) (&OPT_CD) (&LOCA) (&ERROR))
              /* */
              CALLPRC    PRC('EASY_PERFO') PARM((&FUNCS_PTR) (&CURL) (&ERROR))
+             CALLPRC    PRC('Qp2free') PARM((&FREE_PTR *BYVAL)) RTNVAL(&RTCD)
              IF         COND(&ERROR *NE 0) THEN(DO)
              SNDPGMMSG  MSG('La chiamata a libcurl ha dato errore.')
              GOTO       CMDLBL(FINE)
@@ -214,31 +215,6 @@ REPEAT_I:
              /* by copying &NATIVE char(16) into &BFP we are actually setting &NATIVEP pointer */
              CHGVAR     VAR(&BFP) VALUE(&NATIVE)
              CHGVAR     VAR(&CURR_P) VALUE(&NATIVP)
-         /*                                                                      */
-         /*    scansiono &HTML (utf-8) cercando il primo 0x0a (new-line)         */
-         /*      per farlo mi occorre partire dalla prima posizione (1)          */
-         /*      sapendo che successivamente dovrò incrementare di 1 la          */
-         /*      ultima posizione  elaborata: ecco perchè inizializzo &EPOS      */
-         /*      a zero e memorizzo in &SPOS il suo valore incrementato di 1     */
-         /*    quando non trovo il new-line chiudo il file                       */
-         /*      questo tuttavia mi espone ad un errore nel caso tale            */
-         /*      terminatore di riga manchi                                      */
-         /*                                                                      */
-         /*         &SPOS                                                        */
-         /*       /              &EPOS = 7                                       */
-         /*       |            /                                                 */
-         /*       |            |                                                 */
-         /*       v            v                                                 */
-         /*      |E|N|D|P|G|M|0x0A|                                              */
-         /*                                                                      */
-         /*      poniamo &LEN=6 e &IN_BYTES=7                                    */
-         /*                                                                      */
-         /*      la conversione potrebbe ridurre il numero di byte necessari     */
-         /*                                                                      */
-         /*      Comprendo quanti siano stati dal valore di &HTML_P dopo         */
-         /*      la esecuzione della iconv() rispetto a %ADDRESS(&HTML_E)        */
-         /*                                                                      */
-         /*                                                                      */
              CHGVAR     VAR(&EPOS) VALUE(0)
              CHGVAR     VAR(&OUT_BYTES) VALUE(&MAXRECLEN)
  NEXT_I:     CHGVAR     VAR(&SPOS) VALUE(&EPOS + 1)
