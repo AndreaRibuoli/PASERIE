@@ -168,9 +168,12 @@
              CHGVAR     VAR(&RPOS) VALUE(%SCAN(&LINEFEED &HTML_E 1))
              IF         COND(&RPOS *EQ 0) THEN(DO)
                DMPCLPGM
-               CHGVAR   VAR(&RPOS) VALUE(31)
+               CHGVAR   VAR(&RPOS) VALUE(30)
              ENDDO
-             CHGVAR     VAR(%SST(&PKG_BLCK &CURPOS 90)) VALUE(%SST(&HTML_E 1 (&RPOS-1)))
+               CHGVAR   VAR(&RPOS) VALUE(&RPOS - 1)
+             ELSE DO
+             ENDDO
+             CHGVAR     VAR(%SST(&PKG_BLCK &CURPOS 90)) VALUE(%SST(&HTML_E 1 &RPOS))
              CHGVAR     VAR(&CURPOS) VALUE(&CURPOS + 91)
              CHGVAR     VAR(&TOTCNT) VALUE(&TOTCNT + 1)
              CHGVAR     VAR(&TMP_FILN) VALUE(%SST(&HTML_E 1 10))
