@@ -9,9 +9,9 @@
              DCL        VAR(&VERBOSE) TYPE(*CHAR) LEN(1)
              INCLUDE    SRCMBR(CURL_INCL)
              DCL        VAR(&FREE_PTR) TYPE(*PTR) ADDRESS(*NULL)
-             DCL        VAR(&RET_LEN)  TYPE(*INT) STG(*BASED) LEN(8) BASPTR(&FREE_PTR)
-             DCL        VAR(&TOTAL_LEN)  TYPE(*INT) STG(*DEFINED) LEN(4) DEFVAR(&RET_LEN 5)
-             DCL        VAR(&BODY_LEN) TYPE(*INT)  LEN(4)
+             DCL        VAR(&RET_LEN)  TYPE(*CHAR) STG(*BASED) LEN(8) BASPTR(&FREE_PTR)
+             DCL        VAR(&TOTAL_LEN)  TYPE(*UINT) STG(*DEFINED) LEN(4) DEFVAR(&RET_LEN 5)
+             DCL        VAR(&BODY_LEN) TYPE(*UINT)  LEN(4)
              DCL        VAR(&CURL_VRM) TYPE(*CHAR) LEN(6)
              DCL        VAR(&MAHIGHB) TYPE(*CHAR) STG(*DEFINED) LEN(1) DEFVAR(&CURL_VRM)
              DCL        VAR(&MALOWBY) TYPE(*CHAR) STG(*DEFINED) LEN(1) DEFVAR(&CURL_VRM 2)
@@ -206,7 +206,7 @@ REPEAT_I:
              ENDDO
              CHGVAR     VAR(&OPT_CD) VALUE(6291464) /* CURLINFO_SIZE_DOWNLOAD_T */
              CALLPRC    PRC('EASY_GINFO') PARM((&FUNCS_PTR) (&CURL) (&OPT_CD) (&LOCA) (&ERROR))
-             CHGVAR     VAR(&BODY_LEN) VALUE(&RET_LEN)
+             CHGVAR     VAR(&BODY_LEN) VALUE(&TOTAL_LEN)
              CALLPRC    PRC('Qp2free') PARM((&FREE_PTR *BYVAL)) RTNVAL(&RTCD)
 
              CHGVAR     VAR(&OFLAG) VALUE(&O_WRONLY + &O_CREAT + &O_TRUNC + &O_APPEND + &O_SYNC + &O_TEXTDATA)
