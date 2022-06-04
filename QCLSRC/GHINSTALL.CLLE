@@ -249,9 +249,16 @@ REPEAT_I:
              IF         COND(%SST(&HTML 1 1) *EQ &NL) THEN(GOTO CMDLBL(SKIP_I))
              CHGVAR     VAR(&LEN) VALUE(&EPOS - &SPOS)
              CHGVAR     VAR(&IN_BYTES) VALUE(&LEN + 1)
-             IF         COND(&BODY_LEN *LT &IN_BYTES) THEN(DMPCLPGM)
+                        /* LINE FEED beyond end of content because */
+                        /* terminating LINE FEED is M_I_S_S_I_N_G! */
+             IF         COND(&BODY_LEN *LT &IN_BYTES) THEN(DO)
+             CHGVAR     VAR(&IN_BYTES) VALUE(&BODY_LEN)
+             CHGVAR     VAR(&BODY_LEN) VALUE(0)
+             ENDDO
+                         /* these are the bytes that WILL remain to be converted & written */
+             ELSE DO
              CHGVAR     VAR(&BODY_LEN) VALUE(&BODY_LEN - &IN_BYTES)
-             /* bytes that WILL remain */
+             ENDDO
              CHGVAR     VAR(&HTML_E) VALUE(' ')
              CHGVAR     VAR(&HTML_P) VALUE(%ADDRESS(&HTML_E))
              CHGVAR     VAR(&PRE_BYTES) VALUE(&OUT_BYTES)
