@@ -137,7 +137,14 @@
              CHGVAR     VAR(&OUT_BYTES) VALUE(&MAXRECLEN)
  NEXT:       CHGVAR     VAR(&SPOS) VALUE(&EPOS + 1)
              CHGVAR     VAR(&EPOS) VALUE(%SCAN(&OA &HTML &SPOS))
-             IF         COND(&EPOS *EQ 0) THEN(GOTO CMDLBL(SKIP))
+             IF         COND(&EPOS *EQ 0) THEN(DO)
+               IF         COND(&BODY_LEN *GT 0) THEN(DO)
+                 CHGVAR     VAR(&IN_BYTES) VALUE(&BODY_LEN)
+                 CHGVAR     VAR(&BODY_LEN) VALUE(0)
+                 GOTO       CMDLBL(RECOVER)
+               ENDDO
+               GOTO       CMDLBL(SKIP)
+             ENDDO
              IF         COND(%SST(&HTML 1 1) *EQ &NL) THEN(GOTO CMDLBL(SKIP))
              CHGVAR     VAR(&LEN) VALUE(&EPOS - &SPOS)
              CHGVAR     VAR(&IN_BYTES) VALUE(&LEN + 1)
@@ -148,7 +155,7 @@
              ELSE DO
                CHGVAR     VAR(&BODY_LEN) VALUE(&BODY_LEN - &IN_BYTES)
              ENDDO
-             CHGVAR     VAR(&HTML_E) VALUE(' ')
+ RECOVER:    CHGVAR     VAR(&HTML_E) VALUE(' ')
              CHGVAR     VAR(&HTML_P) VALUE(%ADDRESS(&HTML_E))
              CALLPRC    PRC('iconv') PARM((&CONVB *BYVAL) (&CURR_P) (&IN_BYTES) (&HTML_P) (&OUT_BYTES)) RTNVAL(&RC)
              IF         COND(%SST(&HTML_E 1 1) *EQ &NL) THEN(GOTO CMDLBL(SKIP))
