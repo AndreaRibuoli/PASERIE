@@ -151,6 +151,7 @@
              CHGVAR     VAR(&IN_BYTES) VALUE(&LEN + 1)
              IF         COND(&BODY_LEN *LT &IN_BYTES) THEN(DO)
                CHGVAR     VAR(&IN_BYTES) VALUE(&BODY_LEN)
+               CHGVAR     VAR(&BODY_LEN) VALUE(0)
              ENDDO
              ELSE DO
                CHGVAR     VAR(&BODY_LEN) VALUE(&BODY_LEN - &IN_BYTES)
