@@ -3,6 +3,7 @@
                           CASE(*MIXED) PROMPT('Project directory')
              PARM       KWD(DEVOPT) TYPE(*CHAR) LEN(1) DFT('N')
              PARM       KWD(JTMPLOP) TYPE(*CHAR) LEN(10) DFT('*PND      ')
+             PARM       KWD(VERBOSE) TYPE(*CHAR) LEN(1) DFT('N')
 
 
 

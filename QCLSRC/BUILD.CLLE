@@ -160,7 +160,7 @@
              DLTSPLF    FILE(INSTALLOC)
              CRTCLMOD   MODULE(&BLDLIB/LIBCLONE_B) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(LIBCLONE_B) +
-                          OUTPUT(*NONE) ALWRTVSRC(*NO)
+                          OUTPUT(*PRINT) ALWRTVSRC(*NO)
              CRTPGM     PGM(&TGTLIB/LIBCLONE_B) +
                           MODULE(&BLDLIB/LIBCLONE_B) +
                           TEXT('PASERIE installer (6/10)')
