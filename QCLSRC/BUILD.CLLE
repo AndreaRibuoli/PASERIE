@@ -59,7 +59,7 @@
                         OPTION(*NOSRC *NOLIST)
              CRTCLMOD   MODULE(&BLDLIB/INSTALL_L) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(INSTALL_L) +
-                          OUTPUT(*NONE) ALWRTVSRC(*NO)
+                          OUTPUT(*PRINT) ALWRTVSRC(*NO)
              CRTCLMOD   MODULE(&BLDLIB/EASY_INIT) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(EASY_INIT) +
                           INCFILE(&SRCLIB/QCLSRC) +
@@ -167,5 +167,5 @@
              CRTCMD     CMD(&TGTLIB/LIBCLONE) PGM(&TGTLIB/LIBCLONE) +
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(LIBCLONE)  +
                           TEXT('PASERIE installer (9/9)')
-             DLTSPLF    FILE(LIBCLONE)
+             DLTSPLF    FILE(LIBCLONE) 
 RETURN:      ENDPGM
