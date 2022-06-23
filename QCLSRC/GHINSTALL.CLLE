@@ -266,12 +266,14 @@ REPEAT_I:
                         /* should never occur */
              IF         COND(%SST(&HTML_E 1 1) *EQ &NL) THEN(GOTO CMDLBL(SKIP_I))
              CHGVAR     VAR(&PRE_BYTES) VALUE(&PRE_BYTES - &OUT_BYTES)
+             IF         COND(&PRE_BYTES *EQ 0) THEN(GOTO CMDLBL(SKIP_I))
              CALLPRC    PRC('write') PARM((&FD *BYVAL) (&HTML_E *BYREF) (&PRE_BYTES *BYVAL)) RTNVAL(&RTCD)
              CHGVAR     VAR(&EPOS) VALUE(0)
              CHGVAR     VAR(&NATIVP) VALUE(&CURR_P)
              GOTO       CMDLBL(NEXT_I)
  SKIP_I:     /* DMPCLPGM */
              CALLPRC    PRC('close') PARM((&FD *BYVAL)) RTNVAL(&RTCD)
+
              CHGPFM     FILE(QTEMP/&PKG_FILN) MBR(&PKG_MBRN) SRCTYPE(&PKG_EXTN) TEXT(&PKG_TEXT)
              CALLPRC    PRC('EASY_CLEAN') PARM((&FUNCS_PTR) (&CURL))
              CHGVAR     VAR(%OFFSET(&PKG_LPTR)) VALUE(%OFFSET(&PKG_LPTR) + 91)
