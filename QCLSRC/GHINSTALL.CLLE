@@ -240,7 +240,7 @@ REPEAT_I:
              CHGVAR     VAR(&BFP) VALUE(&NATIVE)
              CHGVAR     VAR(&CURR_P) VALUE(&NATIVP)
              CHGVAR     VAR(&EPOS) VALUE(0)
-             CHGVAR     VAR(&OUT_BYTES) VALUE(220000)
+             CHGVAR     VAR(&OUT_BYTES) VALUE(400000)
  NEXT_I:     CHGVAR     VAR(&SPOS) VALUE(&EPOS + 1)
              CHGVAR     VAR(&EPOS) VALUE(%SCAN(&OA &HTML &SPOS))
                         /* No more LINE FEEDs */
