@@ -60,12 +60,29 @@ DOWHILE COND(&LOOP)
  RCVF
  MONMSG MSGID(CPF0864) EXEC(LEAVE)
  IF COND(&VERBOSE *EQ 'L') THEN(DO)
-  CHGVAR     VAR(&MSGDTA) VALUE( 'File: '       *CAT &SRCFILE *CAT +
-                                 ' Member: '    *CAT &SRCMBR  *CAT +
-                                 ' Attribute: ' *CAT &SRCTYPE *CAT +
-                                 ' Text: '      *CAT &SRCDESC *CAT &X15 *CAT &NL)
-  CALLPRC    PRC('printf') PARM((&MSGDTA))
+   IF COND(%SST(&SRCFILE 1 10) *EQ '*PREREQ   ') THEN(DO)
+     CHGVAR     VAR(&MSGDTA) VALUE( 'Comment: '      *CAT &SRCFILE *CAT +
+                                    ' PackageName: ' *CAT &SRCMBR  *CAT +
+                                    ' Options: '     *CAT &SRCTYPE *CAT +
+                                    ' GitHub USER: ' *CAT &SRCDESC *CAT &X15 *CAT &NL)
+   ENDDO
+   ELSE DO
+     CHGVAR     VAR(&MSGDTA) VALUE( 'File: '       *CAT &SRCFILE *CAT +
+                                    ' Member: '    *CAT &SRCMBR  *CAT +
+                                    ' Attribute: ' *CAT &SRCTYPE *CAT +
+                                    ' Text: '      *CAT &SRCDESC *CAT &X15 *CAT &NL)
+   ENDDO                                 
+  CALLPRC    PRC('printf') PARM((&MSGDTA))  
  ENDDO
+ IF COND(%SST(&SRCFILE 1 10) *EQ '*PREREQ   ') THEN(DO)
+   CHKOBJ OBJ(QSYS/&SRCMBR) OBJTYPE(*LIB) AUT(*READ)
+   MONMSG MSGID(CPF9801 CPF9802) EXEC(DO)
+     CHGVAR VAR(&MSGDTA) VALUE('Library ' *CAT &SRCMBR *TCAT ' does not exist or not authorized to')
+     CALLPRC    PRC('printf') PARM((&MSGDTA))
+     RETURN
+   ENDDO  
+ ENDDO
+ IF COND(%SST(&SRCFILE 1 1) *EQ '*') THEN(ITERATE)
  CRTSRCPF FILE(QTEMP/&SRCFILE) RCDLEN(132)
  MONMSG MSGID(CPF0000)
  CHGVAR VAR(&FROMSTMF) VALUE(&FROMPATH *TCAT '/' *CAT &SRCFILE *TCAT '/' +

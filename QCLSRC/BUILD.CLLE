@@ -52,7 +52,7 @@
              CRTCLMOD   MODULE(&BLDLIB/GHINSTALL) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL) +
                           INCFILE(&SRCLIB/QCLSRC) +
-                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+                          TGTRLS(&TGTRLS) OUTPUT(*PRINT) ALWRTVSRC(*NO)
              CRTCLMOD   MODULE(&BLDLIB/GHINSTALL2) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL2) +
                           INCFILE(&SRCLIB/QCLSRC) +
