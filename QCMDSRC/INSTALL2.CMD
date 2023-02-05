@@ -1,4 +1,4 @@
-             CMD        PROMPT('PASERIE2 Install Program')
+             CMD        PROMPT('PASERIE Install2 Program')
              PARM       KWD(GIT_USER) TYPE(*CHAR) LEN(30) MIN(1) +
                           CASE(*MIXED) PROMPT('GitHub User Profile')
              PARM       KWD(PACKAGEN) TYPE(*CHAR) LEN(10) MIN(1) +
@@ -11,6 +11,7 @@
                           CASE(*MIXED) PROMPT('Second half of token')
              PARM       KWD(DEVOPT) TYPE(*CHAR) LEN(1) DFT('N')
              PARM       KWD(JTMPLOP) TYPE(*CHAR) LEN(10) DFT('*PND      ')
+             PARM       KWD(TGTRLS)  TYPE(*CHAR) LEN(10) DFT('*CURRENT  ')
              PARM       KWD(VERBOSE) TYPE(*CHAR) LEN(1) DFT('N')
 
 

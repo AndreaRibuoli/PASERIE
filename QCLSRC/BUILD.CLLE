@@ -53,6 +53,8 @@
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL) +
                           INCFILE(&SRCLIB/QCLSRC) +
                           TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTDUPOBJ  OBJ(INSTALL) FROMLIB(&TGTLIB) OBJTYPE(*CMD) NEWOBJ(INSTALL2)
+             MONMSG     MSGID(CPF0000)
              CRTCLMOD   MODULE(&BLDLIB/GHINSTALL2) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL2) +
                           INCFILE(&SRCLIB/QCLSRC) +
