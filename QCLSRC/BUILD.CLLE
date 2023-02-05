@@ -53,12 +53,18 @@
                           TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
              MONMSG     MSGID(CPF0000)
              ENDDO
+             CRTCMD     CMD(&TGTLIB/INSTALL) PGM(&TGTLIB/INSTALL)  +
+                          SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL) +
+                          TEXT('PASERIE installer (8/10)')
+             DLTSPLF    FILE(INSTALL)
+             CRTCMD     CMD(&TGTLIB/INSTALL2) PGM(&TGTLIB/INSTALL2)  +
+                          SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL2) +
+                          TEXT('PASERIE installer (dev/dev)')
+             DLTSPLF    FILE(INSTALL2)
              CRTCLMOD   MODULE(&BLDLIB/GHINSTALL) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL) +
                           INCFILE(&SRCLIB/QCLSRC) +
                           TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
-             CRTDUPOBJ  OBJ(INSTALL) FROMLIB(&TGTLIB) OBJTYPE(*CMD) NEWOBJ(INSTALL2)
-             MONMSG     MSGID(CPF0000)
              CRTCLMOD   MODULE(&BLDLIB/GHINSTALL2) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL2) +
                           INCFILE(&SRCLIB/QCLSRC) +
@@ -156,14 +162,6 @@
                           MODULE(&BLDLIB/INSTALLOC) +
                           TGTRLS(&TGTRLS) TEXT('PASERIE installer (4/10)')
              MONMSG     MSGID(CPF0000)
-             CRTCMD     CMD(&TGTLIB/INSTALL) PGM(&TGTLIB/INSTALL)  +
-                          SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL) +
-                          TEXT('PASERIE installer (8/10)')
-             DLTSPLF    FILE(INSTALL)
-             CRTCMD     CMD(&TGTLIB/INSTALL2) PGM(&TGTLIB/INSTALL2)  +
-                          SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL2) +
-                          TEXT('PASERIE installer (dev/dev)')
-             DLTSPLF    FILE(INSTALL2)
              CRTCMD     CMD(&TGTLIB/INSTALLOC) PGM(&TGTLIB/INSTALLOC) +
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALLOC)  +
                           TEXT('PASERIE installer (9/10)')
