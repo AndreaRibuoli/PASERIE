@@ -40,7 +40,6 @@
 
              CHGVAR     VAR(&VERBOSE) VALUE(&OMISSIBLE)
              MONMSG     MSGID(MCH3601) EXEC(CHGVAR VAR(&VERBOSE) VALUE('N'))
-             IF         COND(&TGTLIB = '*PACKAGEN ') THEN(CHGVAR VAR(&TGTLIB) VALUE(&PACKAGEN))
              IF         COND(&DEVOPT = 'B') THEN(DO)
              CHGVAR     VAR(&SPOOL) VALUE(*PRINT)
              CHGVAR     VAR(&DEVOPT) VALUE('N')
