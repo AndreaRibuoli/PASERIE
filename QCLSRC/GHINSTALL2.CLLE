@@ -1,10 +1,15 @@
-             PGM        PARM(&GIT_USER &PACKAGEN &GITTOKEN &DEVOPT &OMISSIBLE)
+             PGM        PARM(&GIT_USER &PACKAGEN &GITTOKEN &DEVOPT &TGTRLS &OMISSIBLE)
              DCLPRCOPT  LOG(*NO) ALWRTVSRC(*NO)
-             COPYRIGHT  TEXT('Andrea Ribuoli © 2022 - PASERIE Installer')
+             COPYRIGHT  TEXT('Andrea Ribuoli © 2023 - PASERIE Installer')
              DCL        VAR(&GIT_USER)  TYPE(*CHAR) LEN(30)
              DCL        VAR(&PACKAGEN)  TYPE(*CHAR) LEN(10)
              DCL        VAR(&GITTOKEN)  TYPE(*CHAR) LEN(40)
+             DCL        VAR(&GIT_USER2) TYPE(*CHAR) LEN(30)
+             DCL        VAR(&PACKAGEN2) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&GITTOKENA) TYPE(*CHAR) LEN(20)
+             DCL        VAR(&GITTOKENB) TYPE(*CHAR) LEN(20)
              DCL        VAR(&DEVOPT)    TYPE(*CHAR) LEN(1)
+             DCL        VAR(&TGTRLS)    TYPE(*CHAR) LEN(10)
              DCL        VAR(&OMISSIBLE) TYPE(*CHAR) LEN(1)
              DCL        VAR(&VERBOSE) TYPE(*CHAR) LEN(1)
              INCLUDE    SRCMBR(CURL_INCL)
@@ -30,6 +35,8 @@
              DCL        VAR(&SPOOL)  TYPE(*CHAR) LEN(6) VALUE(*NONE)
              DCL        VAR(&X15) TYPE(*CHAR) LEN(1) VALUE(X'15')
              DCL        VAR(&EXTRACT)  TYPE(*DEC)   LEN(5 0)
+             DCL        VAR(&TMPPOS) TYPE(*UINT) LEN(4)
+
              CHGVAR     VAR(&VERBOSE) VALUE(&OMISSIBLE)
              MONMSG     MSGID(MCH3601) EXEC(CHGVAR VAR(&VERBOSE) VALUE('N'))
              IF         COND(&DEVOPT = 'B') THEN(DO)
@@ -172,6 +179,19 @@
              ELSE DO
                CHGVAR   VAR(&RPOS) VALUE(&RPOS - 1)
              ENDDO
+             IF COND(%SST(&HTML_E 1 10) *EQ '*PREREQ   ') THEN(DO)
+               CHKOBJ OBJ(%SST(&HTML_E 11 10)) OBJTYPE(*LIB) AUT(*READ)
+               MONMSG MSGID(CPF9801) EXEC(DO)
+                 CHGVAR VAR(&TMPPOS) VALUE(&RPOS - 30)
+                 CHGVAR VAR(&GIT_USER2) VALUE(%SST(&HTML_E 31 &TMPPOS))
+                 CHGVAR VAR(&PACKAGEN2) VALUE(%SST(&HTML_E 11 10))
+                 CHGVAR VAR(&GITTOKENA) VALUE(%SST(&GITTOKEN 1 20))
+                 CHGVAR VAR(&GITTOKENB) VALUE(%SST(&GITTOKEN 21 20))
+                 PASERIE/INSTALL2 GIT_USER(&GIT_USER2) PACKAGEN(&PACKAGEN2) +
+                   GITTOK_A(&GITTOKENA) GITTOK_B(&GITTOKENB)
+               ENDDO  
+               GOTO       CMDLBL(NEXT)
+             ENDDO
              CHGVAR     VAR(%SST(&PKG_BLCK &CURPOS 90)) VALUE(%SST(&HTML_E 1 &RPOS))
              CHGVAR     VAR(&CURPOS) VALUE(&CURPOS + 91)
              CHGVAR     VAR(&TOTCNT) VALUE(&TOTCNT + 1)
@@ -240,7 +260,7 @@ REPEAT_I:
              CHGVAR     VAR(&BFP) VALUE(&NATIVE)
              CHGVAR     VAR(&CURR_P) VALUE(&NATIVP)
              CHGVAR     VAR(&EPOS) VALUE(0)
-             CHGVAR     VAR(&OUT_BYTES) VALUE(&MAXRECLEN)
+             CHGVAR     VAR(&OUT_BYTES) VALUE(400000)
  NEXT_I:     CHGVAR     VAR(&SPOS) VALUE(&EPOS + 1)
              CHGVAR     VAR(&EPOS) VALUE(%SCAN(&OA &HTML &SPOS))
                         /* No more LINE FEEDs */
@@ -266,12 +286,14 @@ REPEAT_I:
                         /* should never occur */
              IF         COND(%SST(&HTML_E 1 1) *EQ &NL) THEN(GOTO CMDLBL(SKIP_I))
              CHGVAR     VAR(&PRE_BYTES) VALUE(&PRE_BYTES - &OUT_BYTES)
+             IF         COND(&PRE_BYTES *EQ 0) THEN(GOTO CMDLBL(SKIP_I))
              CALLPRC    PRC('write') PARM((&FD *BYVAL) (&HTML_E *BYREF) (&PRE_BYTES *BYVAL)) RTNVAL(&RTCD)
              CHGVAR     VAR(&EPOS) VALUE(0)
              CHGVAR     VAR(&NATIVP) VALUE(&CURR_P)
              GOTO       CMDLBL(NEXT_I)
  SKIP_I:     /* DMPCLPGM */
              CALLPRC    PRC('close') PARM((&FD *BYVAL)) RTNVAL(&RTCD)
+
              CHGPFM     FILE(QTEMP/&PKG_FILN) MBR(&PKG_MBRN) SRCTYPE(&PKG_EXTN) TEXT(&PKG_TEXT)
              CALLPRC    PRC('EASY_CLEAN') PARM((&FUNCS_PTR) (&CURL))
              CHGVAR     VAR(%OFFSET(&PKG_LPTR)) VALUE(%OFFSET(&PKG_LPTR) + 91)
@@ -292,7 +314,7 @@ END:         CALLPRC    PRC('Qp2EndPase') RTNVAL(&RTCD)
              CRTBNDCL   PGM(QTEMP/BUILD) SRCFILE(QTEMP/QCLSRC) SRCMBR(BUILD) +
                         OUTPUT(&SPOOL) ALWRTVSRC(*NO)
              MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(PRVCLP))
-             CALL       PGM(QTEMP/BUILD) PARM(&DEVOPT)
+             CALL       PGM(QTEMP/BUILD) PARM(&DEVOPT &TGTRLS)
              MONMSG     MSGID(CPF0000)
              IF         COND(&VERBOSE *EQ 'L') THEN(DO)
              OVRDBF     FILE(STDOUT) TOFILE(QPRINT) OVRSCOPE(*JOB) SHARE(*YES)
