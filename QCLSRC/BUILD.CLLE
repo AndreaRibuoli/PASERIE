@@ -55,11 +55,11 @@
              ENDDO
              CRTCMD     CMD(&TGTLIB/INSTALL) PGM(&TGTLIB/INSTALL)  +
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL) +
-                          TEXT('PASERIE installer (8/10)')
+                          TEXT('PASERIE installer (8/10)') PRDLIB(&TGTLIB)
              DLTSPLF    FILE(INSTALL)
              CRTCMD     CMD(&TGTLIB/INSTALL2) PGM(&TGTLIB/INSTALL2)  +
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL2) +
-                          TEXT('PASERIE installer (dev/dev)')
+                          TEXT('PASERIE installer (dev/dev)') PRDLIB(&TGTLIB)
              DLTSPLF    FILE(INSTALL2)
              CRTCLMOD   MODULE(&BLDLIB/GHINSTALL) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL) +
@@ -164,7 +164,7 @@
              MONMSG     MSGID(CPF0000)
              CRTCMD     CMD(&TGTLIB/INSTALLOC) PGM(&TGTLIB/INSTALLOC) +
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALLOC)  +
-                          TEXT('PASERIE installer (9/10)')
+                          TEXT('PASERIE installer (9/10)') PRDLIB(&TGTLIB)
              DLTSPLF    FILE(INSTALLOC)
              CRTCLMOD   MODULE(&BLDLIB/LIBCLONE_B) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(LIBCLONE_B) +
@@ -180,6 +180,6 @@
                           TGTRLS(&TGTRLS) TEXT('PASERIE installer (5/10)')
              CRTCMD     CMD(&TGTLIB/LIBCLONE) PGM(&TGTLIB/LIBCLONE) +
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(LIBCLONE)  +
-                          TEXT('PASERIE installer (10/10)')
+                          TEXT('PASERIE installer (10/10)') PRDLIB(&TGTLIB)
              DLTSPLF    FILE(LIBCLONE) 
 RETURN:      ENDPGM
