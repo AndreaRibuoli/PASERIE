@@ -9,10 +9,13 @@
              PARM       KWD(GITTOK_B) TYPE(*CHAR) LEN(20) DSPINPUT(*NO) +
                           DFT('A2N60Xz6HP5J4Y2bZ5gA') FULL(*YES) +
                           CASE(*MIXED) PROMPT('Second half of token')
+             PARM       KWD(TGTLIB) TYPE(*CHAR) LEN(10) DFT(*PACKAGEN) +
+                          PROMPT('Overwrite Target library')
              PARM       KWD(DEVOPT) TYPE(*CHAR) LEN(1) DFT('N')
              PARM       KWD(JTMPLOP) TYPE(*CHAR) LEN(10) DFT('*PND      ')
              PARM       KWD(TGTRLS)  TYPE(*CHAR) LEN(10) DFT('*CURRENT  ')
              PARM       KWD(VERBOSE) TYPE(*CHAR) LEN(1) DFT('N')
+
 
 
 
