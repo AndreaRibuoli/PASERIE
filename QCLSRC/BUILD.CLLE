@@ -16,8 +16,8 @@
              CHGVAR     VAR(&TGTLIB) VALUE(&TGTLIB_P)
              MONMSG     MSGID(MCH3601) EXEC(CHGVAR VAR(&TGTLIB) VALUE(*PACKAGEN))
              IF         COND(&TGTLIB = '*PACKAGEN ') THEN(CHGVAR VAR(&TGTLIB) VALUE(PASERIE))
-             CRTLIB     LIB(&TGTLIB)
-             MONMSG     MSGID(CPF0000)
+             /* CRTLIB     LIB(&TGTLIB)    */
+             /* MONMSG     MSGID(CPF0000)  */
              IF         COND(&DEVOPT = 'N') THEN(DO)
              DLTF       FILE(&TGTLIB/QCMDSRC)
              MONMSG     MSGID(CPF0000)
