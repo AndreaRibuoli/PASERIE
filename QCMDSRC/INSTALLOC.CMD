@@ -1,4 +1,4 @@
-             CMD        PROMPT('PASERIE Local Inst Program V1R0M0')
+             CMD        PROMPT('PASERIE Local Inst Pgm  V1R0M0')
              PARM       KWD(LOCAL_PATH) TYPE(*CHAR) LEN(100) MIN(1) +
                           CASE(*MIXED) PROMPT('Project directory')
              PARM       KWD(TGTLIB) TYPE(*CHAR) LEN(10) DFT(*LOCALPATH) +

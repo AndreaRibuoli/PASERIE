@@ -1,4 +1,4 @@
-             CMD        PROMPT('PASERIE Lib Clone Program V1R0M0')
+             CMD        PROMPT('PASERIE Lib Clone Pgm   V1R0M0')
              PARM       KWD(SRCLIB) TYPE(*CHAR) LEN(10) MIN(1) +
                           PROMPT('Source library')
              PARM       KWD(TGTLIB) TYPE(*CHAR) LEN(10) DFT(*SRCLIB) +

@@ -1,4 +1,4 @@
-             CMD        PROMPT('PASERIE Install2 Program V1R0M0')
+             CMD        PROMPT('PASERIE Install2 Pgm    V1R0M0')
              PARM       KWD(GIT_USER) TYPE(*CHAR) LEN(30) MIN(1) +
                           CASE(*MIXED) PROMPT('GitHub User Profile')
              PARM       KWD(PACKAGEN) TYPE(*CHAR) LEN(10) MIN(1) +
