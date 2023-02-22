@@ -7,8 +7,6 @@
              DCL        VAR(&TGTLIB)    TYPE(*CHAR) LEN(10)
              DCL        VAR(&GIT_USER2) TYPE(*CHAR) LEN(30)
              DCL        VAR(&PACKAGEN2) TYPE(*CHAR) LEN(10)
-             DCL        VAR(&GITTOKENA) TYPE(*CHAR) LEN(20)
-             DCL        VAR(&GITTOKENB) TYPE(*CHAR) LEN(20)
              DCL        VAR(&DEVOPT)    TYPE(*CHAR) LEN(1)
              DCL        VAR(&TGTRLS)    TYPE(*CHAR) LEN(10)
              DCL        VAR(&OMISSIBLE) TYPE(*CHAR) LEN(1)
@@ -186,10 +184,7 @@
                  CHGVAR VAR(&TMPPOS) VALUE(&RPOS - 30)
                  CHGVAR VAR(&GIT_USER2) VALUE(%SST(&HTML_E 31 &TMPPOS))
                  CHGVAR VAR(&PACKAGEN2) VALUE(%SST(&HTML_E 11 10))
-                 CHGVAR VAR(&GITTOKENA) VALUE(%SST(&GITTOKEN 1 20))
-                 CHGVAR VAR(&GITTOKENB) VALUE(%SST(&GITTOKEN 21 20))
-                 INSTALL GIT_USER(&GIT_USER2) PACKAGEN(&PACKAGEN2) +
-                   GITTOK_A(&GITTOKENA) GITTOK_B(&GITTOKENB)
+                 INSTALL GIT_USER(&GIT_USER2) PACKAGEN(&PACKAGEN2) GITTOKEN(&GITTOKEN)
                ENDDO  
                GOTO       CMDLBL(NEXT)
              ENDDO
