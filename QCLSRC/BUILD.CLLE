@@ -57,18 +57,18 @@
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL) +
                           TEXT('PASERIE installer (8/10)') PRDLIB(&TGTLIB)
              DLTSPLF    FILE(INSTALL)
-             CRTCMD     CMD(&TGTLIB/INSTALL2) PGM(&TGTLIB/INSTALL2)  +
-                          SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL2) +
-                          TEXT('PASERIE installer (dev/dev)') PRDLIB(&TGTLIB)
-             DLTSPLF    FILE(INSTALL2)
+         /*    CRTCMD     CMD(&TGTLIB/INSTALL2) PGM(&TGTLIB/INSTALL2)  +           */
+         /*                 SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL2)  +           */ 
+         /*                 TEXT('PASERIE installer (dev/dev)') PRDLIB(&TGTLIB)    */
+         /*    DLTSPLF    FILE(INSTALL2)                                           */
              CRTCLMOD   MODULE(&BLDLIB/GHINSTALL) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL) +
                           INCFILE(&SRCLIB/QCLSRC) +
                           TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
-             CRTCLMOD   MODULE(&BLDLIB/GHINSTALL2) +
-                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL2) +
-                          INCFILE(&SRCLIB/QCLSRC) +
-                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+         /*    CRTCLMOD   MODULE(&BLDLIB/GHINSTALL2) +                      */
+         /*                 SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL2) +    */
+         /*                 INCFILE(&SRCLIB/QCLSRC) +                       */
+         /*                 TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)    */
              DLTF       FILE(QTEMP/GUIDE00F)
              MONMSG     MSGID(CPF0000)
              CRTPF      FILE(QTEMP/GUIDE00F) SRCFILE(&SRCLIB/QDDSPF) +
@@ -154,10 +154,10 @@
                           MODULE(&BLDLIB/INSTALL) +
                           TGTRLS(&TGTRLS) TEXT('PASERIE installer (2/10)')
              MONMSG     MSGID(CPF0000)
-             CRTPGM     PGM(&TGTLIB/INSTALL2) +
-                          MODULE(&BLDLIB/INSTALL2) +
-                          TGTRLS(&TGTRLS) TEXT('PASERIE installer (dev/dev)')
-             MONMSG     MSGID(CPF0000)
+         /*    CRTPGM     PGM(&TGTLIB/INSTALL2) +                                 */
+         /*                 MODULE(&BLDLIB/INSTALL2) +                            */
+         /*                 TGTRLS(&TGTRLS) TEXT('PASERIE installer (dev/dev)')   */
+         /*    MONMSG     MSGID(CPF0000)                                          */
              CRTPGM     PGM(&TGTLIB/INSTALLOC) +
                           MODULE(&BLDLIB/INSTALLOC) +
                           TGTRLS(&TGTRLS) TEXT('PASERIE installer (4/10)')
