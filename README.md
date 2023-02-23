@@ -6,21 +6,22 @@ Once available on a target system the utility allows you to install your package
 in a very simple way, directly accessing your repositories on GitHub
 or the repositories of other developers that authorized you.
 
-The Community Edition does not provide you a mechanism to locally register your GitHub's *Personal Access Token*
-so that you will be required to pass it in every request involving access to a Private repository.
+The **Basic Edition** provides **PASERIE/INSTALL** command and a very simple mechanism to 
+locally register your GitHub's *Personal Access Token* so that you will be not required to pass it with every request. 
 
-The Developer Edition provides you such a mechanism simplifying automation 
-(e.g.: a CL could include multiple INSTALL commands without storing tokens)
+This specific routine is implemented as an exit program that can be customized to your organization's specific needs
+by restoring the CL source of the **PASERIE/GETPAT** program (*Retrieve Personal access token*).
 
-The application being packaged for PASERIE/INSTALL follows the same rules: no need to keep different versions of your 
-source code.
+The initial program performs a simple `RTVDTAARA` over a data area named *GETTOKEN*, expected to be exist in PASERIE library.
 
-The Community Edition is limited to the INSTALL utility.
+Note: One suggestion could be to create a file of authorised users where programmers' tokens are kept in an encrypted column
+so that the current user's token is returned when invoked. 
 
-The Developer Edition includes also INSTALLOC and LIBCLONE, plus the services to persist your token, safely.
+The **Developer Edition** includes other tools like **PASERIE/INSTALLOC** and **PASERIE/LIBCLONE**.
 
-The Developer Edition will check for a valid IBM i license key before providing these extra services.
-The Developer Edition is actually made up of Community Edition with the addition of the extra utilities.
+The *Basic and Developer Editions* will check for a valid IBM i license key before providing their services.
+The **Developer Edition** includes a kit of **10** Basic Edition license keys that will be generated for the 
+developer to register on her/his customers' systems.
 
 ## FUTURE DEVELOPMENTS
 
