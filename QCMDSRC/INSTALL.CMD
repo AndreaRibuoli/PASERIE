@@ -3,8 +3,8 @@
                           CASE(*MIXED) PROMPT('GitHub Developer Profile')
              PARM       KWD(PACKAGEN) TYPE(*CHAR) LEN(10) MIN(1) +
                           CASE(*MIXED) PROMPT('Repository')
-             PARM       KWD(GITTOKEN) TYPE(*CHAR) LEN(40) DSPINPUT(*NO) DFT(*DTAARA) +
-                          SPCVAL((*DTAARA '*DTAARA')) +
+             PARM       KWD(GITTOKEN) TYPE(*CHAR) LEN(40) DSPINPUT(*NO) DFT(*GETPAT) +
+                          SPCVAL((*GETPAT '*GETPAT')) +
                           FULL(*YES) CASE(*MIXED) PROMPT('Personal access token')      
              PARM       KWD(TGTLIB) TYPE(*CHAR) LEN(10) DFT(*PACKAGEN) +
                           PROMPT('Target library')

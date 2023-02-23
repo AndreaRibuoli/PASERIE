@@ -13,6 +13,7 @@ QCLSRC    EASY_GINFOCLLE      Module EASY_GINFO (9 of 9)
 QSRVSRC   LIBCURL   BND       Bind file for LIBCURL *SRVPGM
 QCLSRC    GHINSTALL CLLE      Program GHINSTALL
 QCLSRC    INSTALL   CLLE      Program INSTALL
+QCLSRC    GETPAT    CLLE      Retrieve Personal Access Token
 QCMDSRC   INSTALL   CMD       Command INSTALL    
 QDDSPF    GUIDE00F  PF        Template     
 QCLSRC    INSTALL_L CLLE      Program INSTALL_L

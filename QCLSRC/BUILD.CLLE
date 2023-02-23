@@ -53,6 +53,9 @@
                           TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
              MONMSG     MSGID(CPF0000)
              ENDDO
+             CRTBNDCL   PGM(&TGTLIB/GETPAT) SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GETPAT) +
+                        TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*YES)
+             MONMSG     MSGID(CPF0000)
              CRTCMD     CMD(&TGTLIB/INSTALL) PGM(&TGTLIB/INSTALL)  +
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL) +
                           TEXT('PASERIE installer (8/10)') PRDLIB(&TGTLIB)
