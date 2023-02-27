@@ -70,7 +70,7 @@
                           OPTION(*NOSRC *NOLIST)
              CRTCLMOD   MODULE(&BLDLIB/INSTALL_L) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(INSTALL_L) +
-                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+                          TGTRLS(&TGTRLS) OUTPUT(*PRINT) ALWRTVSRC(*NO)
              CRTCLMOD   MODULE(&BLDLIB/EASY_INIT) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(EASY_INIT) +
                           INCFILE(&SRCLIB/QCLSRC) +
