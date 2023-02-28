@@ -1,4 +1,4 @@
-# PASERIE (V1R0M1)
+# PASERIE (V1R0M2)
 ### Utility for Source-Level Distribution in IBM i
 
 This utility helps you maintain your IBM i source code on GitHub.
@@ -22,6 +22,25 @@ The **Developer Edition** includes other tools like **PASERIE/INSTALLOC** and **
 The *Basic and Developer Editions* will check for a valid IBM i license key before providing their services.
 The **Developer Edition** includes a kit of **10** Basic Edition license keys that will be generated for the 
 developer to register on her/his customers' systems.
+
+## PARAMETERS
+
+|     KWD    |  INSTALL  | INSTALLOC | LIBCLONE  |
+|:----------:|:---------:|:---------:|:---------:|
+| REPO_OWNER |    yes    |           |           | 
+| REPOSITORY |    yes    |           |           | 
+| YOURGITPAT |    yes    |           |           | 
+| SRCLIB     |           |           |    yes    | 
+| LOCALPATH  |           |    yes    |    yes    | 
+| TGTLIB     |    yes    |    yes    |           | 
+| TGTRLS     |    yes    |    yes    |           | 
+| DEVOPT     |    yes    |    yes    |    yes    | 
+| LOGOUTPUT  |    yes    |    yes    |    yes    | 
+| VERBOSE    |    yes    |    yes    |    yes    | 
+
+
+
+
 
 ## THE NAME
 
