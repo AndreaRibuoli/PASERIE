@@ -48,7 +48,7 @@
              CHGVAR     VAR(&SYMB_06) VALUE(&SYMB_06 *TCAT &NL)
              CHGVAR     VAR(&SYMB_07) VALUE(&SYMB_07 *TCAT &NL)
              CHGVAR     VAR(&SYMB_08) VALUE(&SYMB_08 *TCAT &NL)
-             CHGVAR     VAR(&PATH) VALUE('/QOpenSys/PaseOss/lib/paseoss_start32' *CAT &NL)
+             CHGVAR     VAR(&PATH) VALUE('/home/AndreaRibuoli/PaseOss/lib/paseoss_start32' *CAT &NL)
 RETRY:       CALLPRC    PRC('Qp2RunPase') PARM((&PATH) (&SYNM_P *BYVAL) (&SYDT_P *BYVAL) (&SYDT_L *BYVAL) +
                           (&P_CCSID *BYVAL) (&ARGV_P) (&ENV_P *BYVAL)) RTNVAL(&RTCD)
              MONMSG     MSGID(CPFB9C0) EXEC(GOTO CMDLBL(FINE))
@@ -70,7 +70,7 @@ RETRY:       CALLPRC    PRC('Qp2RunPase') PARM((&PATH) (&SYNM_P *BYVAL) (&SYDT_P
              CHGVAR     VAR(&S_CCSID) VALUE(&P_CCSID)
           /* SNDPGMMSG MSG('PASE CCSID set to ' *CAT &S_CCSID) */
              CHGVAR     VAR(&FLAGS) VALUE(262146)
-             CHGVAR     VAR(&PATH2) VALUE('/QOpenSys/PaseOss/lib/libcurl.a(shr.o)' *TCAT &NL)
+             CHGVAR     VAR(&PATH2) VALUE('/home/AndreaRibuoli/PaseOss/lib/libcurl.a(shr.o)' *TCAT &NL)
 
              CALLPRC    PRC('Qp2dlopen') PARM((&PATH2) (&FLAGS *BYVAL) (&CCSID *BYVAL)) RTNVAL(&ID)
              CALLPRC    PRC('Qp2dlerror') RTNVAL(&ERR_P)
@@ -132,7 +132,7 @@ RETRY:       CALLPRC    PRC('Qp2RunPase') PARM((&PATH) (&SYNM_P *BYVAL) (&SYDT_P
           /* SNDPGMMSG MSG(&SYMB_08) */
 
              CHGVAR     VAR(&FLAGS) VALUE(2)
-             CHGVAR     VAR(&PATH2) VALUE('/QOpenSys/PaseOss/lib/libhelp.so' *TCAT &NL)
+             CHGVAR     VAR(&PATH2) VALUE('/home/AndreaRibuoli/PaseOss/lib/libhelp.so' *TCAT &NL)
 
              CALLPRC    PRC('Qp2dlopen') PARM( +
                           (&PATH2)             +
