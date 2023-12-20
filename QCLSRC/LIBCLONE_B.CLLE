@@ -115,6 +115,8 @@ CALLPRC    PRC('printf') PARM((&MSGDTA))
 RETURN
 ENDDO
 /* determine if subdir exists */
+IF         COND(%SST(&LOCALPATH 1 1) *NE '/') +
+           THEN(CHGVAR VAR(&LOCALPATH) VALUE('./' *CAT &LOCALPATH))
 CHGVAR VAR(&LPOS) VALUE(0)
 DOUNTIL COND('0')
 CHGVAR VAR(&POS) VALUE(&LPOS + 1)
