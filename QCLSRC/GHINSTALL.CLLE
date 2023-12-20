@@ -309,15 +309,10 @@ END:         CALLPRC    PRC('Qp2EndPase') RTNVAL(&RTCD)
              IF         COND(&RTCD *NE 0) THEN(SNDPGMMSG MSG('La chiamata Qp2EndPase ha dato errore.'))
              CRTBNDCL   PGM(QTEMP/BUILD) SRCFILE(QTEMP/QCLSRC) SRCMBR(BUILD) +
                         OUTPUT(&SPOOL) ALWRTVSRC(*NO)
-             MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(PRVCLP))
-             IF COND(&TGTLIB *NE '*PACKAGEN') THEN(DO)
-               CALL PGM(QTEMP/BUILD) PARM(&DEVOPT &TGTRLS &TGTLIB)
-               MONMSG MSGID(CPF0000)  
-             ENDDO  
-             ELSE CMD(DO)
-               CALL PGM(QTEMP/BUILD) PARM(&DEVOPT &TGTRLS &PACKAGEN)
-               MONMSG MSGID(CPF0000)
-             ENDDO  
+             MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(FINE))
+             CALL PGM(QTEMP/BUILD) PARM(&DEVOPT &TGTRLS &TGTLIB)
+             MONMSG MSGID(CPF0000)
+             DMPCLPGM
              IF         COND(&VERBOSE *EQ 'L') THEN(DO)
              OVRDBF     FILE(STDOUT) TOFILE(QPRINT) OVRSCOPE(*JOB) SHARE(*YES)
              CHGVAR     VAR(&COUNT) VALUE(0)
@@ -334,9 +329,4 @@ END:         CALLPRC    PRC('Qp2EndPase') RTNVAL(&RTCD)
              DLTOVR     FILE(STDOUT) LVL(*JOB)
              ENDDO
              GOTO       CMDLBL(FINE)
-PRVCLP:      CRTCLPGM   PGM(QTEMP/BUILD) SRCFILE(QTEMP/QCLSRC) SRCMBR(BUILD) +
-                        OUTPUT(&SPOOL) ALWRTVSRC(*NO) REPLACE(*NO)
-             MONMSG     MSGID(CPF0000)
-             CALL       PGM(QTEMP/BUILD) PARM(&DEVOPT)
-             MONMSG     MSGID(CPF0000)
 FINE:        ENDPGM
