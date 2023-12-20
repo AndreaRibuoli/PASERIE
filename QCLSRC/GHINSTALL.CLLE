@@ -315,7 +315,7 @@ END:         CALLPRC    PRC('Qp2EndPase') RTNVAL(&RTCD)
                MONMSG MSGID(CPF0000)  
              ENDDO  
              ELSE CMD(DO)
-               CALL PGM(QTEMP/BUILD) PARM(&DEVOPT &TGTRLS)
+               CALL PGM(QTEMP/BUILD) PARM(&DEVOPT &TGTRLS &PACKAGEN)
                MONMSG MSGID(CPF0000)
              ENDDO  
              IF         COND(&VERBOSE *EQ 'L') THEN(DO)
