@@ -1,4 +1,4 @@
-             CMD        PROMPT('PASERIE Installer       V1R0M2')
+             CMD        PROMPT('PASERIE Installer       V1R0M3')
              PARM       KWD(REPO_OWNER) TYPE(*CHAR) LEN(30) MIN(1) +
                           CASE(*MIXED) PROMPT('GitHub repository owner')
              PARM       KWD(REPOSITORY) TYPE(*CHAR) LEN(10) MIN(1) +
@@ -13,7 +13,7 @@
                           SPCVAL((*CURRENT '*CURRENT') (*PRV '*PRV')) +
                           PROMPT('Target release')
              PARM       KWD(DEVOPT) TYPE(*CHAR) LEN(1) DFT(N) +
-                          PROMPT('Developemnt option') PMTCTL(*PMTRQS)
+                          PROMPT('Development option') PMTCTL(*PMTRQS)
              PARM       KWD(LOGOUTPUT) TYPE(*CHAR) LEN(10) DFT(*PND) +
                           SPCVAL((*SAME '*SAME') (*SYSVAL '*SYSVAL') +
                           (*JOBLOGSVR '*JOBLOGSVR') (*JOBEND '*JOBEND') (*PND '*PND')) +
