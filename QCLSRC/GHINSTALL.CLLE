@@ -307,6 +307,8 @@ REPEAT_I:
              ENDDO
 END:         CALLPRC    PRC('Qp2EndPase') RTNVAL(&RTCD)
              IF         COND(&RTCD *NE 0) THEN(SNDPGMMSG MSG('La chiamata Qp2EndPase ha dato errore.'))
+             ADDLIBLE   LIB(TMKMAKE)
+             MONMSG MSGID(CPF0000)
              CRTBNDCL   PGM(QTEMP/BUILD) SRCFILE(QTEMP/QCLSRC) SRCMBR(BUILD) +
                         OUTPUT(&SPOOL) ALWRTVSRC(*NO)
              MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(FINE))
