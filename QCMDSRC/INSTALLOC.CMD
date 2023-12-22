@@ -2,7 +2,7 @@
              PARM       KWD(LOCAL_PATH) TYPE(*CHAR) LEN(100) MIN(1) +
                           CASE(*MIXED) PROMPT('Project directory')
              PARM       KWD(TGTLIB) TYPE(*CHAR) LEN(10) DFT(*LOCAL_PATH) +
-                          SPCVAL((*LOCAL_PATH '*LOCALPATH')) +
+                          SPCVAL((*LOCAL_PATH '*PACKAGEN')) +
                           PROMPT('Target library')
              PARM       KWD(TGTRLS)  TYPE(*CHAR) LEN(10) DFT(*CURRENT) +
                           SPCVAL((*CURRENT '*CURRENT') (*PRV '*PRV')) +
