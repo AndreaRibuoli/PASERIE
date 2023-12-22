@@ -1,6 +1,7 @@
-             PGM        PARM(&GIT_USER &PACKAGEN &GITTOKEN &TGTLIB &DEVOPT &TGTRLS &OMISSIBLE)
+             PGM        PARM(&PASE_DIR &GIT_USER &PACKAGEN &GITTOKEN &TGTLIB &DEVOPT &TGTRLS &OMISSIBLE)
              DCLPRCOPT  LOG(*NO) ALWRTVSRC(*NO)
              COPYRIGHT  TEXT('Andrea Ribuoli © 2023 - PASERIE Installer')
+             DCL        VAR(&PASE_DIR)  TYPE(*CHAR) LEN(60)
              DCL        VAR(&GIT_USER)  TYPE(*CHAR) LEN(30)
              DCL        VAR(&PACKAGEN)  TYPE(*CHAR) LEN(10)
              DCL        VAR(&GITTOKEN)  TYPE(*CHAR) LEN(40)
@@ -35,7 +36,6 @@
              DCL        VAR(&X15) TYPE(*CHAR) LEN(1) VALUE(X'15')
              DCL        VAR(&EXTRACT)  TYPE(*DEC)   LEN(5 0)
              DCL        VAR(&TMPPOS) TYPE(*UINT) LEN(4)
-
              CHGVAR     VAR(&VERBOSE) VALUE(&OMISSIBLE)
              MONMSG     MSGID(MCH3601) EXEC(CHGVAR VAR(&VERBOSE) VALUE('N'))
              IF         COND(&DEVOPT = 'B') THEN(DO)
@@ -52,7 +52,7 @@
              SNDPGMMSG  MSG('Application error with iconv')
              GOTO       CMDLBL(FINE)
              ENDDO
-             CALLPRC    PRC('EASY_LOAD') PARM((&FUNCS_PTR))
+             CALLPRC    PRC('EASY_LOAD') PARM((&FUNCS_PTR) (&PASE_DIR *BYVAL))
              CALLPRC    PRC('Qp2malloc') PARM((&SIZEF *BYVAL) (&LOCAF) (*)) RTNVAL(&MEMF_P)
              CALLPRC    PRC('VERS_INFO') PARM((&FUNCS_PTR) (&LOCAF))
              CHGVAR     VAR(&INFOPU) VALUE(&NATIVF)
