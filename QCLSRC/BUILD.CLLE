@@ -9,6 +9,7 @@
              DCL        VAR(&BLDLIB) TYPE(*CHAR) LEN(10) VALUE(QTEMP)
              DCL        VAR(&TGTLIB) TYPE(*CHAR) LEN(10)
              DCL        VAR(&IFSPATH) TYPE(*CHAR) LEN(100)
+             DCL        VAR(&STMT) TYPE(*CHAR) LEN(28) 
              CHGVAR     VAR(&DEVOPT) VALUE(&DEVOPT_P)
              MONMSG     MSGID(MCH3601) EXEC(CHGVAR VAR(&DEVOPT) VALUE(L))
              CHGVAR     VAR(&TGTRLS) VALUE(&TGTRLS_P)
@@ -16,8 +17,9 @@
              CHGVAR     VAR(&TGTLIB) VALUE(&TGTLIB_P)
              MONMSG     MSGID(MCH3601) EXEC(CHGVAR VAR(&TGTLIB) VALUE(*PACKAGEN))
              IF         COND(&TGTLIB = '*PACKAGEN ') THEN(CHGVAR VAR(&TGTLIB) VALUE(PASERIE))
-             /* CRTLIB     LIB(&TGTLIB)    */
-             /* MONMSG     MSGID(CPF0000)  */
+             CHGVAR     VAR(&STMT) VALUE('QSYS/CRTLIB LIB(' *CAT &TGTLIB *TCAT ')') 
+             CALL       PGM(QCMDEXC) PARM(&STMT 28)
+             MONMSG     MSGID(CPF0000)             
              IF         COND(&DEVOPT = 'N') THEN(DO)
              DLTF       FILE(&TGTLIB/QCMDSRC)
              MONMSG     MSGID(CPF0000)
