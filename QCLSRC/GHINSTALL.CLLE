@@ -52,7 +52,8 @@
              SNDPGMMSG  MSG('Application error with iconv')
              GOTO       CMDLBL(FINE)
              ENDDO
-             CALLPRC    PRC('EASY_LOAD') PARM((&FUNCS_PTR) (&PASE_DIR *BYVAL))
+             CHGVAR     VAR(&ROOT) VALUE(&PASE_DIR)
+             CALLPRC    PRC('EASY_LOAD') PARM((&FUNCS_PTR))
              CALLPRC    PRC('Qp2malloc') PARM((&SIZEF *BYVAL) (&LOCAF) (*)) RTNVAL(&MEMF_P)
              CALLPRC    PRC('VERS_INFO') PARM((&FUNCS_PTR) (&LOCAF))
              CHGVAR     VAR(&INFOPU) VALUE(&NATIVF)

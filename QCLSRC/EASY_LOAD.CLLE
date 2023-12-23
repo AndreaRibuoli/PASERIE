@@ -1,7 +1,6 @@
-             PGM        PARM(&FUNCS_PTR &ROOT)
+             PGM        PARM(&FUNCS_PTR)
              DCL        VAR(&FUNCS_PTR) TYPE(*PTR)
-             DCL        VAR(&ROOT) TYPE(*CHAR) LEN(60)
-             DCL        VAR(&PA)        TYPE(*CHAR) STG(*BASED) LEN(80) BASPTR(&FUNCS_PTR)
+             DCL        VAR(&PA)        TYPE(*CHAR) STG(*BASED) LEN(160) BASPTR(&FUNCS_PTR)
              DCL        VAR(&SYMB_01)   TYPE(*CHAR) LEN(30) VALUE('curl_easy_init')
              DCL        VAR(&SYMB_02)   TYPE(*CHAR) LEN(30) VALUE('curl_easy_setopt')
              DCL        VAR(&SYMB_03)   TYPE(*CHAR) LEN(30) VALUE('curl_slist_append')
@@ -18,6 +17,7 @@
              DCL        VAR(&FUNCTION6)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA 41)  /* CallbackPtr       */
              DCL        VAR(&FUNCTION7)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA 49)  /* VersionInfo       */
              DCL        VAR(&FUNCTION8)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA 57)  /* curl_EASY_GetINFO */
+             DCL        VAR(&ROOT)       TYPE(*CHAR) STG(*DEFINED) LEN(60) DEFVAR(&PA 81) /* PaseOssPath       */
              DCL        VAR(&ERR_P)     TYPE(*PTR)                                             ADDRESS(*NULL)
              DCL        VAR(&MSG)       TYPE(*CHAR) STG(*BASED)   LEN(300)                     BASPTR(&ERR_P)
              DCL        VAR(&NL)        TYPE(*CHAR)               LEN(1)                       VALUE(X'00')
