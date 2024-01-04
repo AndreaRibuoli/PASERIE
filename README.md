@@ -35,6 +35,41 @@ The suite provides three tools:
               QTEMP/QCLSRC(BUILD)    (compiled on the fly and executed)   
 ```
 
+## INSTALLATION
+
+Let's first create an empty SAVEFILE named `QGPL/PASERIE`.
+Then, from `CALL QP2TERM`, we verify to have **curl** installed:
+
+```
+  $                                        
+> PATH=/QOpenSys/pkgs/bin:$PATH            
+  $                                        
+> export PATH                              
+  $         
+> which curl
+  /QOpenSys/pkgs/bin/curl
+```
+By means of curl we download 2 archives:
+                                                                      
+
+```                  
+curl -o PaseOssFloating.tar \
+        https://www.andrearibuoli.it/paserie/PaseOssFloating.tar    
+```
+        
+```                  
+curl -o /QSYS.LIB/QGPL.LIB/PASERIE.FILE \
+        https://www.andrearibuoli.it/paserie/PASERIE.SAVF
+```
+
+From the home path of the user that will be using **PASERIE/INSTALL** we
+install **PaseOss** folder by untarring *PaseOssFloating* tar file:
+
+```
+tar xvf PaseOssFloating.tar
+```
+
+Now, closed the QP2TERM session, and can perform the `RSTLIB` for PASERIE.
 
 <!--
 and a very simple mechanism to 
