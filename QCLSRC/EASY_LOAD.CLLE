@@ -32,11 +32,11 @@
         /*   DCL        VAR(&ENV)       TYPE(*PTR)                                             ADDRESS(*NULL) */
         /*   DCL        VAR(&ENV_P)     TYPE(*PTR)                                             ADDRESS(&ENV)  */
              /* */
-             DCL        VAR(&ENVARA)    TYPE(*CHAR) LEN(32)
+             DCL        VAR(&ENVARA)    TYPE(*CHAR) LEN(48)
              DCL        VAR(&ENV1P)     TYPE(*PTR)  STG(*DEFINED)  DEFVAR(&ENVARA  1)
              DCL        VAR(&ENV2P)     TYPE(*PTR)  STG(*DEFINED)  DEFVAR(&ENVARA  17)
+             DCL        VAR(&ENV3P)     TYPE(*PTR)  STG(*DEFINED)  DEFVAR(&ENVARA  33)
              DCL        VAR(&ENV_P)     TYPE(*PTR)                                             ADDRESS(&ENVARA)
-             DCL        VAR(&ENVSTRING) TYPE(*CHAR) LEN(100)
              /* */
              DCL        VAR(&PSIZE)     TYPE(*INT)   VALUE(0)
              DCL        VAR(&S_CCSID)   TYPE(*CHAR)  LEN(5)
@@ -58,9 +58,9 @@
              CHGVAR     VAR(&SYMB_07) VALUE(&SYMB_07 *TCAT &NL)
              CHGVAR     VAR(&SYMB_08) VALUE(&SYMB_08 *TCAT &NL)
              CHGVAR     VAR(&PATH) VALUE(&ROOT *TCAT '/lib/paseoss_start32' *CAT &NL)
-             CHGVAR     VAR(&ENVSTRING) VALUE('CURL_CA_BUNDLE=' *CAT &ROOT *TCAT &CERT *TCAT &NL)
-             CHGVAR     VAR(&ENV1P) VALUE(%ADDRESS(&ENVSTRING))
+             CHGVAR     VAR(&ENV1P) VALUE(*NULL)
              CHGVAR     VAR(&ENV2P) VALUE(*NULL)
+             CHGVAR     VAR(&ENV3P) VALUE(*NULL)
 RETRY:       CALLPRC    PRC('Qp2RunPase') PARM((&PATH) (&SYNM_P *BYVAL) (&SYDT_P *BYVAL) (&SYDT_L *BYVAL) +
                           (&P_CCSID *BYVAL) (&ARGV_P) (&ENV_P *BYVAL)) RTNVAL(&RTCD)
              MONMSG     MSGID(CPFB9C0) EXEC(GOTO CMDLBL(FINE))

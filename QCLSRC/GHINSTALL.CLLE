@@ -55,6 +55,14 @@
              CHGVAR     VAR(&ROOT) VALUE(&PASE_DIR)
              CHGVAR     VAR(&CERT) VALUE('/certs/ca-certs.crt')
              CALLPRC    PRC('EASY_LOAD') PARM((&FUNCS_PTR))
+             CHGVAR     VAR(&CAINFO) VALUE(&ROOT *TCAT &CERT *TCAT &NL)
+             CHGVAR     VAR(&CAINFO_P) VALUE(%ADDRESS(&CAINFO))
+             CALLPRC    PRC('Qp2malloc') PARM((&SIZEG *BYVAL) (&LOCAG) (*)) RTNVAL(&MEMG_P)
+             CHGVAR     VAR(&IN_BYTES) VALUE(&SIZED)
+             CHGVAR     VAR(&OUT_BYTES) VALUE(&SIZED)
+             CHGVAR     VAR(&MEMG_P2) VALUE(&MEMG_P)
+             CALLPRC    PRC('iconv') PARM((&CONVD *BYVAL) (&CAINFO_P) (&IN_BYTES) (&MEMG_P2) (&OUT_BYTES)) RTNVAL(&RC)
+
              CALLPRC    PRC('Qp2malloc') PARM((&SIZEF *BYVAL) (&LOCAF) (*)) RTNVAL(&MEMF_P)
              CALLPRC    PRC('VERS_INFO') PARM((&FUNCS_PTR) (&LOCAF))
              CHGVAR     VAR(&INFOPU) VALUE(&NATIVF)
@@ -92,6 +100,8 @@
              CALLPRC    PRC('EASY_INIT') PARM((&FUNCS_PTR) (&CURL))
              CHGVAR     VAR(&OPT_CD) VALUE(10023) /* CURLOPT_HTTPHEADER */
              CALLPRC    PRC('EASY_SETOP') PARM((&FUNCS_PTR) (&CURL) (&OPT_CD) (&LOCAC) (&ERROR))
+             CHGVAR     VAR(&OPT_CD) VALUE(10065) /* CURLOPT_CAINFO */
+             CALLPRC    PRC('EASY_SETOP') PARM((&FUNCS_PTR) (&CURL) (&OPT_CD) (&LOCAG) (&ERROR))
              IF         COND(&VERBOSE *EQ 'Y') THEN(DO)
              CHGVAR     VAR(&OPT_CD)  VALUE(41)   /* CURLOPT_VERBOSE 41 */
              CALLPRC    PRC('EASY_SETOP') PARM((&FUNCS_PTR) (&CURL) (&OPT_CD) (&ONVALUE) (&ERROR))
@@ -207,6 +217,8 @@ REPEAT_I:
              CALLPRC    PRC('EASY_INIT') PARM((&FUNCS_PTR) (&CURL))
              CHGVAR     VAR(&OPT_CD) VALUE(10023) /* CURLOPT_HTTPHEADER */
              CALLPRC    PRC('EASY_SETOP') PARM((&FUNCS_PTR) (&CURL) (&OPT_CD) (&LOCAC) (&ERROR))
+             CHGVAR     VAR(&OPT_CD) VALUE(10065) /* CURLOPT_CAINFO */
+             CALLPRC    PRC('EASY_SETOP') PARM((&FUNCS_PTR) (&CURL) (&OPT_CD) (&LOCAG) (&ERROR))
              IF         COND(&VERBOSE *EQ 'Y') THEN(DO)
              CHGVAR     VAR(&OPT_CD)  VALUE(41)   /* CURLOPT_VERBOSE 41 */
              CALLPRC    PRC('EASY_SETOP') PARM((&FUNCS_PTR) (&CURL) (&OPT_CD) (&ONVALUE) (&ERROR))
