@@ -9,15 +9,16 @@
              DCL        VAR(&SYMB_06)   TYPE(*CHAR) LEN(30) VALUE('CallbackPtr')
              DCL        VAR(&SYMB_07)   TYPE(*CHAR) LEN(30) VALUE('VersionInfo')
              DCL        VAR(&SYMB_08)   TYPE(*CHAR) LEN(30) VALUE('curl_easy_getinfo')
-             DCL        VAR(&FUNCTION1)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA  1)  /* curl_EASY_INIT    */
-             DCL        VAR(&FUNCTION2)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA  9)  /* curl_EASY_SETOPt  */
-             DCL        VAR(&FUNCTION3)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA 17)  /* curl_SLIST_APPEnd */
-             DCL        VAR(&FUNCTION4)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA 25)  /* curl_EASY_PERFOrm */
-             DCL        VAR(&FUNCTION5)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA 33)  /* curl_EASY_CLEANup */
-             DCL        VAR(&FUNCTION6)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA 41)  /* CallbackPtr       */
-             DCL        VAR(&FUNCTION7)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA 49)  /* VersionInfo       */
-             DCL        VAR(&FUNCTION8)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA 57)  /* curl_EASY_GetINFO */
-             DCL        VAR(&ROOT)       TYPE(*CHAR) STG(*DEFINED) LEN(60) DEFVAR(&PA 81) /* PaseOssPath       */
+             DCL        VAR(&FUNCTION1)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA  1)   /* curl_EASY_INIT    */
+             DCL        VAR(&FUNCTION2)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA  9)   /* curl_EASY_SETOPt  */
+             DCL        VAR(&FUNCTION3)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA 17)   /* curl_SLIST_APPEnd */
+             DCL        VAR(&FUNCTION4)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA 25)   /* curl_EASY_PERFOrm */
+             DCL        VAR(&FUNCTION5)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA 33)   /* curl_EASY_CLEANup */
+             DCL        VAR(&FUNCTION6)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA 41)   /* CallbackPtr       */
+             DCL        VAR(&FUNCTION7)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA 49)   /* VersionInfo       */
+             DCL        VAR(&FUNCTION8)  TYPE(*INT)  STG(*DEFINED) LEN(8) DEFVAR(&PA 57)   /* curl_EASY_GetINFO */
+             DCL        VAR(&ROOT)       TYPE(*CHAR) STG(*DEFINED) LEN(60) DEFVAR(&PA 81)  /* PaseOssPath       */
+             DCL        VAR(&CERT)       TYPE(*CHAR) STG(*DEFINED) LEN(20) DEFVAR(&PA 141) /* certs bundle      */
              DCL        VAR(&ERR_P)     TYPE(*PTR)                                             ADDRESS(*NULL)
              DCL        VAR(&MSG)       TYPE(*CHAR) STG(*BASED)   LEN(300)                     BASPTR(&ERR_P)
              DCL        VAR(&NL)        TYPE(*CHAR)               LEN(1)                       VALUE(X'00')
@@ -28,8 +29,15 @@
              DCL        VAR(&P_CCSID)   TYPE(*INT)                                             VALUE(1208)
              DCL        VAR(&PATH)      TYPE(*CHAR)               LEN(50)
              DCL        VAR(&ARGV_P)    TYPE(*PTR)                                             ADDRESS(&PATH)
-             DCL        VAR(&ENV)       TYPE(*PTR)                                             ADDRESS(*NULL)
-             DCL        VAR(&ENV_P)     TYPE(*PTR)                                             ADDRESS(&ENV)
+        /*   DCL        VAR(&ENV)       TYPE(*PTR)                                             ADDRESS(*NULL) */
+        /*   DCL        VAR(&ENV_P)     TYPE(*PTR)                                             ADDRESS(&ENV)  */
+             /* */
+             DCL        VAR(&ENVARA)    TYPE(*CHAR) LEN(32)
+             DCL        VAR(&ENV1P)     TYPE(*PTR)  STG(*DEFINED)  DEFVAR(&ENVARA  1)
+             DCL        VAR(&ENV2P)     TYPE(*PTR)  STG(*DEFINED)  DEFVAR(&ENVARA  17)
+             DCL        VAR(&ENV_P)     TYPE(*PTR)                                             ADDRESS(&ENVARA)
+             DCL        VAR(&ENVSTRING) TYPE(*CHAR) LEN(100)
+             /* */
              DCL        VAR(&PSIZE)     TYPE(*INT)   VALUE(0)
              DCL        VAR(&S_CCSID)   TYPE(*CHAR)  LEN(5)
              DCL        VAR(&PATH2)     TYPE(*CHAR)  LEN(70)
@@ -50,6 +58,9 @@
              CHGVAR     VAR(&SYMB_07) VALUE(&SYMB_07 *TCAT &NL)
              CHGVAR     VAR(&SYMB_08) VALUE(&SYMB_08 *TCAT &NL)
              CHGVAR     VAR(&PATH) VALUE(&ROOT *TCAT '/lib/paseoss_start32' *CAT &NL)
+             CHGVAR     VAR(&ENVSTRING) VALUE('CURL_CA_BUNDLE=' *CAT &ROOT *TCAT &CERT *TCAT &NL)
+             CHGVAR     VAR(&ENV1P) VALUE(%ADDRESS(&ENVSTRING))
+             CHGVAR     VAR(&ENV2P) VALUE(*NULL)
 RETRY:       CALLPRC    PRC('Qp2RunPase') PARM((&PATH) (&SYNM_P *BYVAL) (&SYDT_P *BYVAL) (&SYDT_L *BYVAL) +
                           (&P_CCSID *BYVAL) (&ARGV_P) (&ENV_P *BYVAL)) RTNVAL(&RTCD)
              MONMSG     MSGID(CPFB9C0) EXEC(GOTO CMDLBL(FINE))

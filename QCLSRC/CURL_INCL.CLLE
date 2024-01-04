@@ -1,6 +1,7 @@
              DCL        VAR(&ERROR) TYPE(*INT) LEN(4)
              DCL        VAR(&PTRSAREA) TYPE(*CHAR) LEN(160) VALUE(*BLANK)
              DCL        VAR(&ROOT)     TYPE(*CHAR) STG(*DEFINED) LEN(60) DEFVAR(&PTRSAREA 81)
+             DCL        VAR(&CERT)     TYPE(*CHAR) STG(*DEFINED) LEN(20) DEFVAR(&PTRSAREA 141)
              DCL        VAR(&FUNCS_PTR) TYPE(*PTR) ADDRESS(&PTRSAREA)
              DCL        VAR(&TMP_LIBN) TYPE(*CHAR) LEN(10)
              DCL        VAR(&TMP_FILN) TYPE(*CHAR) LEN(10)

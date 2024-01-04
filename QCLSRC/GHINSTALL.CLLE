@@ -53,6 +53,7 @@
              GOTO       CMDLBL(FINE)
              ENDDO
              CHGVAR     VAR(&ROOT) VALUE(&PASE_DIR)
+             CHGVAR     VAR(&CERT) VALUE('/certs/ca-certs.crt')
              CALLPRC    PRC('EASY_LOAD') PARM((&FUNCS_PTR))
              CALLPRC    PRC('Qp2malloc') PARM((&SIZEF *BYVAL) (&LOCAF) (*)) RTNVAL(&MEMF_P)
              CALLPRC    PRC('VERS_INFO') PARM((&FUNCS_PTR) (&LOCAF))
