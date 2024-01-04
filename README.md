@@ -1,4 +1,4 @@
-# PASERIE (V1R0M2)
+# PASERIE (V1R0M8)
 ### Utility for Source-Level Distribution in IBM i
 
 This utility helps you maintain your IBM i source code on GitHub.
@@ -6,7 +6,38 @@ Once available on a target system the utility allows you to install your package
 in a very simple way, directly accessing your repositories on GitHub
 or the repositories of other developers that authorized you.
 
-The **Basic Edition** provides **PASERIE/INSTALL** command and a very simple mechanism to 
+The suite provides three tools:
+
+* **PASERIE/INSTALL** the main command focusing on the installation phase of an already developed and released package.
+* **PASERIE/INSTALLOC** the command used in the development phase to test the installation of a package planned to be released directly from a directory in the IFS.
+* **PASERIE/LIBCLONE** the command used to jump\-start the packaging (consistent with PASERIE tools) from an existing native library. 
+
+```
+    from GitHub                  from IFS 
+┌────────────────┐          ┌────────────────┐    
+│                ├┐         │                ├┐   
+│                ││         │                ││   
+│                ││         │                ││   
+│                ││         │                ││   
+│                ││         │                ││   
+└┬──────\\───────┘│         └┬──────//───────┘│
+ └───────\\───────┘          └─────//─────────┘  
+          \\                      //
+        INSTALL               INSTALLOC
+            \\                  //
+             \\                //
+              ┌────────────────┐
+              │                │
+              │   Q T E M P    │
+              │                │
+              └────────────────┘
+                     
+              QTEMP/QCLSRC(BUILD)    (compiled on the fly and executed)   
+```
+
+
+<!--
+and a very simple mechanism to 
 locally register your GitHub's *Personal Access Token* so that you will be not required to pass it with every request. 
 
 This specific routine is implemented as an exit program that can be customized to your organization's specific needs
@@ -22,6 +53,7 @@ The **Developer Edition** includes other tools like **PASERIE/INSTALLOC** and **
 The *Basic and Developer Editions* will check for a valid IBM i license key before providing their services.
 The **Developer Edition** includes a kit of **10** Basic Edition license keys that will be generated for the 
 developer to register on her/his customers' systems.
+-->
 
 ## PARAMETERS
 
@@ -50,7 +82,9 @@ developer to register on her/his customers' systems.
 
 pastry ==> *pâ-tis-se-rie* ==> **PASERIE**
 
+<!--
 ## FUTURE DEVELOPMENTS
 
 To support product packaging with traditional IBM i Software Product APIs.
 At least I would like to support RSTLICPGM but the objective is to include license key generation, too.
+-->
