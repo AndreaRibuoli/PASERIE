@@ -69,7 +69,7 @@ install **PaseOss** folder by untarring *PaseOssFloating* tar file:
 tar xvf PaseOssFloating.tar
 ```
 
-Now, closed the QP2TERM session, and can perform the `RSTLIB` for PASERIE.
+Now, closed the QP2TERM session, we can perform the `RSTLIB` for PASERIE.
 
 <!--
 and a very simple mechanism to 
