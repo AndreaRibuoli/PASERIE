@@ -28,7 +28,7 @@ The suite provides three tools:
              \\                //
               ┌────────────────┐
               │                │
-              │   Q T E M P    │
+              │   Q T E M P    │     (GUIDANCE.TXT lists source members)
               │                │
               └────────────────┘
                      
