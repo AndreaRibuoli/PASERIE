@@ -8,9 +8,9 @@ or the repositories of other developers that authorized you.
 
 The suite provides three tools:
 
-* **PASERIE/INSTALL** the main command focusing on the installation phase of an already developed and released package.
-* **PASERIE/INSTALLOC** the command used in the development phase to test the installation of a package planned to be released directly from a directory in the IFS.
-* **PASERIE/LIBCLONE** the command used to jump\-start the packaging (consistent with PASERIE tools) from an existing native library. 
+* **PASERIE/INSTALL** the main command focusing on the installation phase of an already developed and GitHub-released package.
+* **PASERIE/INSTALLOC** the command used in the development phase to test the installation of a package (planned to be released on GitHub or not) directly from a directory in the IFS.
+* **PASERIE/LIBCLONE** the command used to jump\-start the packaging (consistently with PASERIE tools' conventions) from an existing native library. 
 
 ```
     from GitHub                  from IFS 
