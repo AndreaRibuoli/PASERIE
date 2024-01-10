@@ -2,15 +2,17 @@
 ### Utility for Source-Level Distribution in IBM i
 
 This utility helps you maintain your IBM i source code on GitHub.
-Once available on a target system the utility allows you to install your packages 
+Once available on a target system, the utility allows you to install your packages 
 in a very simple way, directly accessing your repositories on GitHub
 or the repositories of other developers that authorized you.
 
-The suite provides three tools:
+The suite provides a total of three commands:
 
-* **PASERIE/INSTALL** the main command focusing on the installation phase of an already developed and GitHub-released package.
-* **PASERIE/INSTALLOC** the command used in the development phase to test the installation of a package (planned to be released on GitHub or not) directly from a directory in the IFS.
-* **PASERIE/LIBCLONE** the command used to jump\-start the packaging (consistently with PASERIE tools' conventions) from an existing native library. 
+* For end users of a package:
+  *  **PASERIE/INSTALL** the main command focusing on the installation phase of an already developed and GitHub-released package.
+* For developers:
+  *  **PASERIE/INSTALLOC** the command used in the development phase to test the installation of a package (planned to be released on GitHub or not) directly from a directory in the IFS.
+  *  **PASERIE/LIBCLONE** the command used to jump\-start the packaging (consistently with PASERIE tools' conventions) from an existing native library. 
 
 ```
     from GitHub                  from IFS 
@@ -37,8 +39,11 @@ The suite provides three tools:
 
 ## INSTALLATION
 
-Let's first create an empty SAVEFILE named `QGPL/PASERIE`.
-Then, from `CALL QP2TERM`, we verify to have **curl** installed:
+Let's first create an empty SAVEFILE named `QGPL/PASERIE`:
+```
+CRTSAVF FILE(QGPL/PASERIE) TEXT('Paserie Save File')
+```
+Then, from `CALL QP2TERM`, we verify that **curl** is installed:
 
 ```
   $                                        
@@ -49,7 +54,7 @@ Then, from `CALL QP2TERM`, we verify to have **curl** installed:
 > which curl
   /QOpenSys/pkgs/bin/curl
 ```
-By means of curl we download 2 archives:
+Using curl, we download 2 archives:
                                                                       
 
 ```                  
@@ -66,10 +71,14 @@ From the home path of the user that will be using **PASERIE/INSTALL** we
 install **PaseOss** folder by untarring *PaseOssFloating* tar file:
 
 ```
+cd ~
 tar xvf PaseOssFloating.tar
 ```
 
-Now, closed the QP2TERM session, we can perform the `RSTLIB` for PASERIE.
+Now, after exiting from the QP2TERM session, we can perform the `RSTLIB` for PASERIE:
+```
+RSTLIB SAVLIB(PASERIE) DEV(*SAVF) SAVF(QGPL/PASERIE)
+```
 
 <!--
 and a very simple mechanism to 
@@ -90,10 +99,10 @@ The **Developer Edition** includes a kit of **10** Basic Edition license keys th
 developer to register on her/his customers' systems.
 -->
 
-## PARAMETERS
+## PARAMETERS FOR THE THREE COMMANDS WITH SCREEN SHOTS
 
 |     KWD    |  INSTALL  | INSTALLOC | LIBCLONE  |
-|:----------:|:---------:|:---------:|:---------:|
+|:-----------|:---------:|:---------:|:---------:|
 | REPO_OWNER |    yes    |           |           | 
 | REPOSITORY |    yes    |           |           | 
 | YOURGITPAT |    yes    |           |           | 
