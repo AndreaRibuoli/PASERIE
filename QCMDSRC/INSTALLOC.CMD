@@ -1,4 +1,4 @@
-             CMD        PROMPT('PASERIE Local Installer V1R0M8')
+             CMD        PROMPT('PASERIE Local Installer V1R0M9')
              PARM       KWD(LOCAL_PATH) TYPE(*CHAR) LEN(100) MIN(1) +
                           CASE(*MIXED) PROMPT('Project directory')
              PARM       KWD(TGTLIB) TYPE(*CHAR) LEN(10) DFT(*LOCAL_PATH) +
@@ -8,7 +8,7 @@
                           SPCVAL((*CURRENT '*CURRENT') (*PRV '*PRV')) +
                           PROMPT('Target release')
              PARM       KWD(DEVOPT) TYPE(*CHAR) LEN(1) DFT(N) +
-                          PROMPT('Developemnt option') PMTCTL(*PMTRQS)
+                          PROMPT('Development option') PMTCTL(*PMTRQS)
              PARM       KWD(LOGOUTPUT) TYPE(*CHAR) LEN(10) DFT(*PND) +
                           SPCVAL((*SAME '*SAME') (*SYSVAL '*SYSVAL') +
                           (*JOBLOGSVR '*JOBLOGSVR') (*JOBEND '*JOBEND') (*PND '*PND')) +
