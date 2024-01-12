@@ -1,4 +1,4 @@
-# PASERIE (V1R0M8)
+# PASERIE (V1R0M9)
 ### Utility for Source-Level Distribution in IBM i
 
 This utility helps you maintain your IBM i source code on GitHub.
@@ -80,25 +80,6 @@ Now, after exiting from the QP2TERM session, we can perform the `RSTLIB` for PAS
 RSTLIB SAVLIB(PASERIE) DEV(*SAVF) SAVF(QGPL/PASERIE)
 ```
 
-<!--
-and a very simple mechanism to 
-locally register your GitHub's *Personal Access Token* so that you will be not required to pass it with every request. 
-
-This specific routine is implemented as an exit program that can be customized to your organization's specific needs
-by restoring the CL source of the **PASERIE/GETPAT** program (*Retrieve Personal access token*).
-
-The initial program performs a simple `RTVDTAARA` over a data area named *GETTOKEN*, expected to exist in PASERIE library.
-
-Note: One suggestion could be to create a file of authorised users where programmers' tokens are kept in an encrypted column
-so that the current user's token is returned when invoked. 
-
-The **Developer Edition** includes other tools like **PASERIE/INSTALLOC** and **PASERIE/LIBCLONE**.
-
-The *Basic and Developer Editions* will check for a valid IBM i license key before providing their services.
-The **Developer Edition** includes a kit of **10** Basic Edition license keys that will be generated for the 
-developer to register on her/his customers' systems.
--->
-
 ## PARAMETERS FOR THE THREE COMMANDS WITH SCREEN SHOTS
 
 |     KWD    |  INSTALL  | INSTALLOC | LIBCLONE  |
@@ -126,9 +107,38 @@ developer to register on her/his customers' systems.
 
 pastry ==> *pâ-tis-se-rie* ==> **PASERIE**
 
-<!--
-## FUTURE DEVELOPMENTS
+## HINTS FOR DEVELOPERS
 
-To support product packaging with traditional IBM i Software Product APIs.
-At least I would like to support RSTLICPGM but the objective is to include license key generation, too.
--->
+The minimum provision to enable `PASERIE/INSTALL` handling your "native" IBM i GitHub repository is:
+
+* creating a file named `GUIDANCE.TXT` in the root of the repository and
+* creating a directory named `QCLSRC` and a `QCLSRC/BUILD.CLLE` ILE CL source 
+
+The installer will use the token passed 
+with **YOURGITPDA** (*GitHub personal access token*) 
+to access GitHub APIs and download `GUIDANCE.TXT` in memory. 
+The content is a list of member files that 
+will be created in the `QTEMP` of the batch job.
+Once all files are transfered the job will attempt the compilation of
+QTEMP/QCLSRC(BUILD) member file into QTEMP/BUILD \*PGM.
+If successful, it will pass control to your build procedure.
+
+The expected input parameters of a well\-behaving `QCLSRC/BUILD.CLLE` are the 
+following (in this order):
+
+``` 
+ DCL VAR(&DEVOPT) TYPE(*CHAR) LEN(1)
+ DCL VAR(&TGTRLS) TYPE(*CHAR) LEN(10)
+ DCL VAR(&TGTLIB) TYPE(*CHAR) LEN(10)
+```
+
+that default to `'N'`, `'*CURRENT'`, and `'*PACKAGEN'` if not set in
+`PASERIE/INSTALL`, or `PASERIE/INSTALLOC`, corresponding parameters.
+
+The `PASERIE/LIBCLONE` utility generates a directory with all the required
+PASERIE\-related objects. It also introduces a dependency on the `TMKMAKE`
+utility (from `QUSRTOOL` library). I have re\-packaged it for a plain 
+installation with `PASERIE/INSTALL` (please contact me if you need help
+in installing it: `andrea.ribuoli@yahoo.com`)  
+
+
