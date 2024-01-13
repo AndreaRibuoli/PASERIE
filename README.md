@@ -58,12 +58,12 @@ Using curl, we download 2 archives:
                                                                       
 
 ```                  
-curl -o PaseOssFloating.tar \
+curl -o PaseOssFloating.tar
         https://www.andrearibuoli.it/paserie/PaseOssFloating.tar    
 ```
         
 ```                  
-curl -o /QSYS.LIB/QGPL.LIB/PASERIE.FILE \
+curl -o /QSYS.LIB/QGPL.LIB/PASERIE.FILE
         https://www.andrearibuoli.it/paserie/PASERIE.SAVF
 ```
 
