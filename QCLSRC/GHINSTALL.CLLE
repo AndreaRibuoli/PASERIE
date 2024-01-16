@@ -257,14 +257,14 @@ REPEAT_I:
              CALLPRC    PRC('Qp2malloc') PARM((&SIZE *BYVAL) (&LOCA) (*)) RTNVAL(&MEM_P)
              CHGVAR     VAR(&FILEPATH) VALUE('/QSYS.LIB/QTEMP.LIB/' *CAT &PKG_FILN +
                           *TCAT '.FILE/' *CAT &PKG_MBRN *TCAT '.MBR')
-          /*   IF  COND(&LANG_DIR *NE '     ' *AND &PKG_FILN *EQ 'QCMDSRC   ') THEN( + */
-          /*        CHGVAR VAR(&USELANGDIR) VALUE(&LANG_DIR))                          */
+             IF  COND((&LANG_DIR *NE '     ') *AND (&PKG_FILN *EQ 'QCMDSRC   ')) THEN( +
+                  CHGVAR VAR(&USELANGDIR) VALUE(&LANG_DIR))
              CHGVAR     VAR(&URLI) +
                           VALUE('https://api.github.com/repos/' +
                           *CAT &GIT_USER *TCAT '/' *CAT &PACKAGEN +
                           *TCAT '/contents/' *CAT &PKG_FILN *TCAT &USELANGDIR +
                           *TCAT '/' *CAT &PKG_MBRN *TCAT '.' *CAT &PKG_EXTN)
-          /*   IF   COND(&USELANGDIR *NE '     ') THEN(CHGVAR VAR(&USELANGDIR) VALUE('     ')) */
+             IF   COND(&USELANGDIR *NE '     ') THEN(CHGVAR VAR(&USELANGDIR) VALUE('     '))
              CHGVAR     VAR(&URL) VALUE(&URLI *TCAT &NL)
              CHGVAR     VAR(&URL_P) VALUE(%ADDRESS(&URL))
              CHGVAR     VAR(&IN_BYTES) VALUE(&SIZE)
