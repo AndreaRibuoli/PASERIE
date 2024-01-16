@@ -1,20 +1,20 @@
-             CMD        PROMPT('PASERIE Local Installer V1R0M9')
+             CMD        PROMPT('PASERIE Installa locale V1R1M0')
              PARM       KWD(LOCAL_PATH) TYPE(*CHAR) LEN(100) MIN(1) +
-                          CASE(*MIXED) PROMPT('Project directory')
+                          CASE(*MIXED) PROMPT('Directory del progetto')
              PARM       KWD(TGTLIB) TYPE(*CHAR) LEN(10) DFT(*LOCAL_PATH) +
                           SPCVAL((*LOCAL_PATH '*PACKAGEN')) +
-                          PROMPT('Target library')
+                          PROMPT('Caricamento nella libreria')
              PARM       KWD(TGTRLS)  TYPE(*CHAR) LEN(10) DFT(*CURRENT) +
                           SPCVAL((*CURRENT '*CURRENT') (*PRV '*PRV')) +
-                          PROMPT('Target release')
+                          PROMPT('Rilascio di destinazione')
              PARM       KWD(DEVOPT) TYPE(*CHAR) LEN(1) DFT(N) +
-                          PROMPT('Development option') PMTCTL(*PMTRQS)
+                          PROMPT('Opzione di sviluppo') PMTCTL(*PMTRQS)
              PARM       KWD(LOGOUTPUT) TYPE(*CHAR) LEN(10) DFT(*PND) +
                           SPCVAL((*SAME '*SAME') (*SYSVAL '*SYSVAL') +
                           (*JOBLOGSVR '*JOBLOGSVR') (*JOBEND '*JOBEND') (*PND '*PND')) +
-                          PROMPT('Job log output') PMTCTL(*PMTRQS)
+                          PROMPT('Emissione registrazione lavoro') PMTCTL(*PMTRQS)
              PARM       KWD(VERBOSE) TYPE(*CHAR) LEN(1) DFT(N) +
-                          PROMPT('Verbose') PMTCTL(*PMTRQS)
+                          PROMPT('Verboso') PMTCTL(*PMTRQS)
 
 
 
