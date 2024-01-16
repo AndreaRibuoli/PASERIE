@@ -200,11 +200,6 @@
                CHGVAR   VAR(&RPOS) VALUE(&RPOS - 1)
              ENDDO
              IF COND(%SST(&HTML_E 1 10) *EQ '*PREREQ   ') THEN(DO)
-               IF COND(%SST(&HTML_E 11 10) *EQ '*LANGUAGE ') THEN(DO)
-                 IF COND(%SST(&HTML_E 21 4) *EQ &LANG_FC) THEN( +
-                   CHGVAR VAR(&LANG_DIR) VALUE('/' *CAT &LANG_FC))
-                 GOTO       CMDLBL(NEXT)
-               ENDDO
                CHKOBJ OBJ(%SST(&HTML_E 11 10)) OBJTYPE(*LIB) AUT(*READ)
                MONMSG MSGID(CPF9801) EXEC(DO)
                  CHGVAR VAR(&TMPPOS) VALUE(&RPOS - 30)
@@ -212,6 +207,11 @@
                  CHGVAR VAR(&PACKAGEN2) VALUE(%SST(&HTML_E 11 10))
                  INSTALL REPO_OWNER(&GIT_USER2) REPOSITORY(&PACKAGEN2) YOURGITPAT(&GITTOKEN)
                ENDDO  
+               GOTO       CMDLBL(NEXT)
+             ENDDO
+             IF COND(%SST(&HTML_E 1 10) *EQ '*LANGUAGE ') THEN(DO)
+               IF COND(%SST(&HTML_E 11 4) *EQ &LANG_FC) THEN( +
+                 CHGVAR VAR(&LANG_DIR) VALUE('/' *CAT &LANG_FC))
                GOTO       CMDLBL(NEXT)
              ENDDO
              IF COND(%SST(&HTML_E 1 1) *EQ '*') THEN(DO)
