@@ -1,4 +1,4 @@
-# PASERIE (V1R0M9)
+# PASERIE (V1R1M0)
 ### Utility for Source-Level Distribution in IBM i
 
 This utility helps you maintain your IBM i source code on GitHub.
@@ -104,6 +104,15 @@ RSTLIB SAVLIB(PASERIE) DEV(*SAVF) SAVF(QGPL/PASERIE)
 ![INSTALL](PASERIE_INSTALLOC_V1R0M2.png)
 
 ![INSTALL](PASERIE_LIBCLONE_V1R0M2.png)
+
+On a system based in Italy the commands will be compiled from localized source files:
+
+![INSTALL](PASERIE_INSTALL_V1R1M0.png)
+
+![INSTALL](PASERIE_INSTALLOC_V1R1M0.png)
+
+![INSTALL](PASERIE_LIBCLONE_V1R1M0.png)
+
 
 ## THE NAME
 
