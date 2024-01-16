@@ -14,6 +14,7 @@ The suite provides a total of three commands:
   *  **PASERIE/INSTALLOC** the command used in the development phase to test the installation of a package (planned to be released on GitHub or not) directly from a directory in the IFS.
   *  **PASERIE/LIBCLONE** the command used to jump\-start the packaging (consistently with PASERIE tools' conventions) from an existing native library. 
 
+
 ```
     from GitHub                  from IFS 
 ┌────────────────┐          ┌────────────────┐    
@@ -40,6 +41,7 @@ The suite provides a total of three commands:
 ## INSTALLATION
 
 Let's first create an empty SAVEFILE named `QGPL/PASERIE`:
+
 ```
 CRTSAVF FILE(QGPL/PASERIE) TEXT('Paserie Save File')
 ```
@@ -141,4 +143,90 @@ utility (from `QUSRTOOL` library). I have re\-packaged it for a plain
 installation with `PASERIE/INSTALL` (please contact me if you need help
 in installing it: `andrea.ribuoli@yahoo.com`)  
 
+## HANDS ON
 
+Let us take confidence with `PASERIE/LIBCLONE`.
+
+First we create a new native library named **SIMPLE**:
+
+`CRTLIB LIB(SIMPLE)`
+
+Now we create a source file named **QCLSRC** with a member named **GREETINGS**:
+
+```
+CRTSRCPF FILE(SIMPLE/QCLSRC)                       
+         MBR(GREETINGS)                            
+         TEXT('Help me understand PASERIE tools')  
+``` 
+
+Let us assign the `CLLE` SEU\-type to our member file:
+
+`CHGPFM FILE(SIMPLE/QCLSRC) MBR(GREETINGS) SRCTYPE(CLLE)`
+
+Let us edit the source file:
+
+`EDTF FILE(SIMPLE/QCLSRC) MBR(GREETINGS)`
+
+and enter a simple CL source like:
+
+![edtf](EDTF.png)
+
+Now we issue the following command:
+
+`PASERIE/LIBCLONE SRCLIB(SIMPLE)`
+
+We should receive:
+
+```
+ Selection or command  
+ ===>                  
+                       
+ F3=Exit   F4=Prompt   
+ F23=Set initial menu  
+ LIBCLONE_B completed. 
+```
+ 
+ Now let us run `WRKLNK OBJ(SIMPLE)` and use option `5` to enter the directory. We should find:
+ 
+ ```
+ Opt   Object link            Type     Attribute    Text  
+       GUIDANCE.TXT           STMF                        
+       QCLSRC                 DIR                         
+       QMAKSRC                DIR                         
+ ```
+ 
+ The content of `GUIDANCE.TXT` will be:
+ 
+ ```
+  ************Beginning of data**************                       
+QCLSRC    GREETINGS           Help me understand PASERIE tools     
+QCLSRC    BUILD     CLLE      BUILD CLLE auto-generated            
+QMAKSRC   BUILD     TXT       BUILD Makefile auto-generated        
+ ************End of Data********************                       
+ ```
+ 
+ Inside `QCLSRC` directory you will find two source members:
+ 
+```
+Opt   Object link            Type  
+      BUILD.CLLE             STMF  
+      GREETINGS.CLLE         STMF   
+```
+
+And there is also a `QMAKSRC` with a `BUILD`
+member. 
+
+Assuming you have a `TMKMAKE` library with a working `TMKMAKE` command you will be able to run successfully:
+
+`PASERIE/INSTALLOC LOCAL_PATH(SIMPLE)`
+
+Now issuing `CALL PGM(SIMPLE/GREETINGS)` we will get:
+
+```
+Selection or command              
+===>                              
+                                  
+F3=Exit   F4=Prompt   F9=Retrieve 
+F23=Set initial menu              
+Your first use of PASERIE/LIBCLONE
+```     
