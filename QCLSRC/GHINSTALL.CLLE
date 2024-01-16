@@ -38,11 +38,11 @@
              DCL        VAR(&X15) TYPE(*CHAR) LEN(1) VALUE(X'15')
              DCL        VAR(&EXTRACT)  TYPE(*DEC)   LEN(5 0)
              DCL        VAR(&TMPPOS) TYPE(*UINT) LEN(4)
-             DCL        VAR(&LANG_DIR) TYPE(*CHAR) LEN(5) VALUE('     ')
+       /*    DCL        VAR(&LANG_DIR) TYPE(*CHAR) LEN(5) VALUE('     ')    */
              DCL        VAR(&USELANGDIR) TYPE(*CHAR) LEN(5) VALUE('     ')
-             DCL        VAR(&LANG_FC) TYPE(*CHAR) LEN(4)
-             RTVDTAARA  DTAARA(QGPL/QSS1MRI (26 4)) RTNVAR(&LANG_FC)
-             MONMSG     MSG(CPF0000)
+       /*    DCL        VAR(&LANG_FC) TYPE(*CHAR) LEN(4)                    */
+       /*    RTVDTAARA  DTAARA(QGPL/QSS1MRI (26 4)) RTNVAR(&LANG_FC)        */
+       /*    MONMSG     MSG(CPF0000)                                        */
              CHGVAR     VAR(&VERBOSE) VALUE(&OMISSIBLE)
              MONMSG     MSGID(MCH3601) EXEC(CHGVAR VAR(&VERBOSE) VALUE('N'))
              IF         COND(&DEVOPT = 'B') THEN(DO)
@@ -209,11 +209,11 @@
                ENDDO  
                GOTO       CMDLBL(NEXT)
              ENDDO
-             IF COND(%SST(&HTML_E 1 10) *EQ '*LANGUAGE ') THEN(DO)
-               IF COND(%SST(&HTML_E 11 4) *EQ &LANG_FC) THEN( +
-                 CHGVAR VAR(&LANG_DIR) VALUE('/' *CAT &LANG_FC))
-               GOTO       CMDLBL(NEXT)
-             ENDDO
+       /*      IF COND(%SST(&HTML_E 1 10) *EQ '*LANGUAGE ') THEN(DO)  */
+       /*        IF COND(%SST(&HTML_E 11 4) *EQ &LANG_FC) THEN( +     */
+       /*          CHGVAR VAR(&LANG_DIR) VALUE('/' *CAT &LANG_FC))    */
+       /*        GOTO       CMDLBL(NEXT)                              */
+       /*      ENDDO                                                  */
              IF COND(%SST(&HTML_E 1 1) *EQ '*') THEN(DO)
                GOTO       CMDLBL(NEXT)
              ENDDO
@@ -257,14 +257,14 @@ REPEAT_I:
              CALLPRC    PRC('Qp2malloc') PARM((&SIZE *BYVAL) (&LOCA) (*)) RTNVAL(&MEM_P)
              CHGVAR     VAR(&FILEPATH) VALUE('/QSYS.LIB/QTEMP.LIB/' *CAT &PKG_FILN +
                           *TCAT '.FILE/' *CAT &PKG_MBRN *TCAT '.MBR')
-             IF  COND(&LANG_DIR *NE '     ' *AND &PKG_FILN *EQ 'QCMDSRC   ') THEN( +
-                         CHGVAR VAR(&USELANGDIR) VALUE(&LANG_DIR))
+          /*   IF  COND(&LANG_DIR *NE '     ' *AND &PKG_FILN *EQ 'QCMDSRC   ') THEN( + */
+          /*        CHGVAR VAR(&USELANGDIR) VALUE(&LANG_DIR))                          */
              CHGVAR     VAR(&URLI) +
                           VALUE('https://api.github.com/repos/' +
                           *CAT &GIT_USER *TCAT '/' *CAT &PACKAGEN +
                           *TCAT '/contents/' *CAT &PKG_FILN *TCAT &USELANGDIR +
                           *TCAT '/' *CAT &PKG_MBRN *TCAT '.' *CAT &PKG_EXTN)
-             IF   COND(&USELANGDIR *NE '     ') THEN(CHGVAR VAR(&USELANGDIR) VALUE('     '))
+          /*   IF   COND(&USELANGDIR *NE '     ') THEN(CHGVAR VAR(&USELANGDIR) VALUE('     ')) */
              CHGVAR     VAR(&URL) VALUE(&URLI *TCAT &NL)
              CHGVAR     VAR(&URL_P) VALUE(%ADDRESS(&URL))
              CHGVAR     VAR(&IN_BYTES) VALUE(&SIZE)
