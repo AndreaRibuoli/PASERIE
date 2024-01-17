@@ -37,6 +37,7 @@ The suite provides a total of three commands:
                      
               QTEMP/QCLSRC(BUILD)    (compiled on the fly and executed)   
 ```
+<div style="page-break-after: always;"></div>
 
 ## INSTALLATION
 
@@ -81,6 +82,7 @@ Now, after exiting from the QP2TERM session, we can perform the `RSTLIB` for PAS
 ```
 RSTLIB SAVLIB(PASERIE) DEV(*SAVF) SAVF(QGPL/PASERIE)
 ```
+<div style="page-break-after: always;"></div>
 
 ## PARAMETERS FOR THE THREE COMMANDS WITH SCREEN SHOTS
 
@@ -239,3 +241,30 @@ F3=Exit   F4=Prompt   F9=Retrieve
 F23=Set initial menu              
 Your first use of PASERIE/LIBCLONE
 ```     
+<div style="page-break-after: always;"></div>
+
+## VERSIONS
+
+**PASERIE** currently supports **IBM i PASE** from *7.2* to *7.5*
+but I am working on extending the coverage of previous versions to facilitate reuse of code originally developed on older versions
+of the operating system.
+
+```
+╔═══════╦═════════════╗
+║ PASE  ║     AIX     ║
+╠═══════╬═══════╤═════╣
+║  7.5  ║       │ TL5 ║
+╟───────╢  7.2  ├─────╢
+║  7.4  ║       │ TL2 ║
+╟───────╫───────┼─────╢
+║  7.3  ║       │ TL4 ║
+╟───────╢  7.1  ├─────╢
+║  7.2  ║       │ TL1 ║
+╟───────╫───────┼─────╢
+║  7.1  ║  6.1  │ TL2 ║
+╟───────╫───────┼─────╢
+║  6.1  ║       │ TL6 ║
+╟───────╢  5.3  ├─────╢
+║  5.4  ║       │ ML3 ║
+╚═══════╩═══════╧═════╝
+```
