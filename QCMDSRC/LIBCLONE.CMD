@@ -1,4 +1,4 @@
-             CMD        PROMPT('PASERIE Library Clone   V1R0M9')
+             CMD        PROMPT('PASERIE Library Clone   V1R1M0')
              PARM       KWD(SRCLIB) TYPE(*CHAR) LEN(10) MIN(1) +
                           PROMPT('Source library')
              PARM       KWD(LOCAL_PATH) TYPE(*CHAR) LEN(100) +
