@@ -1,4 +1,3 @@
-*LANGUAGE 2932                Italian 
 QCLSRC    BUILD     CLLE      Development mode (CALL PASERIE/BUILD)
 QCLSRC    DCL32INCL CLLE      Include DCL32INCL
 QCLSRC    CURL_INCL CLLE      Include CURL_INCL
