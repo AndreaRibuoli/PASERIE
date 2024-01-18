@@ -41,8 +41,17 @@
              DCL        VAR(&LANG_DIR) TYPE(*CHAR) LEN(5) VALUE('     ')
              DCL        VAR(&USELANGDIR) TYPE(*CHAR) LEN(5) VALUE('     ')
              DCL        VAR(&LANG_FC) TYPE(*CHAR) LEN(4)
+             DCL        VAR(&CUR_OSV) TYPE(*CHAR) LEN(6) VALUE('      ')
+             DCL        VAR(&CUR_OSV_3) TYPE(*CHAR) LEN(3) VALUE('   ')
+             DCL        VAR(&CUR_OSV_D) TYPE(*DEC) LEN(3 0) VALUE(0)
              RTVDTAARA  DTAARA(QGPL/QSS1MRI (26 4)) RTNVAR(&LANG_FC)
              MONMSG     MSGID(CPF0000)
+             RTVDTAARA  DTAARA(QGPL/QSS1MRI (1 6)) RTNVAR(&CUR_OSV)
+             MONMSG     MSGID(CPF0000)
+             CHGVAR     VAR(&CUR_OSV_3) VALUE(%SST(&CUR_OSV 2 1) *CAT +
+                                              %SST(&CUR_OSV 4 1) *CAT +
+                                              %SST(&CUR_OSV 6 1))
+             CHGVAR     VAR(&CUR_OSV_D) VALUE(%DEC(&CUR_OSV_3 3 0))
              CHGVAR     VAR(&VERBOSE) VALUE(&OMISSIBLE)
              MONMSG     MSGID(MCH3601) EXEC(CHGVAR VAR(&VERBOSE) VALUE('N'))
              IF         COND(&DEVOPT = 'B') THEN(DO)
@@ -362,6 +371,9 @@ END:         CALLPRC    PRC('Qp2EndPase') RTNVAL(&RTCD)
              CHGVAR     VAR(&COUNT) VALUE(&COUNT + 1)
              CHGVAR     VAR(%OFFSET(&PKG_LPTR)) VALUE(%OFFSET(&PKG_LPTR) + 91)
              ENDDO
+             CHGVAR     VAR(&MSGDTA) VALUE( 'Version: '    *CAT &CUR_OSV *CAT +
+                                           ' Language Feature: ' *CAT &LANG_FC *CAT &NL)
+             CALLPRC    PRC('printf') PARM((&MSGDTA))
              DLTOVR     FILE(STDOUT) LVL(*JOB)
              ENDDO
              GOTO       CMDLBL(FINE)
