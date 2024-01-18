@@ -268,3 +268,9 @@ of the operating system.
 ║     5.4    ║       │ ML3 ║
 ╚════════════╩═══════╧═════╝
 ```
+
+* **TR** *Technology Refresh (IBM i)*
+* **TL** *Technology Level (AIX)*
+* **ML** *Modification Level (AIX)*
+
+*Note*: Starting in 2006, as part of the new *AIX 5L Service Strategy*, **ML**s were replaced by **TL**s
