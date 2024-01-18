@@ -372,7 +372,7 @@ END:         CALLPRC    PRC('Qp2EndPase') RTNVAL(&RTCD)
              CHGVAR     VAR(%OFFSET(&PKG_LPTR)) VALUE(%OFFSET(&PKG_LPTR) + 91)
              ENDDO
              CHGVAR     VAR(&MSGDTA) VALUE( 'Version: '    *CAT &CUR_OSV *CAT +
-                                           ' Language Feature: ' *CAT &LANG_FC *CAT &NL)
+                       '                     Language Feature: ' *CAT &LANG_FC *CAT &NL)
              CALLPRC    PRC('printf') PARM((&MSGDTA))
              DLTOVR     FILE(STDOUT) LVL(*JOB)
              ENDDO

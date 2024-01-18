@@ -112,7 +112,7 @@ DOWHILE COND(&LOOP)
 ENDDO
 IF COND(&VERBOSE *EQ 'L') THEN(DO)
    CHGVAR     VAR(&MSGDTA) VALUE( 'Version: '    *CAT &CUR_OSV *CAT +
-                                 ' Language Feature: ' *CAT &LANG_FC *CAT &NL)
+             '                     Language Feature: ' *CAT &LANG_FC *CAT &NL)
    CALLPRC    PRC('printf') PARM((&MSGDTA))
    DLTOVR     FILE(STDOUT) LVL(*JOB)
 ENDDO
