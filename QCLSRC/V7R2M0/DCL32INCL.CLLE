@@ -1,0 +1,17 @@
+             /* Utilizzare:                   */
+             /*   INCLUDE SRCMBR(DCL32INCL)   */
+             /*                               */
+             DCL        VAR(&PA)        TYPE(*CHAR) STG(*BASED)   LEN(80)                BASPTR(&FUNCS_PTR)
+             DCL        VAR(&ARGL)      TYPE(*CHAR)               LEN(32)
+             DCL        VAR(&ARGL_P)    TYPE(*PTR)                                       ADDRESS(&ARGL)
+             DCL        VAR(&SIGN)      TYPE(*CHAR)               LEN(8)                 VALUE(X'0000000000000000')
+             DCL        VAR(&FIRST)     TYPE(*INT)  STG(*DEFINED) LEN(2) DEFVAR(&SIGN 1)
+             DCL        VAR(&SECOND)    TYPE(*INT)  STG(*DEFINED) LEN(2) DEFVAR(&SIGN 3)
+             DCL        VAR(&THIRD)     TYPE(*INT)  STG(*DEFINED) LEN(2) DEFVAR(&SIGN 5)
+             DCL        VAR(&FORTH)     TYPE(*INT)  STG(*DEFINED) LEN(2) DEFVAR(&SIGN 7)
+             DCL        VAR(&SIGN_P)    TYPE(*PTR)                                       ADDRESS(&SIGN)
+             DCL        VAR(&RESTYP)    TYPE(*INT)                LEN(2)                 VALUE(0)
+             DCL        VAR(&BUFFER)    TYPE(*CHAR)               LEN(32)
+             DCL        VAR(&BUFF_P)    TYPE(*PTR)                                       ADDRESS(&BUFFER)
+             DCL        VAR(&BF_LEN)    TYPE(*INT)                LEN(2)                 VALUE(0)
+             DCL        VAR(&RTCD)      TYPE(*INT)

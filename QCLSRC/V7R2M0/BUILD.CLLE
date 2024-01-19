@@ -1,0 +1,168 @@
+             PGM        PARM(&DEVOPT_P &TGTRLS_P &TGTLIB_P)
+             DCLPRCOPT  LOG(*NO) ALWRTVSRC(*NO)
+             DCL        VAR(&DEVOPT_P) TYPE(*CHAR) LEN(1)
+             DCL        VAR(&TGTRLS_P) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TGTLIB_P) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&DEVOPT) TYPE(*CHAR) LEN(1)
+             DCL        VAR(&TGTRLS) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCLIB) TYPE(*CHAR) LEN(10) VALUE(QTEMP)
+             DCL        VAR(&BLDLIB) TYPE(*CHAR) LEN(10) VALUE(QTEMP)
+             DCL        VAR(&TGTLIB) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&STMT) TYPE(*CHAR) LEN(28) 
+             CHGVAR     VAR(&DEVOPT) VALUE(&DEVOPT_P)
+             MONMSG     MSGID(MCH3601) EXEC(CHGVAR VAR(&DEVOPT) VALUE(L))
+             CHGVAR     VAR(&TGTRLS) VALUE(&TGTRLS_P)
+             MONMSG     MSGID(MCH3601) EXEC(CHGVAR VAR(&TGTRLS) VALUE(*CURRENT))
+             CHGVAR     VAR(&TGTLIB) VALUE(&TGTLIB_P)
+             MONMSG     MSGID(MCH3601) EXEC(CHGVAR VAR(&TGTLIB) VALUE(*PACKAGEN))
+             IF         COND(&TGTLIB = '*PACKAGEN ') THEN(CHGVAR VAR(&TGTLIB) VALUE(PASERIE))
+             CHGVAR     VAR(&STMT) VALUE('QSYS/CRTLIB LIB(' *CAT &TGTLIB *TCAT ')') 
+             CALL       PGM(QCMDEXC) PARM(&STMT 28)
+             MONMSG     MSGID(CPF0000)             
+             IF         COND(&DEVOPT = 'N') THEN(DO)
+             DLTF       FILE(&TGTLIB/QCMDSRC)
+             MONMSG     MSGID(CPF0000)
+             DLTF       FILE(&TGTLIB/QSRVSRC)
+             MONMSG     MSGID(CPF0000)
+             DLTF       FILE(&TGTLIB/QCLSRC)
+             MONMSG     MSGID(CPF0000)
+             DLTF       FILE(&TGTLIB/QDDSPF)
+             MONMSG     MSGID(CPF0000)
+             DLTPGM     PGM(&TGTLIB/BUILD)
+             MONMSG     MSGID(CPF0000)
+             ENDDO
+             IF         COND(&DEVOPT = 'Y') THEN(DO)
+             CRTSRCPF   FILE(&TGTLIB/QCMDSRC) RCDLEN(132)
+             MONMSG     MSGID(CPF0000)
+             CRTSRCPF   FILE(&TGTLIB/QSRVSRC) RCDLEN(132)
+             MONMSG     MSGID(CPF0000)
+             CRTSRCPF   FILE(&TGTLIB/QCLSRC) RCDLEN(132)
+             MONMSG     MSGID(CPF0000)
+             CRTSRCPF   FILE(&TGTLIB/QDDSPF) RCDLEN(132)
+             MONMSG     MSGID(CPF0000)
+             CPYSRCF    FROMFILE(&SRCLIB/QCMDSRC) TOFILE(&TGTLIB/QCMDSRC) FROMMBR(*ALL)
+             CPYSRCF    FROMFILE(&SRCLIB/QSRVSRC) TOFILE(&TGTLIB/QSRVSRC) FROMMBR(*ALL)
+             CPYSRCF    FROMFILE(&SRCLIB/QCLSRC) TOFILE(&TGTLIB/QCLSRC) FROMMBR(*ALL)
+             CPYSRCF    FROMFILE(&SRCLIB/QDDSPF) TOFILE(&TGTLIB/QDDSPF) FROMMBR(*ALL)
+             CHGVAR     VAR(&SRCLIB) VALUE(&TGTLIB)
+             ENDDO
+             IF         COND(&DEVOPT = 'L') THEN(DO)
+             CHGVAR     VAR(&SRCLIB) VALUE(&TGTLIB)
+             ENDDO
+             IF         COND(&DEVOPT = 'Y') THEN(DO)
+             CRTBNDCL   PGM(&TGTLIB/BUILD) SRCFILE(&SRCLIB/QCLSRC) SRCMBR(BUILD) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             MONMSG     MSGID(CPF0000)
+             ENDDO
+             CRTBNDCL   PGM(&TGTLIB/GETPAT) SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GETPAT) +
+                        TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*YES)
+             MONMSG     MSGID(CPF0000)
+             CRTCMD     CMD(&TGTLIB/INSTALL) PGM(&TGTLIB/INSTALL)  +
+                          SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL) +
+                          TEXT('PASERIE installer (8/10)') PRDLIB(&TGTLIB)
+             DLTSPLF    FILE(INSTALL)
+             CRTCLMOD   MODULE(&BLDLIB/GHINSTALL) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL) +
+                          INCFILE(&SRCLIB/QCLSRC) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             DLTF       FILE(QTEMP/GUIDE00F)
+             MONMSG     MSGID(CPF0000)
+             CRTPF      FILE(QTEMP/GUIDE00F) SRCFILE(&SRCLIB/QDDSPF) +
+                          OPTION(*NOSRC *NOLIST)
+             CRTCLMOD   MODULE(&BLDLIB/INSTALL_L) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(INSTALL_L) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTCLMOD   MODULE(&BLDLIB/EASY_INIT) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(EASY_INIT) +
+                          INCFILE(&SRCLIB/QCLSRC) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTCLMOD   MODULE(&BLDLIB/EASY_LOAD) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(EASY_LOAD) +
+                          INCFILE(&SRCLIB/QCLSRC) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTCLMOD   MODULE(&BLDLIB/VERS_INFO) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(VERS_INFO) +
+                          INCFILE(&SRCLIB/QCLSRC) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTCLMOD   MODULE(&BLDLIB/EASY_CLEAN) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(EASY_CLEAN) +
+                          INCFILE(&SRCLIB/QCLSRC) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTCLMOD   MODULE(&BLDLIB/EASY_GINFO) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(EASY_GINFO) +
+                          INCFILE(&SRCLIB/QCLSRC) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTCLMOD   MODULE(&BLDLIB/SLIST_APPE) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(SLIST_APPE) +
+                          INCFILE(&SRCLIB/QCLSRC) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTCLMOD   MODULE(&BLDLIB/INSTALL) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(INSTALL) +
+                          INCFILE(&SRCLIB/QCLSRC) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTCLMOD   MODULE(&BLDLIB/INSTALLOC) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(INSTALLOC) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTCLMOD   MODULE(&BLDLIB/EASY_SETOP) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(EASY_SETOP) +
+                          INCFILE(&SRCLIB/QCLSRC) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTCLMOD   MODULE(&BLDLIB/CALL_BACK) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(CALL_BACK) +
+                          INCFILE(&SRCLIB/QCLSRC) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTCLMOD   MODULE(&BLDLIB/EASY_PERFO) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(EASY_PERFO) +
+                          INCFILE(&SRCLIB/QCLSRC) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTSRVPGM  SRVPGM(&TGTLIB/LIBCURL) +
+                          MODULE(&BLDLIB/EASY_INIT +
+                            &BLDLIB/EASY_SETOP +
+                            &BLDLIB/EASY_PERFO +
+                            &BLDLIB/EASY_CLEAN +
+                            &BLDLIB/EASY_GINFO +
+                            &BLDLIB/SLIST_APPE +
+                            &BLDLIB/EASY_LOAD +
+                            &BLDLIB/CALL_BACK +
+                            &BLDLIB/VERS_INFO) +
+                          SRCFILE(&SRCLIB/QSRVSRC) +
+                          TGTRLS(&TGTRLS) TEXT('PASERIE installer (7/10)')
+             MONMSG     MSGID(CPF0000)
+             CRTPGM     PGM(&TGTLIB/GHINSTALL) +
+                          MODULE(&BLDLIB/GHINSTALL) +
+                          BNDSRVPGM((&TGTLIB/LIBCURL)) +
+                          TGTRLS(&TGTRLS) TEXT('PASERIE installer (1/10)')
+             MONMSG     MSGID(CPF0000)
+             CRTPGM     PGM(&TGTLIB/INSTALL_L) +
+                          MODULE(&BLDLIB/INSTALL_L) +
+                          TGTRLS(&TGTRLS) TEXT('PASERIE installer (3/10)')
+             MONMSG     MSGID(CPF0000)
+             CRTPGM     PGM(&TGTLIB/INSTALL) +
+                          MODULE(&BLDLIB/INSTALL) +
+                          TGTRLS(&TGTRLS) TEXT('PASERIE installer (2/10)')
+             MONMSG     MSGID(CPF0000)
+             CRTPGM     PGM(&TGTLIB/INSTALLOC) +
+                          MODULE(&BLDLIB/INSTALLOC) +
+                          TGTRLS(&TGTRLS) TEXT('PASERIE installer (4/10)')
+             MONMSG     MSGID(CPF0000)
+             CRTCMD     CMD(&TGTLIB/INSTALLOC) PGM(&TGTLIB/INSTALLOC) +
+                          SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALLOC)  +
+                          TEXT('PASERIE installer (9/10)') PRDLIB(&TGTLIB)
+             DLTSPLF    FILE(INSTALLOC)
+             CRTCLMOD   MODULE(&BLDLIB/LIBCLONE_B) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(LIBCLONE_B) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTPGM     PGM(&TGTLIB/LIBCLONE_B) +
+                          MODULE(&BLDLIB/LIBCLONE_B) +
+                          TGTRLS(&TGTRLS) TEXT('PASERIE installer (6/10)')
+             CRTCLMOD   MODULE(&BLDLIB/LIBCLONE) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(LIBCLONE) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTPGM     PGM(&TGTLIB/LIBCLONE) +
+                          MODULE(&BLDLIB/LIBCLONE) +
+                          TGTRLS(&TGTRLS) TEXT('PASERIE installer (5/10)')
+             CRTCMD     CMD(&TGTLIB/LIBCLONE) PGM(&TGTLIB/LIBCLONE) +
+                          SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(LIBCLONE)  +
+                          TEXT('PASERIE installer (10/10)') PRDLIB(&TGTLIB)
+             DLTSPLF    FILE(LIBCLONE) 
+RETURN:      ENDPGM
