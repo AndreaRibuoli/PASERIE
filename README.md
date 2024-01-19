@@ -210,7 +210,7 @@ We should receive:
  
  ```
   ************Beginning of data**************                       
-QCLSRC    GREETINGS           Help me understand PASERIE tools     
+QCLSRC    GREETINGS CLLE      Help me understand PASERIE tools     
 QCLSRC    BUILD     CLLE      BUILD CLLE auto-generated            
 QMAKSRC   BUILD     TXT       BUILD Makefile auto-generated        
  ************End of Data********************                       

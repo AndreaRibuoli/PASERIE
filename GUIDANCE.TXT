@@ -1,5 +1,5 @@
 *LANGUAGE 2932                Italian 
-*OSRELEASEV7R2M0              IBM i OS 7.2 and previous
+*OSRELEASEV7R1M0              IBM i OS 7.1 and previous
 QCLSRC    BUILD     CLLE      Development mode (CALL PASERIE/BUILD)
 QCLSRC    DCL32INCL CLLE      Include DCL32INCL
 QCLSRC    CURL_INCL CLLE      Include CURL_INCL
