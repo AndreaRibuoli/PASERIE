@@ -36,6 +36,8 @@ DCLF FILE(QTEMP/GUIDE00F)
              MONMSG     MSGID(CPF0000)
              RTVDTAARA  DTAARA(QGPL/QSS1MRI (1 6)) RTNVAR(&CUR_OSV)
              MONMSG     MSGID(CPF0000)
+             RTVDTAARA  DTAARA(PASE_TEST (1 6)) RTNVAR(&CUR_OSV)
+             MONMSG     MSGID(CPF0000)
              CHGVAR     VAR(&CUR_OSV_3) VALUE(%SST(&CUR_OSV 2 1) *CAT +
                                               %SST(&CUR_OSV 4 1) *CAT +
                                               %SST(&CUR_OSV 6 1))
@@ -76,19 +78,27 @@ DOWHILE COND(&LOOP)
  RCVF
  MONMSG MSGID(CPF0864) EXEC(LEAVE)
  IF COND(&VERBOSE *EQ 'L') THEN(DO)
-   IF COND(%SST(&SRCFILE 1 10) *EQ '*PREREQ   ') THEN(DO)
+   IF COND(%SST(&SRCFILE 1 10) *EQ   '*PREREQ   ') THEN(DO)
      CHGVAR     VAR(&MSGDTA) VALUE( 'Comment: '      *CAT &SRCFILE *CAT +
                                     ' PackageName: ' *CAT &SRCMBR  *CAT +
                                     ' Options: '     *CAT &SRCTYPE *CAT +
                                     ' GitHub USER: ' *CAT &SRCDESC *CAT &X15 *CAT &NL)
    ENDDO
    ELSE DO
-     CHGVAR     VAR(&MSGDTA) VALUE( 'File: '       *CAT &SRCFILE *CAT +
-                                    ' Member: '    *CAT &SRCMBR  *CAT +
-                                    ' Attribute: ' *CAT &SRCTYPE *CAT +
-                                    ' Text: '      *CAT &SRCDESC *CAT &X15 *CAT &NL)
+     IF COND(%SST(&SRCFILE 1 10) *EQ '*LANGUAGE ') THEN(DO)
+       CHGVAR     VAR(&MSGDTA) VALUE( 'Comment: '      *CAT &SRCFILE *CAT +
+                                      ' Language FC: ' *CAT &SRCMBR  *CAT +
+                                      ' Options: '     *CAT &SRCTYPE *CAT +
+                                      ' Description: ' *CAT &SRCDESC *CAT &X15 *CAT &NL)
+     ENDDO
+     ELSE DO
+       CHGVAR     VAR(&MSGDTA) VALUE( 'File: '       *CAT &SRCFILE *CAT +
+                                      ' Member: '    *CAT &SRCMBR  *CAT +
+                                      ' Attribute: ' *CAT &SRCTYPE *CAT +
+                                      ' Text: '      *CAT &SRCDESC *CAT &X15 *CAT &NL)
+     ENDDO                                 
    ENDDO                                 
-  CALLPRC    PRC('printf') PARM((&MSGDTA))  
+   CALLPRC    PRC('printf') PARM((&MSGDTA))  
  ENDDO
  IF COND(%SST(&SRCFILE 1 10) *EQ '*PREREQ   ') THEN(DO)
    CHKOBJ OBJ(QSYS/&SRCMBR) OBJTYPE(*LIB) AUT(*READ)
