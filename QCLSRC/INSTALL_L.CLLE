@@ -43,7 +43,6 @@ DCLF FILE(QTEMP/GUIDE00F)
              CHGVAR     VAR(&CUR_OSV_3) VALUE(%SST(&CUR_OSV 2 1) *CAT +
                                               %SST(&CUR_OSV 4 1) *CAT +
                                               %SST(&CUR_OSV 6 1))
-             CHGVAR     VAR(&CUR_OSV_D) VALUE(%DEC(&CUR_OSV_3 3 0))
 CHGVAR VAR(&VERBOSE) VALUE(&OMISSIBLE)
 MONMSG MSGID(MCH3601) EXEC(CHGVAR VAR(&VERBOSE) VALUE('N'))
 IF COND(&DEVOPT = 'B') THEN(DO)
