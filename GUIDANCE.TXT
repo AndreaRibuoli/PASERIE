@@ -1,3 +1,4 @@
+*LANGUAGE 2929                German 
 *LANGUAGE 2932                Italian 
 *OSRELEASEV7R1M0              IBM i OS 7.1
 *OSRELEASEV6R1M0              IBM i OS 6.1 and previous
