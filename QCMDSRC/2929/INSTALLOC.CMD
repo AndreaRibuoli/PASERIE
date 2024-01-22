@@ -1,4 +1,4 @@
-CMD        PROMPT('PASERIE Lokalen Installateur V1R1M1')
+CMD        PROMPT('PASERIE Lokalen Installateur')
 PARM       KWD(LOCAL_PATH) TYPE(*CHAR) LEN(100) MIN(1) +
            CASE(*MIXED) PROMPT('Projektverzeichnis')
 PARM       KWD(TGTLIB) TYPE(*CHAR) LEN(10) DFT(*LOCAL_PATH) +

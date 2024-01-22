@@ -1,4 +1,4 @@
-CMD        PROMPT('PASERIE Bibliothek Klonen V1R1M1')
+CMD        PROMPT('PASERIE Bibliothek Klonen')
 PARM       KWD(SRCLIB) TYPE(*CHAR) LEN(10) MIN(1) +
            PROMPT('Quellbibliothek')
 PARM       KWD(LOCAL_PATH) TYPE(*CHAR) LEN(100) +
