@@ -1,4 +1,4 @@
-# PASERIE (V1R1M0)
+# PASERIE (V1R1M1)
 ### Utility for Source-Level Distribution in IBM i
 
 This utility helps you maintain your IBM i source code on GitHub.
@@ -84,6 +84,11 @@ RSTLIB SAVLIB(PASERIE) DEV(*SAVF) SAVF(QGPL/PASERIE)
 ```
 <div style="page-break-after: always;"></div>
 
+## THE NAME
+
+pastry ==> *pâ-tis-se-rie* ==> **PASERIE**
+
+
 ## PARAMETERS FOR THE THREE COMMANDS WITH SCREEN SHOTS
 
 |     KWD    |  INSTALL  | INSTALLOC | LIBCLONE  |
@@ -100,25 +105,25 @@ RSTLIB SAVLIB(PASERIE) DEV(*SAVF) SAVF(QGPL/PASERIE)
 | VERBOSE    |    yes    |    yes    |    yes    | 
 
 
+<div style="page-break-after: always;"></div>
 
-![INSTALL](PASERIE_INSTALL_V1R0M2.png)
+![INSTALL](PASERIE_INSTALL_V1R1M1_en.png)
 
-![INSTALL](PASERIE_INSTALLOC_V1R0M2.png)
+![INSTALL](PASERIE_INSTALLOC_V1R1M1_en.png)
 
-![INSTALL](PASERIE_LIBCLONE_V1R0M2.png)
+![INSTALL](PASERIE_LIBCLONE_V1R1M1_en.png)
+
+<div style="page-break-after: always;"></div>
 
 On a system based in Italy the commands will be compiled from localized source files:
 
-![INSTALL](PASERIE_INSTALL_V1R1M0.png)
+![INSTALL](PASERIE_INSTALL_V1R1M1_it.png)
 
-![INSTALL](PASERIE_INSTALLOC_V1R1M0.png)
+![INSTALL](PASERIE_INSTALLOC_V1R1M1_it.png)
 
-![INSTALL](PASERIE_LIBCLONE_V1R1M0.png)
+![INSTALL](PASERIE_LIBCLONE_V1R1M1_it.png)
 
-
-## THE NAME
-
-pastry ==> *pâ-tis-se-rie* ==> **PASERIE**
+<div style="page-break-after: always;"></div>
 
 ## HINTS FOR DEVELOPERS
 
@@ -243,30 +248,30 @@ Your first use of PASERIE/LIBCLONE
 ```     
 <div style="page-break-after: always;"></div>
 
-## VERSIONS
+## CURRENTLY SUPPORTED VERSIONS
 
 **PASERIE** currently supports **IBM i PASE** from *7.2* to *7.5*
 but I am working on extending the coverage of previous versions to facilitate reuse of code originally developed on older versions
 of the operating system.
 
 ```
-╔════════════╦═════════════╗
-║ IBM i PASE ║     AIX     ║
-╠════════════╬═══════╤═════╣
-║     7.5    ║       │ TL5 ║
-╟────────────╢  7.2  ├─────╢
-║     7.4    ║       │ TL2 ║
-╟────────────╫───────┼─────╢
-║     7.3    ║       │ TL4 ║
-╟────────────╢  7.1  ├─────╢
-║     7.2    ║       │ TL1 ║
-╟────────────╫───────┼─────╢
-║     7.1    ║  6.1  │ TL2 ║
-╟────────────╫───────┼─────╢
-║     6.1    ║       │ TL6 ║
-╟────────────╢  5.3  ├─────╢
-║     5.4    ║       │ ML3 ║
-╚════════════╩═══════╧═════╝
+╔════════════╦═════════════╦═════════╤═══════════╤══════════╗
+║ IBM i PASE ║     AIX     ║ INSTALL │ INSTALLOC │ LIBCLONE ║
+╠════════════╬═══════╤═════╬═════════╪═══════════╪══════════╣
+║     7.5    ║       │ TL5 ║   yes   │    yes    │    yes   ║
+╟────────────╢  7.2  ├─────╫─────────┼───────────┼──────────╢
+║     7.4    ║       │ TL2 ║   yes   │    yes    │    yes   ║
+╟────────────╫───────┼─────╫─────────┼───────────┼──────────╢
+║     7.3    ║       │ TL4 ║   yes   │    yes    │    yes   ║
+╟────────────╢  7.1  ├─────╫─────────┼───────────┼──────────╢
+║     7.2    ║       │ TL1 ║   yes   │    yes    │    yes   ║
+╟────────────╫───────┼─────╫─────────┼───────────┼──────────╢
+║     7.1    ║  6.1  │ TL2 ║         │    yes    │    yes   ║
+╟────────────╫───────┼─────╫─────────┼───────────┼──────────╢
+║     6.1    ║       │ TL6 ║         │    yes    │    yes   ║
+╟────────────╢  5.3  ├─────╫─────────┼───────────┼──────────╢
+║     5.4    ║       │ ML3 ║         │    yes    │    yes   ║
+╚════════════╩═══════╧═════╩═════════╧═══════════╧══════════╝
 ```
 
 * **TR** *Technology Refresh (IBM i)*
