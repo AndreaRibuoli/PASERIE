@@ -1,4 +1,4 @@
-             CMD        PROMPT('PASERIE Installatore    V1R1M0')
+             CMD        PROMPT('PASERIE Installatore    V1R1M1')
              PARM       KWD(REPO_OWNER) TYPE(*CHAR) LEN(30) MIN(1) +
                           CASE(*MIXED) PROMPT('Proprietario repo su GitHub')
              PARM       KWD(REPOSITORY) TYPE(*CHAR) LEN(10) MIN(1) +

@@ -1,4 +1,4 @@
-             CMD        PROMPT('PASERIE Clona Libreria  V1R1M0')
+             CMD        PROMPT('PASERIE Clona Libreria  V1R1M1')
              PARM       KWD(SRCLIB) TYPE(*CHAR) LEN(10) MIN(1) +
                           PROMPT('Libreria di sorgenti')
              PARM       KWD(LOCAL_PATH) TYPE(*CHAR) LEN(100) +
