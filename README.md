@@ -125,6 +125,16 @@ On a system based in Italy the commands will be compiled from localized source f
 
 <div style="page-break-after: always;"></div>
 
+On a system based in Germany the commands will be compiled from localized source files:
+
+![INSTALL](PASERIE_INSTALL_V1R1M1_de.png)
+
+![INSTALL](PASERIE_INSTALLOC_V1R1M1_de.png)
+
+![INSTALL](PASERIE_LIBCLONE_V1R1M1_de.png)
+
+<div style="page-break-after: always;"></div>
+
 ## HINTS FOR DEVELOPERS
 
 The minimum provision to enable `PASERIE/INSTALL` handling your "native" IBM i GitHub repository is:
