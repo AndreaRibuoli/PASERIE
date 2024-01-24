@@ -46,6 +46,7 @@
              DCL        VAR(&CUR_OSV) TYPE(*CHAR) LEN(6) VALUE('      ')
              DCL        VAR(&CUR_OSV_3) TYPE(*CHAR) LEN(3) VALUE('   ')
              DCL        VAR(&CUR_OSV_D) TYPE(*DEC) LEN(3 0) VALUE(0)
+             CHGJOB     JOBMSGQFL(*WRAP)
              RTVDTAARA  DTAARA(QGPL/QSS1MRI (26 4)) RTNVAR(&LANG_FC)
              MONMSG     MSGID(CPF0000)
              RTVDTAARA  DTAARA(PASE_TEST (26 4)) RTNVAR(&LANG_FC)
