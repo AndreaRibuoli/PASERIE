@@ -41,36 +41,34 @@ The suite provides a total of three commands:
 
 ## INSTALLATION
 
-Let's first create an empty SAVEFILE named `QGPL/PASERIE`:
+I assume you have **bash**, **git** and **curl** installed in your *PASE* environment.
 
-```
-CRTSAVF FILE(QGPL/PASERIE) TEXT('Paserie Save File')
-```
-Then, from `CALL QP2TERM`, we verify that **curl** is installed:
+From `CALL QP2TERM`, you can verify that **git** and **curl** are installed:
 
 ```
   $                                        
 > PATH=/QOpenSys/pkgs/bin:$PATH            
   $                                        
 > export PATH                              
-  $         
+  $                  
+> which bash
+  /QOpenSys/pkgs/bin/bash
+  $
 > which curl
   /QOpenSys/pkgs/bin/curl
+  $         
+> which git
+  /QOpenSys/pkgs/bin/git
 ```
-Using curl, we download 2 archives:
-                                                                      
 
+Using curl download the following archive (supporting IBM i 7.3, 7.4 and 7.5):
+                                                                      
 ```                  
 curl -o PaseOssFloating.tar
         https://www.andrearibuoli.it/paserie/PaseOssFloating.tar    
 ```
-        
-```                  
-curl -o /QSYS.LIB/QGPL.LIB/PASERIE.FILE
-        https://www.andrearibuoli.it/paserie/PASERIE.SAVF
-```
 
-From the home path of the user that will be using **PASERIE/INSTALL** we
+From *the home path of the user* that will be using *PASERIE/INSTALL* we
 install **PaseOss** folder by untarring *PaseOssFloating* tar file:
 
 ```
@@ -78,10 +76,18 @@ cd ~
 tar xvf PaseOssFloating.tar
 ```
 
-Now, after exiting from the QP2TERM session, we can perform the `RSTLIB` for PASERIE:
+Now, still from *the home path of the user* that will be using *PASERIE/INSTALL* we
+perform:
+
 ```
-RSTLIB SAVLIB(PASERIE) DEV(*SAVF) SAVF(QGPL/PASERIE)
+cd ~
+git clone https://github.com/AndreaRibuoli/PASERIE.git
+cd PASERIE
+bash ./bootstrap.sh
 ```
+
+after exiting from the QP2TERM session you should have **PASERIE** utilities available. 
+
 <div style="page-break-after: always;"></div>
 
 ## THE NAME

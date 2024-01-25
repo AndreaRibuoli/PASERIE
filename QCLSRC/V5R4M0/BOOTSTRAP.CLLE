@@ -1,0 +1,35 @@
+             PGM        PARM(&PATH)
+             DCL        VAR(&SRCLIB) TYPE(*CHAR) LEN(10) VALUE(PASERIE0)
+             DCL        VAR(&BLDLIB) TYPE(*CHAR) LEN(10) VALUE(PASERIE0)
+             DCL        VAR(&TGTLIB) TYPE(*CHAR) LEN(10) VALUE(PASERIE0) 
+             DCL        VAR(&PATH) TYPE(*CHAR) LEN(30)
+             DCL        VAR(&STMT) TYPE(*CHAR) LEN(100)
+             DLTF       FILE(QTEMP/GUIDE00F)
+             MONMSG     MSGID(CPF0000)
+             CRTPF      FILE(QTEMP/GUIDE00F) SRCFILE(&SRCLIB/QDDSPF) +
+                          OPTION(*NOSRC *NOLIST)
+             CRTCLMOD   MODULE(&BLDLIB/INSTALL_L) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(INSTALL_L) +
+                          OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTCLMOD   MODULE(&BLDLIB/INSTALLOC) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(INSTALLOC) +
+                          OUTPUT(*NONE) ALWRTVSRC(*NO)
+             CRTPGM     PGM(&TGTLIB/INSTALL_L) +
+                          MODULE(&BLDLIB/INSTALL_L) +
+                          TEXT('PASERIE installer (3/10)')
+             MONMSG     MSGID(CPF0000)
+             CRTPGM     PGM(&TGTLIB/INSTALLOC) +
+                          MODULE(&BLDLIB/INSTALLOC) +
+                          TEXT('PASERIE installer (4/10)')
+             MONMSG     MSGID(CPF0000)
+             CRTCMD     CMD(&TGTLIB/INSTALL) PGM(&TGTLIB/INSTALL) +
+                          SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL)  +
+                          TEXT('PASERIE installer (2/10)') PRDLIB(&TGTLIB)
+             DLTSPLF    FILE(INSTALL)
+             CRTCMD     CMD(&TGTLIB/INSTALLOC) PGM(&TGTLIB/INSTALLOC) +
+                          SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALLOC)  +
+                          TEXT('PASERIE installer (9/10)') PRDLIB(&TGTLIB)
+             DLTSPLF    FILE(INSTALLOC)
+             CHGVAR     VAR(&STMT) VALUE('PASERIE0/INSTALLOC LOCAL_PATH(''' *CAT &PATH *TCAT ''')')
+             CALL       PGM(QCMDEXC) PARM(&STMT 100)  
+RETURN:      ENDPGM
