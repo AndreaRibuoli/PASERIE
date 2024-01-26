@@ -11,4 +11,4 @@ PARM       KWD(LOGOUTPUT) TYPE(*CHAR) LEN(10) DFT(*PND) +
             (*JOBLOGSVR '*JOBLOGSVR') (*JOBEND '*JOBEND') (*PND '*PND')) +
             PROMPT('Sortie du journal de travail') PMTCTL(*PMTRQS)
 PARM       KWD(VERBOSE) TYPE(*CHAR) LEN(1) DFT(N) +
-            PROMPT('Verbeux') PMTCTL(*PMTRQS)
+            PROMPT('Loquace') PMTCTL(*PMTRQS)
