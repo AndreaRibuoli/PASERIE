@@ -1,3 +1,4 @@
+*LANGUAGE 2928                French 
 *LANGUAGE 2929                German 
 *LANGUAGE 2932                Italian 
 *OSRELEASEV7R1M0              IBM i OS 7.1
