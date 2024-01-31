@@ -6,7 +6,8 @@
 
 msg=`system "CRTDTAARA DTAARA(DUMMY) TYPE(*CHAR)"`
 system "DLTDTAARA DTAARA(DUMMY)"
-tmp_lib="${${msg#*"created in library "}::(-2)}2"
+tmp_lib=${msg#*'created in library '}
+tmp_lib="${tmp_lib:0:-2}2"
 system "CRTSRCPF FILE(${tmp_lib}/QDDSPF) RCDLEN(132)"
 system "CRTSRCPF FILE(${tmp_lib}/QCLSRC) RCDLEN(132)"   
 system "CRTSRCPF FILE(${tmp_lib}/QCMDSRC) RCDLEN(132)"   
