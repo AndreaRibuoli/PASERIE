@@ -1,3 +1,4 @@
+
              PGM        PARM(&PATH)
              DCL        VAR(&SRCLIB) TYPE(*CHAR) LEN(10) VALUE(PASERIE0)
              DCL        VAR(&BLDLIB) TYPE(*CHAR) LEN(10) VALUE(PASERIE0)
