@@ -11,10 +11,10 @@
                           OPTION(*NOSRC *NOLIST)
              CRTCLMOD   MODULE(&BLDLIB/INSTALL_L) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(INSTALL_L) +
-                          OUTPUT(*NONE) ALWRTVSRC(*NO)
+                          OUTPUT(*NONE)
              CRTCLMOD   MODULE(&BLDLIB/INSTALLOC) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(INSTALLOC) +
-                          OUTPUT(*NONE) ALWRTVSRC(*NO)
+                          OUTPUT(*NONE)
              CRTPGM     PGM(&TGTLIB/INSTALL_L) +
                           MODULE(&BLDLIB/INSTALL_L) +
                           TEXT('PASERIE installer (3/10)')

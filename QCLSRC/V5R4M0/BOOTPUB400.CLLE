@@ -35,10 +35,12 @@
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL)  +
                           TEXT('PASERIE installer (2/10)') PRDLIB(&TMPLIB)
              DLTSPLF    FILE(INSTALL)
+             MONMSG     MSGID(CPF0000)
              CRTCMD     CMD(&TMPLIB/INSTALLOC) PGM(&TMPLIB/INSTALLOC) +
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALLOC)  +
                           TEXT('PASERIE installer (9/10)') PRDLIB(&TMPLIB)
              DLTSPLF    FILE(INSTALLOC)
+             MONMSG     MSGID(CPF0000)
              CHGVAR     VAR(&STMT) VALUE(&TMPLIB *TCAT '/INSTALLOC LOCAL_PATH(''' *CAT &PATH *TCAT ''')')
              CHGVAR     VAR(&STMT) VALUE(&STMT *TCAT  ' TGTLIB(''' *CAT &TGTLIB *TCAT ''')')
              CALL       PGM(QCMDEXC) PARM(&STMT 100)  
