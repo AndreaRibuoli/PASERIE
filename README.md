@@ -68,6 +68,9 @@ curl -o PaseOssFloating.tar
         https://www.andrearibuoli.it/paserie/PaseOssFloating.tar    
 ```
 
+An alternative archive supports IBM i 6.1, 7.1 and 7.2. 
+In case of interest send me a request by e\-mail for specific 
+instructions (`andrea.ribuoli@yahoo.com`).
 From *the home path of the user* that will be using *PASERIE/INSTALL* we
 install **PaseOss** folder by untarring *PaseOssFloating* tar file:
 
@@ -86,7 +89,12 @@ cd PASERIE
 bash ./bootstrap.sh
 ```
 
-after exiting from the QP2TERM session you should have **PASERIE** utilities available. 
+( Given the limitations in [PUB400.COM](https://www.pub400.com), to install PASERIE there 
+\-a free and public IBM i enviroment\- replace the last command with a dedicated script: 
+`bash ./bootstra_pub400.sh`.
+
+After exiting from the QP2TERM session you should have **PASERIE** utilities available. 
+
 
 <div style="page-break-after: always;"></div>
 
@@ -276,9 +284,10 @@ Your first use of PASERIE/LIBCLONE
 
 ## CURRENTLY SUPPORTED VERSIONS
 
-**PASERIE** currently supports **IBM i PASE** from *7.2* to *7.5*
-but I am working on extending the coverage of previous versions to facilitate reuse of code originally developed on older versions
-of the operating system.
+**PASERIE** currently supports **IBM i PASE** from **6.1** to *7.5*
+but I am working on extending the coverage even to IBM i *5.4* 
+to facilitate reuse of code originally developed 
+on very old versions of the operating system.
 
 ```
 ╔════════════╦═════════════╦═════════╤═══════════╤══════════╗
@@ -292,9 +301,9 @@ of the operating system.
 ╟────────────╢  7.1  ├─────╫─────────┼───────────┼──────────╢
 ║     7.2    ║       │ TL1 ║   yes   │    yes    │    yes   ║
 ╟────────────╫───────┼─────╫─────────┼───────────┼──────────╢
-║     7.1    ║  6.1  │ TL2 ║         │    yes    │    yes   ║
+║     7.1    ║  6.1  │ TL2 ║   yes   │    yes    │    yes   ║
 ╟────────────╫───────┼─────╫─────────┼───────────┼──────────╢
-║     6.1    ║       │ TL6 ║         │    yes    │    yes   ║
+║     6.1    ║       │ TL6 ║   yes   │    yes    │    yes   ║
 ╟────────────╢  5.3  ├─────╫─────────┼───────────┼──────────╢
 ║     5.4    ║       │ ML3 ║         │    yes    │    yes   ║
 ╚════════════╩═══════╧═════╩═════════╧═══════════╧══════════╝
