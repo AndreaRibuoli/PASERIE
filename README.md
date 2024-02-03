@@ -42,8 +42,8 @@ The suite provides a total of three commands:
 ## INSTALLATION
 
 I assume you have **bash**, **git** and **curl** installed in your *PASE* environment.
-
-From `CALL QP2TERM`, you can verify that **git** and **curl** are installed:
+Skip to the end of this document otherwise. 
+From `CALL QP2TERM`, you can verify that **bash**, **git** and **curl** are installed:
 
 ```
   $                                        
@@ -68,9 +68,6 @@ curl -o PaseOssFloating.tar
         https://www.andrearibuoli.it/paserie/PaseOssFloating.tar    
 ```
 
-An alternative archive supports IBM i 6.1, 7.1 and 7.2. 
-In case of interest send me a request by e\-mail for specific 
-instructions (`andrea.ribuoli@yahoo.com`).
 From *the home path of the user* that will be using *PASERIE/INSTALL* we
 install **PaseOss** folder by untarring *PaseOssFloating* tar file:
 
@@ -89,7 +86,7 @@ cd PASERIE
 bash ./bootstrap.sh
 ```
 
-( Given the limitations in [PUB400.COM](https://www.pub400.com), to install PASERIE there 
+Given the limitations in [PUB400.COM](https://www.pub400.com), to install PASERIE there 
 \-a free and public IBM i enviroment\- replace the last command with a dedicated script: 
 `bash ./bootstra_pub400.sh`.
 
@@ -314,3 +311,36 @@ on very old versions of the operating system.
 * **ML** *Modification Level (AIX)*
 
 *Note*: Starting in 2006, as part of the new *AIX 5L Service Strategy*, **ML**s were replaced by **TL**s
+
+<div style="page-break-after: always;"></div>
+
+## INSTALLATION WITHOUT bash OR git OR curl
+
+If you do not have **bash**, **git** or **curl** installed in your *PASE* environment
+it is possible you are still using an IBM i old version.
+
+The following steps support installing PASERIE in IBM i **6.1**, **7.1** and **7.2**.
+
+By means of a PC connected to the Internet, select the follwing URL and download the linked item:
+                                                                      
+[https://www.andrearibuoli.it](https://www.andrearibuoli.it/paserie/PaseOssPre730.tar)    
+
+You will find the tar file in the *Download* folder ![icon](tarIcon.png).
+
+Now access the following link and save the *zip* file of the GitHub PASERIE repository:
+
+[https://github.com](https://github.com/AndreaRibuoli/PASERIE/archive/refs/heads/main.zip)
+
+Untar and unzip the two folders and transfer them to your IBM i home directory.
+ 
+Connect via a 5250 emulator using your user profile.
+
+From `CALL QP2TERM` you will change directory into the repository copy and run the
+installer like this: 
+ 
+```
+cd PASERIE
+sh ./bootstrap.sh
+```
+
+After exiting from the QP2TERM session you should have **PASERIE** utilities ready for use. 
