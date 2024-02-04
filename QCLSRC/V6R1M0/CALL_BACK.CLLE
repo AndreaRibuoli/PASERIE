@@ -1,1 +1,27 @@
-../V7R1M0/CALL_BACK.CLLE
+             PGM        PARM(&FUNCS_PTR &HANDLE &CBCK)
+             DCL        VAR(&FUNCS_PTR) TYPE(*PTR)
+             DCL        VAR(&HANDLE)    TYPE(*CHAR)                LEN(8)
+             DCL        VAR(&CBCK)      TYPE(*CHAR)                LEN(8)
+             DCL        VAR(&HANDLE32)  TYPE(*INT)  STG(*DEFINED)  LEN(4)  DEFVAR(&HANDLE 5)
+             DCL        VAR(&CBCK32)    TYPE(*INT)  STG(*DEFINED)  LEN(4)  DEFVAR(&CBCK 5)
+
+             INCLUDE    SRCMBR(DCL32INCL)
+             DCL        VAR(&FUNCTION)  TYPE(*CHAR) STG(*DEFINED)  LEN(8)  DEFVAR(&PA 41)
+             DCL        VAR(&HNDL_A)    TYPE(*CHAR) STG(*DEFINED)  LEN(8)  DEFVAR(&ARGL 1)
+             DCL        VAR(&HNDL_A32)  TYPE(*INT)  STG(*DEFINED)  LEN(4)  DEFVAR(&ARGL 1)
+             DCL        VAR(&CBCK_H)    TYPE(*CHAR) STG(*DEFINED)  LEN(8)  DEFVAR(&BUFFER)
+             DCL        VAR(&CBCK_H32)  TYPE(*INT)  STG(*DEFINED)  LEN(4)  DEFVAR(&BUFFER)
+             CHGVAR     VAR(&CBCK_H)                               VALUE(X'0000000000000000')
+             CHGVAR     VAR(&CBCK)                                 VALUE(X'0000000000000000')
+             CHGVAR     VAR(&HNDL_A32)                             VALUE(&HANDLE32)
+             CHGVAR     VAR(&FIRST)                                VALUE(-5)
+             CHGVAR     VAR(&RESTYP)                               VALUE(-5)
+             CHGVAR     VAR(&BF_LEN)                               VALUE(4)
+             CALLPRC    PRC('Qp2CallPase2') PARM((&FUNCTION) (&ARGL_P *BYVAL) (&SIGN_P *BYVAL) +
+                          (&RESTYP *BYVAL) (&BUFF_P *BYVAL) (&BF_LEN *BYVAL)) RTNVAL(&RTCD)
+             IF         COND(&RTCD *NE 0) THEN(DO)
+          /* SNDPGMMSG MSG('Qp2CallPase2 failed for CallbackPtr(); RTCD = ' *CAT %CHAR(&RTCD)) */
+             SNDPGMMSG MSG('Qp2CallPase2 failed for CallbackPtr()')
+             ENDDO
+             CHGVAR     VAR(&CBCK32) VALUE(&CBCK_H32)
+RETURN:      ENDPGM
