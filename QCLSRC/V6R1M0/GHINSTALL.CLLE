@@ -121,7 +121,7 @@
              CHGVAR     VAR(&OUT_BYTES) VALUE(&SIZEE32)
              CHGVAR     VAR(&MEME_P2) VALUE(&MEME_P)
              CALLPRC    PRC('iconv') PARM((&CONVD *BYVAL) (&AUT_P) (&IN_BYTES) (&MEME_P2) (&OUT_BYTES)) RTNVAL(&RC)
-             CHGVAR     VAR(&LOCAC) VALUE(0)
+             CHGVAR     VAR(&LOCAC32) VALUE(0)
              CALLPRC    PRC('SLIST_APPE') PARM((&FUNCS_PTR) (&LOCAC) (&LOCAD))
              CALLPRC    PRC('SLIST_APPE') PARM((&FUNCS_PTR) (&LOCAC) (&LOCAE))
              CHGVAR     VAR(&PKG_LPTR) VALUE(%ADDRESS(&PKG_BLCK))
