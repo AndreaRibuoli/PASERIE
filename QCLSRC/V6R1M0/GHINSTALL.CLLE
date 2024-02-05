@@ -1,7 +1,15 @@
              PGM        PARM(&PASE_DIR &GIT_USER &PACKAGEN &GITTOKEN &TGTLIB &DEVOPT &TGTRLS &OMISSIBLE)
              DCLPRCOPT  LOG(*NO) ALWRTVSRC(*NO)
              COPYRIGHT  TEXT('Andrea Ribuoli © 2023 - PASERIE Installer')
-             
+             DCL        VAR(&PASE_DIR)  TYPE(*CHAR) LEN(60)
+             DCL        VAR(&GIT_USER)  TYPE(*CHAR) LEN(30)
+             DCL        VAR(&PACKAGEN)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&GITTOKEN)  TYPE(*CHAR) LEN(40)
+             DCL        VAR(&TGTLIB)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&DEVOPT)    TYPE(*CHAR) LEN(1)
+             DCL        VAR(&TGTRLS)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OMISSIBLE) TYPE(*CHAR) LEN(1)
+
              /* START RECONSIDERING GHINSTALL IMPLEMENTATION WITH V6R1M0 VERSION */
              /* CURRENTLY THE BEST APPROACH IS COMPILING V7R1M0 VERSION WITH     */
              /* TGTRLS *PRV AS THE COMPILER AT 7.1 SUPPORTS NEW SYNTAX WHILE     */
