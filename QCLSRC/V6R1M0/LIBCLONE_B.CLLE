@@ -92,9 +92,13 @@ DCL        VAR(&ELABORA2_P)   TYPE(*PTR)
 DCL        VAR(&LSTPTRD2)  TYPE(*PTR)
 DCL        VAR(&LSTENTD2)  TYPE(*CHAR) STG(*BASED)   LEN(10) BASPTR(&LSTPTRD2)
 
-             DCL        VAR(&NUM_SLASH) TYPE(*INT) VALUE(97)
-             DCL        VAR(&OLD_PTR) TYPE(*PTR)
-             DCL        VAR(&NEW_PTR) TYPE(*PTR)
+DCL        VAR(&BASEPTR)  TYPE(*PTR)
+DCL        VAR(&DFTLIB)   TYPE(*CHAR) STG(*BASED) LEN(10) BASPTR(&BASEPTR)
+DCL        VAR(&RTNCDE)   TYPE(*INT)  LEN(4)
+DCL        VAR(&CONTROLS) TYPE(*CHAR) LEN(8) VALUE(X'0100000000000000')
+DCL        VAR(&CTRL_CHR) TYPE(*CHAR) LEN(1)
+DCL        VAR(&CTRL_LEN) TYPE(*UINT) STG(*DEFINED) LEN(2) DEFVAR(&CONTROLS 7)
+CHGVAR     VAR(&CTRL_CHR) VALUE('/')
 
 MONMSG     MSGID(CPF9801) EXEC(GOTO CMDLBL(CHECK1))
 MONMSG     MSGID(CPF9802) EXEC(GOTO CMDLBL(CHECK2))
@@ -121,31 +125,27 @@ ENDDO
 /* determine if subdir exists */
 IF         COND(%SST(&LOCALPATH 1 1) *NE '/') +
            THEN(CHGVAR VAR(&LOCALPATH) VALUE('./' *CAT &LOCALPATH))
-CHGVAR VAR(&LPOS) VALUE(0)
-DOUNTIL COND('0')
-CHGVAR VAR(&POS) VALUE(&LPOS + 1)
 
 /* CHGVAR VAR(&LPOS) VALUE(%SCAN('/' &LOCALPATH &POS)) */
 
-             CHGVAR     VAR(&OLD_PTR) VALUE(%ADDR(&LOCALPATH))
-             CHGVAR     VAR(%OFS(&OLD_PTR)) VALUE(%OFS(&OLD_PTR) + &POS)
-             CALLPRC    PRC('strchr') PARM((&OLD_PTR) (&NUM_SLASH *BYVAL)) RTNVAL(&NEW_PTR)
-             IF         COND(&NEW_PTR *EQ *NULL) THEN(CHGVAR VAR(&LPOS) VALUE(0))
-             ELSE       CMD(CHGVAR VAR(&LPOS) VALUE(%OFS(&NEW_PTR)-%OFS(&OLD_PTR)))
-
-
-IF COND(&LPOS *EQ 0) THEN(LEAVE)
+CHGVAR VAR(&BASEPTR) VALUE(%ADDRESS(&LOCALPATH))
+CHGVAR VAR(&CTRL_LEN) VALUE(%SIZE((&LOCALPATH)))
+CALLPRC PRC('_SCANX') PARM((&BASEPTR) (&CONTROLS) (X'48000000' *BYVAL)) RTNVAL(&RTNCDE)
+DOWHILE   COND(&RTNCDE *EQ 0)
+  CALLPRC PRC('_SCANX') PARM((&BASEPTR) (&CONTROLS) (X'48000000' *BYVAL)) RTNVAL(&RTNCDE)
 ENDDO
-CHGVAR VAR(&LPOS) VALUE(&POS - 2)
-CHGVAR VAR(&CHECKPATH) VALUE(%SST(&LOCALPATH 1 &LPOS) *CAT &NL)
-CHGVAR VAR(&TGTDIR) VALUE(%SST(&LOCALPATH &POS 10))
-CALLPRC    PRC('access') PARM((&CHECKPATH) (&R_OK *BYVAL)) RTNVAL(&RTCD)
-IF         COND(&RTCD *NE 0) THEN(DO)
-CHGVAR     VAR(&MSGDTA) VALUE('Directory ' *CAT %SST(&LOCALPATH 1 &LPOS) *CAT +
-               ' does not exist: create it, if needed.')
-CALLPRC    PRC('printf') PARM((&MSGDTA))
-RETURN
-ENDDO
+CHGVAR VAR(&TGTDIR) VALUE(&DFTLIB)
+
+/* CHGVAR VAR(&LPOS) VALUE(&POS - 2)                                               */
+/* CHGVAR VAR(&CHECKPATH) VALUE(%SST(&LOCALPATH 1 &LPOS) *CAT &NL)                 */
+/* CHGVAR VAR(&TGTDIR) VALUE(%SST(&LOCALPATH &POS 10))                             */
+/* CALLPRC    PRC('access') PARM((&CHECKPATH) (&R_OK *BYVAL)) RTNVAL(&RTCD)        */
+/* IF         COND(&RTCD *NE 0) THEN(DO)                                           */
+/* CHGVAR     VAR(&MSGDTA) VALUE('Directory ' *CAT %SST(&LOCALPATH 1 &LPOS) *CAT + */
+/*                ' does not exist: create it, if needed.')                        */
+/* CALLPRC    PRC('printf') PARM((&MSGDTA))                                        */
+/* RETURN                                                                          */
+/* ENDDO                                                                           */
 CALLPRC    PRC('malloc') PARM((&ELABORA_SZ *BYVAL)) RTNVAL(&ELABORA_P)
 CALLPRC    PRC('malloc') PARM((&ELABORA2SZ *BYVAL)) RTNVAL(&ELABORA2_P)
 CHGJOB     JOBMSGQFL(*WRAP)
