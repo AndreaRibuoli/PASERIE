@@ -118,41 +118,41 @@ pastry ==> *pâ-tis-se-rie* ==> **PASERIE**
 
 <div style="page-break-after: always;"></div>
 
-![INSTALL](PASERIE_INSTALL_V1R1M1_en.png)
+![INSTALL](images/PASERIE_INSTALL_V1R1M1_en.png)
 
-![INSTALL](PASERIE_INSTALLOC_V1R1M1_en.png)
+![INSTALL](images/PASERIE_INSTALLOC_V1R1M1_en.png)
 
-![INSTALL](PASERIE_LIBCLONE_V1R1M1_en.png)
+![INSTALL](images/PASERIE_LIBCLONE_V1R1M1_en.png)
 
 <div style="page-break-after: always;"></div>
 
 On a system based in Italy the commands will be compiled from localized source files:
 
-![INSTALL](PASERIE_INSTALL_V1R1M1_it.png)
+![INSTALL](images/PASERIE_INSTALL_V1R1M1_it.png)
 
-![INSTALL](PASERIE_INSTALLOC_V1R1M1_it.png)
+![INSTALL](images/PASERIE_INSTALLOC_V1R1M1_it.png)
 
-![INSTALL](PASERIE_LIBCLONE_V1R1M1_it.png)
+![INSTALL](images/PASERIE_LIBCLONE_V1R1M1_it.png)
 
 <div style="page-break-after: always;"></div>
 
 On a system based in Germany the commands will be compiled from localized source files:
 
-![INSTALL](PASERIE_INSTALL_V1R1M1_de.png)
+![INSTALL](images/PASERIE_INSTALL_V1R1M1_de.png)
 
-![INSTALL](PASERIE_INSTALLOC_V1R1M1_de.png)
+![INSTALL](images/PASERIE_INSTALLOC_V1R1M1_de.png)
 
-![INSTALL](PASERIE_LIBCLONE_V1R1M1_de.png)
+![INSTALL](images/PASERIE_LIBCLONE_V1R1M1_de.png)
 
 <div style="page-break-after: always;"></div>
 
 On a system based in France the commands will be compiled from localized source files:
 
-![INSTALL](PASERIE_INSTALL_V1R1M1_fr.png)
+![INSTALL](images/PASERIE_INSTALL_V1R1M1_fr.png)
 
-![INSTALL](PASERIE_INSTALLOC_V1R1M1_fr.png)
+![INSTALL](images/PASERIE_INSTALLOC_V1R1M1_fr.png)
 
-![INSTALL](PASERIE_LIBCLONE_V1R1M1_fr.png)
+![INSTALL](images/PASERIE_LIBCLONE_V1R1M1_fr.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -216,7 +216,7 @@ Let us edit the source file:
 
 and enter a simple CL source like:
 
-![edtf](EDTF.png)
+![edtf](images/EDTF.png)
 
 Now we issue the following command:
 
@@ -325,7 +325,7 @@ By means of a PC connected to the Internet, select the follwing URL and download
                                                                       
 [https://www.andrearibuoli.it](https://www.andrearibuoli.it/paserie/PaseOssPre730.tar)    
 
-You will find the tar file in the *Download* folder ![icon](tarIcon.png).
+You will find the tar file in the *Download* folder ![icon](images/tarIcon.png).
 
 Now access the following link and save the *zip* file of the GitHub PASERIE repository:
 
