@@ -88,7 +88,7 @@ bash ./bootstrap.sh
 
 Given the limitations in [PUB400.COM](https://www.pub400.com), to install PASERIE there 
 \-a free and public IBM i enviroment\- replace the last command with a dedicated script: 
-`bash ./bootstra_pub400.sh`.
+`bash ./bootstrap_pub400.sh`.
 
 After exiting from the QP2TERM session you should have **PASERIE** utilities available. 
 
