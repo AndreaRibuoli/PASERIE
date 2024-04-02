@@ -17,7 +17,7 @@ PARM       KWD(DEVOPT) TYPE(*CHAR) LEN(1) DFT(N) +
 PARM       KWD(LOGOUTPUT) TYPE(*CHAR) LEN(10) DFT(*PND) +
            SPCVAL((*SAME '*SAME') (*SYSVAL '*SYSVAL') +
            (*JOBLOGSVR '*JOBLOGSVR') (*JOBEND '*JOBEND') (*PND '*PND')) +
-           PROMPT('Auftragsprotokoll-Ausgabe') PMTCTL(*PMTRQS)
+           PROMPT('Ausgabe') PMTCTL(*PMTRQS)
 PARM       KWD(VERBOSE) TYPE(*CHAR) LEN(1) DFT(N) +
            PROMPT('Ausführlich') PMTCTL(*PMTRQS)
 
