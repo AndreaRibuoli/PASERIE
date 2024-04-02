@@ -6,9 +6,9 @@ PARM       KWD(TGTLIB) TYPE(*CHAR) LEN(10) DFT(*LOCAL_PATH) +
            PROMPT('Zielbibliothek')
 PARM       KWD(TGTRLS) TYPE(*CHAR) LEN(10) DFT(*CURRENT) +
            SPCVAL((*CURRENT '*CURRENT') (*PRV '*PRV')) +
-           PROMPT('Zielfreigabe')
+           PROMPT('Ziel-Release')
 PARM       KWD(DEVOPT) TYPE(*CHAR) LEN(1) DFT(N) +
-           PROMPT('Entwicklungsoption') PMTCTL(*PMTRQS)
+           PROMPT('Entwickleroption') PMTCTL(*PMTRQS)
 PARM       KWD(LOGOUTPUT) TYPE(*CHAR) LEN(10) DFT(*PND) +
            SPCVAL((*SAME '*SAME') (*SYSVAL '*SYSVAL') +
            (*JOBLOGSVR '*JOBLOGSVR') (*JOBEND '*JOBEND') (*PND '*PND')) +
