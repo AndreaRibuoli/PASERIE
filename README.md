@@ -190,7 +190,11 @@ utility (from `QUSRTOOL` library). I have re\-packaged it for a plain
 installation with `PASERIE/INSTALL` (please contact me if you need help
 in installing it: `andrea.ribuoli@yahoo.com`)  
 
+<div style="page-break-after: always;"></div>
+
 ## HANDS ON
+
+### JUMP\-START
 
 Let us take confidence with `PASERIE/LIBCLONE`.
 
@@ -277,6 +281,94 @@ F3=Exit   F4=Prompt   F9=Retrieve
 F23=Set initial menu              
 Your first use of PASERIE/LIBCLONE
 ```     
+
+<div style="page-break-after: always;"></div>
+
+### RELEASE ON GitHub
+
+Now let us suppose we want to proceed with our development tracking any future change we will operate on our source code.
+Also let us assume we want to adopt **git** and **GitHub**.
+
+You should have a GitHub account and you will create an empty repository named **SIMPLE**:
+
+![REPO](images/BEFORE.png)
+
+Now you need to access your IBM i home directory from an SSH terminal session.
+
+Having `git` available in our **PATH** environment variable, we will issue the following commands
+(you will replace *AndreaRibuoli* with your actual GitHub user profile):
+
+```
+cd SIMPLE
+git init
+git branch -M main
+git remote add origin https://github.com/AndreaRibuoli/SIMPLE.git
+git pull origin main --allow-unrelated-histories
+git add .
+git commit -m 'my initial SIMPLE project'
+git push --set-upstream origin main
+``` 
+
+During the final *push* you will be required to enter **Username** and corresponding **Password**.
+
+In my case:
+
+```
+Username for 'https://github.com': 
+Password for 'https://AndreaRibuoli@github.com': 
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (8/8), 1.49 KiB | 381.00 KiB/s, done.
+Total 8 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/AndreaRibuoli/SIMPLE.git
+   9c6ed28..30ed311  main -> main
+branch 'main' set up to track 'origin/main'.
+```
+
+You will find your repository updated on GitHub:
+
+![REPO](images/AFTER.png)
+
+<div style="page-break-after: always;"></div>
+
+### DISTRIBUTE
+
+Everything is ready to install on a different IBM i system where PASERIE has been already installed
+(again, replace *AndreaRibuoli* with your GitHub username):
+
+```
+PASERIE/INSTALL REPO_OWNER(AndreaRibuoli)
+                REPOSITORY(SIMPLE)     
+                YOURGITPAT('ghp_your__40__bytes_long__personal_token')             
+```
+
+Rather than passing your GitHub token you can adopt the default `*GETPAT`.
+This will call PASERIE/GETPAT. 
+
+You should use `RTVCLSRC` to extract the CLLE source code:
+
+```
+     PGM PARM(&GITTOKEN)                                  
+     DCL VAR(&GITTOKEN) TYPE(*CHAR) LEN(40)               
+     RTVDTAARA DTAARA(GITTOKEN (1 40)) RTNVAR(&GITTOKEN)  
+     ENDPGM                                               
+```
+
+If you are fine in using it **as\-is** store your token in the **GITTOKEN** data area:
+
+```
+CRTDTAARA DTAARA(GITTOKEN) TYPE(*CHAR) LEN(40) 
+          VALUE('ghp_your__40__bytes_long__personal_token')  
+```           
+
+This will enable you to simply issue:
+
+```
+PASERIE/INSTALL REPO_OWNER(AndreaRibuoli) REPOSITORY(SIMPLE)    
+``` 
+
 <div style="page-break-after: always;"></div>
 
 ## CURRENTLY SUPPORTED VERSIONS
