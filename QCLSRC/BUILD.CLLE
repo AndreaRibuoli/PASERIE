@@ -62,7 +62,7 @@
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL) +
                           TEXT('PASERIE installer (8/10)') PRDLIB(&TGTLIB)
              DLTSPLF    FILE(INSTALL)
-             /* MONMSG     MSGID(CPF0000) */
+             MONMSG     MSGID(CPF3303)
              CRTCLMOD   MODULE(&BLDLIB/GHINSTALL) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL) +
                           INCFILE(&SRCLIB/QCLSRC) +
@@ -151,7 +151,7 @@
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALLOC)  +
                           TEXT('PASERIE installer (9/10)') PRDLIB(&TGTLIB)
              DLTSPLF    FILE(INSTALLOC)
-             MONMSG     MSGID(CPF0000)
+             MONMSG     MSGID(CPF3303)
              CRTCLMOD   MODULE(&BLDLIB/LIBCLONE_B) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(LIBCLONE_B) +
                           TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
@@ -168,13 +168,7 @@
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(LIBCLONE)  +
                           TEXT('PASERIE installer (10/10)') PRDLIB(&TGTLIB)
              DLTSPLF    FILE(LIBCLONE) 
-             MONMSG     MSGID(CPF0000)
-             DLTSPLF    FILE(INSTALL)
-             MONMSG     MSGID(CPF0000)
-             DLTSPLF    FILE(INSTALLOC)
-             MONMSG     MSGID(CPF0000)
-             DLTSPLF    FILE(LIBCLONE) 
-             MONMSG     MSGID(CPF0000)
+             MONMSG     MSGID(CPF3303)
              RETURN
 DUMP: DSPJOB JOB(*) OUTPUT(*PRINT) OPTION(*ALL) 
              DMPCLPGM              
