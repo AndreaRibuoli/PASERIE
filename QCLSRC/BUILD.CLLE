@@ -175,4 +175,7 @@
              MONMSG     MSGID(CPF0000)
              DLTSPLF    FILE(LIBCLONE) 
              MONMSG     MSGID(CPF0000)
+             RETURN
+DUMP: DSPJOB JOB(*) OUTPUT(*PRINT) OPTION(*ALL) 
+             DMPCLPGM              
 RETURN:      ENDPGM
