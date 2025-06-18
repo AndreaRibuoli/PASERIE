@@ -9,6 +9,7 @@
              DCL        VAR(&BLDLIB) TYPE(*CHAR) LEN(10) VALUE(QTEMP)
              DCL        VAR(&TGTLIB) TYPE(*CHAR) LEN(10)
              DCL        VAR(&STMT) TYPE(*CHAR) LEN(28) 
+             MONMSG MSGID(CPF0000) EXEC(GOTO CMDLBL(DUMP))
              CHGVAR     VAR(&DEVOPT) VALUE(&DEVOPT_P)
              MONMSG     MSGID(MCH3601) EXEC(CHGVAR VAR(&DEVOPT) VALUE(L))
              CHGVAR     VAR(&TGTRLS) VALUE(&TGTRLS_P)
@@ -61,7 +62,7 @@
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL) +
                           TEXT('PASERIE installer (8/10)') PRDLIB(&TGTLIB)
              DLTSPLF    FILE(INSTALL)
-             MONMSG     MSGID(CPF0000)
+             /* MONMSG     MSGID(CPF0000) */
              CRTCLMOD   MODULE(&BLDLIB/GHINSTALL) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL) +
                           INCFILE(&SRCLIB/QCLSRC) +
