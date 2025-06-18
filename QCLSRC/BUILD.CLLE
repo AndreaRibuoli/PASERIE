@@ -61,6 +61,7 @@
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL) +
                           TEXT('PASERIE installer (8/10)') PRDLIB(&TGTLIB)
              DLTSPLF    FILE(INSTALL)
+             MONMSG     MSGID(CPF0000)
              CRTCLMOD   MODULE(&BLDLIB/GHINSTALL) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL) +
                           INCFILE(&SRCLIB/QCLSRC) +
