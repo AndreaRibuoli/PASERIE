@@ -165,7 +165,11 @@ SKIP1:             ENDDO
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALLOC)  +
                           TEXT('PASERIE installer (9/10)') PRDLIB(&TGTLIB)
              DLTSPLF    FILE(INSTALLOC)
-             MONMSG     MSGID(CPF3303)
+             MONMSG     MSGID(CPF3303) EXEC(DO)
+             CALL   PGM(QSPRILSP) PARM(&RCVVAR &BYTES 'SPRL0100' &ERRORCODE)                          
+             MONMSG MSGID(CPF333A) EXEC(GOTO CMDLBL(SKIP2))                                            
+             DLTSPLF FILE(&SPLFNAME) JOB(&JOBNBR/&JOBUSER/&JOBNAME) SPLNBR(&SPLNBR)                     
+SKIP2:             ENDDO
              CRTCLMOD   MODULE(&BLDLIB/LIBCLONE_B) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(LIBCLONE_B) +
                           TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
@@ -182,7 +186,11 @@ SKIP1:             ENDDO
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(LIBCLONE)  +
                           TEXT('PASERIE installer (10/10)') PRDLIB(&TGTLIB)
              DLTSPLF    FILE(LIBCLONE) 
-             MONMSG     MSGID(CPF3303)
+             MONMSG     MSGID(CPF3303) EXEC(DO)
+             CALL   PGM(QSPRILSP) PARM(&RCVVAR &BYTES 'SPRL0100' &ERRORCODE)                          
+             MONMSG MSGID(CPF333A) EXEC(GOTO CMDLBL(SKIP3))                                            
+             DLTSPLF FILE(&SPLFNAME) JOB(&JOBNBR/&JOBUSER/&JOBNAME) SPLNBR(&SPLNBR)                     
+SKIP3:             ENDDO
              RETURN
 DUMP: DSPJOB JOB(*) OUTPUT(*PRINT) OPTION(*ALL) 
              DMPCLPGM              
