@@ -9,6 +9,16 @@
              DCL        VAR(&BLDLIB) TYPE(*CHAR) LEN(10) VALUE(QTEMP)
              DCL        VAR(&TGTLIB) TYPE(*CHAR) LEN(10)
              DCL        VAR(&STMT) TYPE(*CHAR) LEN(28) 
+     DCL    VAR(&RCVVAR) TYPE(*CHAR) LEN(70) VALUE(X'0000004600000000')                       
+     DCL    VAR(&BYTES)      TYPE(*INT)                LEN(4)  VALUE(70)                      
+     DCL    VAR(&BYTESAVAIL) TYPE(*INT)  STG(*DEFINED) LEN(4)  DEFVAR(&RCVVAR  1)             
+     DCL    VAR(&BYTESRTN)   TYPE(*INT)  STG(*DEFINED) LEN(4)  DEFVAR(&RCVVAR  5)             
+     DCL    VAR(&SPLFNAME)   TYPE(*CHAR) STG(*DEFINED) LEN(10) DEFVAR(&RCVVAR  9)             
+     DCL    VAR(&JOBNAME)    TYPE(*CHAR) STG(*DEFINED) LEN(10) DEFVAR(&RCVVAR 19)             
+     DCL    VAR(&JOBUSER)    TYPE(*CHAR) STG(*DEFINED) LEN(10) DEFVAR(&RCVVAR 29)             
+     DCL    VAR(&JOBNBR)     TYPE(*CHAR) STG(*DEFINED) LEN(6)  DEFVAR(&RCVVAR 39)             
+     DCL    VAR(&SPLNBR)     TYPE(*INT)  STG(*DEFINED) LEN(4)  DEFVAR(&RCVVAR 45)             
+     DCL    VAR(&ERRORCODE)  TYPE(*CHAR)               LEN(8)  VALUE(X'0000000000000000')     
              MONMSG MSGID(CPF0000) EXEC(GOTO CMDLBL(DUMP))
              CHGVAR     VAR(&DEVOPT) VALUE(&DEVOPT_P)
              MONMSG     MSGID(MCH3601) EXEC(CHGVAR VAR(&DEVOPT) VALUE(L))
@@ -62,7 +72,11 @@
                           SRCFILE(&SRCLIB/QCMDSRC) SRCMBR(INSTALL) +
                           TEXT('PASERIE installer (8/10)') PRDLIB(&TGTLIB)
              DLTSPLF    FILE(INSTALL)
-             MONMSG     MSGID(CPF3303)
+             MONMSG     MSGID(CPF3303) EXEC(DO)
+             CALL   PGM(QSPRILSP) PARM(&RCVVAR &BYTES 'SPRL0100' &ERRORCODE)                          
+             MONMSG MSGID(CPF333A) EXEC(GOTO CMDLBL(SKIP1))                                            
+             DLTSPLF FILE(&SPLFNAME) JOB(&JOBNBR/&JOBUSER/&JOBNAME) SPLNBR(&SPLNBR)                     
+SKIP1:             ENDDO
              CRTCLMOD   MODULE(&BLDLIB/GHINSTALL) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL) +
                           INCFILE(&SRCLIB/QCLSRC) +
