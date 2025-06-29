@@ -166,6 +166,12 @@ SELECT PROGRAM_NAME, OBJECT_TYPE, TEXT_DESCRIPTION, CREATE_TIMESTAMP
  FROM QSYS2.PROGRAM_INFO WHERE PROGRAM_LIBRARY = 'PASERIE'
 ``` 
 
+![prima](images/prima.png)
+
+![dopo](images/dopo.png)
+
+<div style="page-break-after: always;"></div>
+
 ## HINTS FOR DEVELOPERS
 
 The minimum provision to enable `PASERIE/INSTALL` handling your "native" IBM i GitHub repository is:
