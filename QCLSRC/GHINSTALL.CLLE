@@ -46,6 +46,22 @@
              DCL        VAR(&CUR_OSV) TYPE(*CHAR) LEN(6) VALUE('      ')
              DCL        VAR(&CUR_OSV_3) TYPE(*CHAR) LEN(3) VALUE('   ')
              DCL        VAR(&CUR_OSV_D) TYPE(*DEC) LEN(3 0) VALUE(0)
+             DCL        VAR(&IMODE)     TYPE(*CHAR) LEN(11)  VALUE('rr+')
+             DCL        VAR(&QTMPMBR)   TYPE(*CHAR) LEN(61)
+             DCL        VAR(&DOT)         TYPE(*CHAR) LEN(1)   VALUE('.')
+             DCL        VAR(&IPOS)        TYPE(*INT)  LEN(2)
+             DCL        VAR(&IRC)         TYPE(*INT)  LEN(4)
+             DCL        VAR(&FP)          TYPE(*PTR)  ADDRESS(*NULL)
+             DCL        VAR(&RFILE)       TYPE(*CHAR) LEN(336) STG(*BASED)   BASPTR(&FP)
+             DCL        VAR(&F10_BUFLEN)  TYPE(*UINT) LEN(4)   STG(*DEFINED) DEFVAR(&RFILE 193) 
+             DCL        VAR(&RIOFB_P)     TYPE(*PTR)  ADDRESS(*NULL)
+             DCL        VAR(&RIOFB)       TYPE(*CHAR) LEN(64)  STG(*BASED)   BASPTR(&RIOFB_P)
+             DCL        VAR(&R04_NUMBYT) TYPE(*INT)  LEN(4)   STG(*DEFINED) DEFVAR(&RIOFB 37) 
+             DCL        VAR(&RAW_ROW)     TYPE(*CHAR) LEN(312) 
+             DCL        VAR(&SRCDTA)      TYPE(*CHAR) LEN(300) STG(*DEFINED) DEFVAR(&RAW_ROW 13)  
+             DCL        VAR(&OPTS)        TYPE(*INT)  LEN(4)   VALUE(0)
+
+             CHGVAR     VAR(&IMODE) VALUE(&IMODE *TCAT &NL)
              CHGJOB     JOBMSGQFL(*WRAP)
              RTVDTAARA  DTAARA(QGPL/QSS1MRI (26 4)) RTNVAR(&LANG_FC)
              MONMSG     MSGID(CPF0000)
@@ -364,6 +380,35 @@ REPEAT_I:
              ENDDO
 END:         CALLPRC    PRC('Qp2EndPase') RTNVAL(&RTCD)
              IF         COND(&RTCD *NE 0) THEN(SNDPGMMSG MSG('La chiamata Qp2EndPase ha dato errore.'))
+             
+/*    post-treatment  BEGIN */
+             CHGVAR     VAR(&COUNT) VALUE(0)
+             CHGVAR     VAR(&PKG_LPTR) VALUE(%ADDRESS(&PKG_BLCK))
+             DOWHILE    COND(&COUNT *LT &TOTCNT)
+    IF         COND((&PKG_FILN *EQ 'QCLSRC') *AND (&PKG_EXTN *EQ 'CLLE')) THEN(DO)                             
+     CHGVAR VAR(&QTMPMBR) VALUE('QTEMP/QCLSRC(' *CAT &PKG_MBRN *TCAT ')' *CAT &NL)                             
+     CALLPRC PRC('_Ropen')   PARM(&QTMPMBR &IMODE) RTNVAL(&FP)                                                 
+     CALLPRC PRC('_Rreadn')  PARM((&FP *BYVAL) &RAW_ROW (&F10_BUFLEN *BYVAL) (&OPTS *BYVAL)) RTNVAL(&RIOFB_P)  
+     DOWHILE COND(&R04_NUMBYT *GT 0)                                                                           
+      CHGVAR VAR(&SRCDTA) VALUE(%TRIML(&SRCDTA))                                                               
+      IF (%SST(&SRCDTA 1 17) *EQ 'INCLUDE SRCSTMF(''') THEN(DO)                                                
+       CHGVAR VAR(&IPOS) VALUE(%SCAN(&DOT &SRCDTA 18))                                                         
+       IF COND(&IPOS *GT 0) THEN(DO)                                                                           
+        CHGVAR VAR(&IPOS) VALUE(&IPOS - 18)                                                                    
+        CHGVAR VAR(&SRCDTA) VALUE('INCLUDE SRCMBR(' *CAT %SST(&SRCDTA 18 &IPOS) *CAT ')')                      
+        CALLPRC PRC('_Rupdate') PARM((&FP *BYVAL) &RAW_ROW (&F10_BUFLEN *BYVAL)) RTNVAL(&RIOFB_P)              
+       ENDDO                                                                                                   
+      ENDDO                                                                                                    
+      CALLPRC PRC('_Rreadn')  PARM((&FP *BYVAL) &RAW_ROW (&F10_BUFLEN *BYVAL) (&OPTS *BYVAL)) RTNVAL(&RIOFB_P) 
+     ENDDO                                                                                                     
+     CALLPRC PRC('_Rfeod') PARM((&FP *BYVAL)) RTNVAL(&IRC)                                                                        
+     CALLPRC PRC('_Rclose') PARM((&FP *BYVAL)) RTNVAL(&IRC)                                                                        
+    ENDDO                                                                                                      
+             CHGVAR     VAR(&COUNT) VALUE(&COUNT + 1)
+             CHGVAR     VAR(%OFFSET(&PKG_LPTR)) VALUE(%OFFSET(&PKG_LPTR) + 91)
+             ENDDO
+/*    post-treatment  END   */
+
              ADDLIBLE   LIB(TMKMAKE)
              MONMSG MSGID(CPF0000)
              CRTBNDCL   PGM(QTEMP/BUILD) SRCFILE(QTEMP/QCLSRC) SRCMBR(BUILD) +
