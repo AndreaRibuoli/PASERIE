@@ -1,4 +1,4 @@
-# PASERIE (V1R1M1)
+# PASERIE (V1R1M2)
 ### Utility for Source-Level Distribution in IBM i
 
 This utility helps you maintain your IBM i source code on GitHub.
