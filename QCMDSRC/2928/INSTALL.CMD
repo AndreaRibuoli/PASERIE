@@ -1,4 +1,4 @@
-CMD        PROMPT('PASERIE Installateur    V1R1M1')
+CMD        PROMPT('PASERIE Installateur    V1R1M2')
 PARM       KWD(REPO_OWNER) TYPE(*CHAR) LEN(30) MIN(1) +
             CASE(*MIXED) PROMPT('Propriétaire du dépôt GitHub')
 PARM       KWD(REPOSITORY) TYPE(*CHAR) LEN(10) MIN(1) +
