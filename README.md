@@ -61,7 +61,7 @@ From `CALL QP2TERM`, you can verify that **bash**, **git** and **curl** are inst
   /QOpenSys/pkgs/bin/git
 ```
 
-Using curl download the following archive (supporting IBM i 7.3, 7.4 and 7.5):
+Using curl download the following archive (supporting IBM i 7.3, 7.4, 7.5 and 7.6):
                                                                       
 ```                  
 curl -o PaseOssFloating.tar
@@ -389,7 +389,7 @@ PASERIE/INSTALL REPO_OWNER(AndreaRibuoli) REPOSITORY(SIMPLE)
 
 ## CURRENTLY SUPPORTED VERSIONS
 
-**PASERIE** currently supports **IBM i PASE** from **6.1** to *7.5*
+**PASERIE** currently supports **IBM i PASE** from **6.1** to *7.6*
 but I am working on extending the coverage even to IBM i *5.4* 
 to facilitate reuse of code originally developed 
 on very old versions of the operating system.
@@ -398,7 +398,7 @@ on very old versions of the operating system.
 ╔════════════╦═════════════╦═════════╤═══════════╤══════════╗
 ║ IBM i PASE ║     AIX     ║ INSTALL │ INSTALLOC │ LIBCLONE ║
 ╠════════════╬═══════╤═════╬═════════╪═══════════╪══════════╣
-║     7.6    ║  7.3  │ TL1 ║    ?    │     ?     │     ?    ║
+║     7.6    ║  7.3  │ TL1 ║   yes   │    yes    │    yes   ║
 ╟────────────╫───────┼─────╫─────────┼───────────┼──────────╢
 ║     7.5    ║       │ TL5 ║   yes   │    yes    │    yes   ║
 ╟────────────╢  7.2  ├─────╫─────────┼───────────┼──────────╢
