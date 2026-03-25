@@ -77,6 +77,10 @@
              MONMSG MSGID(CPF333A) EXEC(GOTO CMDLBL(SKIP1))                                            
              DLTSPLF FILE(&SPLFNAME) JOB(&JOBNBR/&JOBUSER/&JOBNAME) SPLNBR(&SPLNBR)                     
 SKIP1:             ENDDO
+             CRTCLMOD   MODULE(&BLDLIB/GHINSTALL) +
+                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL) +
+                          INCFILE(&SRCLIB/QCLSRC) +
+                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
              DLTF       FILE(QTEMP/GUIDE00F)
              MONMSG     MSGID(CPF0000)
              CRTPF      FILE(QTEMP/GUIDE00F) SRCFILE(&SRCLIB/QDDSPF) +
@@ -140,12 +144,6 @@ SKIP1:             ENDDO
                           SRCFILE(&SRCLIB/QSRVSRC) +
                           TGTRLS(&TGTRLS) TEXT('PASERIE installer (7/10)')
              MONMSG     MSGID(CPF0000)
-             DLTF       FILE(QTEMP/GUIDE00F)
-             CRTCLMOD   MODULE(&BLDLIB/GHINSTALL) +
-                          SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL) +
-                          INCFILE(&SRCLIB/QCLSRC) +
-                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
-             MONMSG     MSGID(CPF0000)
              CRTPGM     PGM(&TGTLIB/GHINSTALL) +
                           MODULE(&BLDLIB/GHINSTALL) +
                           BNDSRVPGM((&TGTLIB/LIBCURL)) +
@@ -197,3 +195,4 @@ SKIP3:             ENDDO
 DUMP: DSPJOB JOB(*) OUTPUT(*PRINT) OPTION(*ALL) 
              DMPCLPGM              
 RETURN:      ENDPGM
+
