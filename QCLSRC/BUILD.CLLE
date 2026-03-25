@@ -80,7 +80,7 @@ SKIP1:             ENDDO
              CRTCLMOD   MODULE(&BLDLIB/GHINSTALL) +
                           SRCFILE(&SRCLIB/QCLSRC) SRCMBR(GHINSTALL) +
                           INCFILE(&SRCLIB/QCLSRC) +
-                          TGTRLS(&TGTRLS) OUTPUT(*NONE) ALWRTVSRC(*NO)
+                          TGTRLS(&TGTRLS) OUTPUT(*PRINT) ALWRTVSRC(*NO)
              DLTF       FILE(QTEMP/GUIDE00F)
              MONMSG     MSGID(CPF0000)
              CRTPF      FILE(QTEMP/GUIDE00F) SRCFILE(&SRCLIB/QDDSPF) +
