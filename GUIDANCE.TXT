@@ -4,7 +4,9 @@
 *OSRELEASEV7R1M0              IBM i OS 7.1
 *OSRELEASEV6R1M0              IBM i OS 6.1 
 *OSRELEASEV5R4M0              IBM i OS 5.4
+QCLSRC    INSTALL   CLLE      Program INSTALL
 QCLSRC    BUILD     CLLE      Development mode (CALL PASERIE/BUILD)
+QCLSRC    GHINSTALL CLLE      Program GHINSTALL
 QCLSRC    DCL32INCL CLLE      Include DCL32INCL
 QCLSRC    CURL_INCL CLLE      Include CURL_INCL
 QCLSRC    EASY_INIT CLLE      Module EASY_INIT  (1 of 9) 
@@ -17,8 +19,6 @@ QCLSRC    CALL_BACK CLLE      Module CALL_BACK  (7 of 9)
 QCLSRC    VERS_INFO CLLE      Module VERS_INFO  (8 of 9)
 QCLSRC    EASY_GINFOCLLE      Module EASY_GINFO (9 of 9)
 QSRVSRC   LIBCURL   BND       Bind file for LIBCURL *SRVPGM
-QCLSRC    GHINSTALL CLLE      Program GHINSTALL
-QCLSRC    INSTALL   CLLE      Program INSTALL
 QCLSRC    GETPAT    CLLE      Retrieve Personal Access Token
 QCMDSRC   INSTALL   CMD       Command INSTALL    
 QDDSPF    GUIDE00F  PF        Template     
