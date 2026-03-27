@@ -70,15 +70,15 @@ ENDDO
 CRTSRCPF FILE(QTEMP/QDDSPF)
 CHGVAR VAR(&TOMBR) VALUE('/QSYS.LIB/QTEMP.LIB/QDDSPF.FILE/GUIDE00F.MBR')
 CALLPRC PRC('open') PARM((&TOMBR) (&OFLAG *BYVAL) (&MODE *BYVAL)) RTNVAL(&FD)
-CHGVAR VAR(&ROW) VALUE('   R GUIDE')
+CHGVAR VAR(&ROW) VALUE('                R GUIDE')
 CALLSUBR SUBR(EMIT80)
-CHGVAR VAR(&ROW) VALUE('     SRCFILE       10A')
+CHGVAR VAR(&ROW) VALUE('                  SRCFILE       10A')
 CALLSUBR SUBR(EMIT80)
-CHGVAR VAR(&ROW) VALUE('     SRCMBR        10A')
+CHGVAR VAR(&ROW) VALUE('                  SRCMBR        10A')
 CALLSUBR SUBR(EMIT80)
-CHGVAR VAR(&ROW) VALUE('     SRCTYPE       10A')
+CHGVAR VAR(&ROW) VALUE('                  SRCTYPE       10A')
 CALLSUBR SUBR(EMIT80)
-CHGVAR VAR(&ROW) VALUE('     SRCDESC       50A')
+CHGVAR VAR(&ROW) VALUE('                  SRCDESC       50A')
 CALLSUBR SUBR(EMIT80)
 CALLPRC PRC('close') PARM((&FD *BYVAL)) RTNVAL(&RTCD)
 CRTPF FILE(QTEMP/GUIDE00F) SRCFILE(QTEMP/QDDSPF) OPTION(*NOSRC *NOLIST)
@@ -97,29 +97,29 @@ DOWHILE COND(&LOOP)
  IF COND(&VERBOSE *EQ 'L') THEN(DO)
    IF COND(%SST(&SRCFILE 1 10) *EQ   '*PREREQ   ') THEN(DO)
      CHGVAR     VAR(&MSGDTA) VALUE( 'Comment: '      *CAT &SRCFILE *CAT +
-          ' PackageName: ' *CAT &SRCMBR  *CAT +
-          ' Options: '     *CAT &SRCTYPE *CAT +
-          ' GitHub USER: ' *CAT &SRCDESC *CAT &X15 *CAT &NL)
+                                    ' PackageName: ' *CAT &SRCMBR  *CAT +
+                                    ' Options: '     *CAT &SRCTYPE *CAT +
+                                    ' GitHub USER: ' *CAT &SRCDESC *CAT &X15 *CAT &NL)
    ENDDO
    ELSE DO
      IF COND(%SST(&SRCFILE 1 10) *EQ '*LANGUAGE ') THEN(DO)
        CHGVAR     VAR(&MSGDTA) VALUE( 'Comment: '      *CAT &SRCFILE *CAT +
-            ' Language FC: ' *CAT &SRCMBR  *CAT +
-            ' Options: '     *CAT &SRCTYPE *CAT +
-            ' Description: ' *CAT &SRCDESC *CAT &X15 *CAT &NL)
+                                      ' Language FC: ' *CAT &SRCMBR  *CAT +
+                                      ' Options: '     *CAT &SRCTYPE *CAT +
+                                      ' Description: ' *CAT &SRCDESC *CAT &X15 *CAT &NL)
      ENDDO
      ELSE DO
        IF COND(%SST(&SRCFILE 1 10) *EQ '*OSRELEASE') THEN(DO)
          CHGVAR     VAR(&MSGDTA) VALUE( 'Comment: '      *CAT &SRCFILE *CAT +
- '    IBM i OS: ' *CAT &SRCMBR  *CAT +
- ' Options: '     *CAT &SRCTYPE *CAT +
- ' Description: ' *CAT &SRCDESC *CAT &X15 *CAT &NL)
+                                        '    IBM i OS: ' *CAT &SRCMBR  *CAT +
+                                        ' Options: '     *CAT &SRCTYPE *CAT +
+                                        ' Description: ' *CAT &SRCDESC *CAT &X15 *CAT &NL)
        ENDDO
        ELSE DO
          CHGVAR     VAR(&MSGDTA) VALUE( 'File: '       *CAT &SRCFILE *CAT +
- ' Member: '    *CAT &SRCMBR  *CAT +
- ' Attribute: ' *CAT &SRCTYPE *CAT +
- ' Text: '      *CAT &SRCDESC *CAT &X15 *CAT &NL)
+                                        ' Member: '    *CAT &SRCMBR  *CAT +
+                                        ' Attribute: ' *CAT &SRCTYPE *CAT +
+                                        ' Text: '      *CAT &SRCDESC *CAT &X15 *CAT &NL)
        ENDDO       
      ENDDO       
    ENDDO       
@@ -188,7 +188,7 @@ DOWHILE COND(&LOOP)
 ENDDO
 IF COND(&VERBOSE *EQ 'L') THEN(DO)
    CHGVAR     VAR(&MSGDTA) VALUE( 'Version: '    *CAT &CUR_OSV *CAT +
-'        Language Feature: ' *CAT &LANG_FC *CAT &NL)
+             '                     Language Feature: ' *CAT &LANG_FC *CAT &NL)
    CALLPRC    PRC('printf') PARM((&MSGDTA))
    DLTOVR     FILE(STDOUT) LVL(*JOB)
 ENDDO
