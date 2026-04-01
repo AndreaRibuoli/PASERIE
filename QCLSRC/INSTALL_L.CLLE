@@ -99,27 +99,27 @@ DOWHILE COND(&LOOP)
      CHGVAR     VAR(&MSGDTA) VALUE( 'Comment: '      *CAT &SRCFILE *CAT +
                                     ' PackageName: ' *CAT &SRCMBR  *CAT +
                                     ' Options: '     *CAT &SRCTYPE *CAT +
-                                    ' GitHub USER: ' *CAT &SRCDESC *CAT &X15 *CAT &NL)
+                                    ' GitHub USER: ' *CAT &SRCDESC *TCAT &X15 *CAT &NL)
    ENDDO
    ELSE DO
      IF COND(%SST(&SRCFILE 1 10) *EQ '*LANGUAGE ') THEN(DO)
        CHGVAR     VAR(&MSGDTA) VALUE( 'Comment: '      *CAT &SRCFILE *CAT +
                                       ' Language FC: ' *CAT &SRCMBR  *CAT +
                                       ' Options: '     *CAT &SRCTYPE *CAT +
-                                      ' Description: ' *CAT &SRCDESC *CAT &X15 *CAT &NL)
+                                      ' Description: ' *CAT &SRCDESC *TCAT &X15 *CAT &NL)
      ENDDO
      ELSE DO
        IF COND(%SST(&SRCFILE 1 10) *EQ '*OSRELEASE') THEN(DO)
          CHGVAR     VAR(&MSGDTA) VALUE( 'Comment: '      *CAT &SRCFILE *CAT +
                                         '    IBM i OS: ' *CAT &SRCMBR  *CAT +
                                         ' Options: '     *CAT &SRCTYPE *CAT +
-                                        ' Description: ' *CAT &SRCDESC *CAT &X15 *CAT &NL)
+                                        ' Description: ' *CAT &SRCDESC *TCAT &X15 *CAT &NL)
        ENDDO
        ELSE DO
          CHGVAR     VAR(&MSGDTA) VALUE( 'File: '       *CAT &SRCFILE *CAT +
                                         ' Member: '    *CAT &SRCMBR  *CAT +
                                         ' Attribute: ' *CAT &SRCTYPE *CAT +
-                                        ' Text: '      *CAT &SRCDESC *CAT &X15 *CAT &NL)
+                                        ' Text: '      *CAT &SRCDESC *TCAT &X15 *CAT &NL)
        ENDDO       
      ENDDO       
    ENDDO       
@@ -148,7 +148,7 @@ DOWHILE COND(&LOOP)
  MONMSG MSGID(CPF0000)
  IF  COND((&LANG_DIR *NE '     ') *AND (&SRCFILE *EQ 'QCMDSRC   ')) THEN( +
      CHGVAR VAR(&USELANGDIR) VALUE(&LANG_DIR))
- IF  COND((&OS_DIR *NE '       ') *AND (&SRCFILE *EQ 'QCLSRC   ')) THEN( +
+ IF  COND((&OS_DIR *NE '       ') *AND (&SRCFILE *EQ 'QCLSRC    ')) THEN( +
      CHGVAR VAR(&USEOSDIR) VALUE(&OS_DIR))
  CHGVAR VAR(&FROMSTMF) VALUE(&FROMPATH *TCAT '/' *CAT &SRCFILE *TCAT &USEOSDIR +
             *TCAT &USELANGDIR *TCAT '/' *CAT &SRCMBR *TCAT '.' *CAT &SRCTYPE)
